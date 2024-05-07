@@ -11,13 +11,145 @@ using Repositories;
 namespace Survey.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20240506145923_boyoss")]
-    partial class boyoss
+    [Migration("20240507202739_firstMig")]
+    partial class firstMig
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.0");
+
+            modelBuilder.Entity("Entities.Product", b =>
+                {
+                    b.Property<int>("ProductId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("CategoryId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ProductName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("Showcase")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Summary")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("ProductId");
+
+                    b.ToTable("Product");
+
+                    b.HasData(
+                        new
+                        {
+                            ProductId = 1,
+                            CategoryId = 2,
+                            ImageUrl = "/images/1.jpg",
+                            Price = 17000m,
+                            ProductName = "Computer",
+                            Showcase = false,
+                            Summary = ""
+                        },
+                        new
+                        {
+                            ProductId = 2,
+                            CategoryId = 2,
+                            ImageUrl = "/images/2.jpg",
+                            Price = 1000m,
+                            ProductName = "Keyboard",
+                            Showcase = false,
+                            Summary = ""
+                        },
+                        new
+                        {
+                            ProductId = 3,
+                            CategoryId = 2,
+                            ImageUrl = "/images/3.jpg",
+                            Price = 500m,
+                            ProductName = "Mouse",
+                            Showcase = false,
+                            Summary = ""
+                        },
+                        new
+                        {
+                            ProductId = 4,
+                            CategoryId = 2,
+                            ImageUrl = "/images/4.jpg",
+                            Price = 7000m,
+                            ProductName = "Monitor",
+                            Showcase = false,
+                            Summary = ""
+                        },
+                        new
+                        {
+                            ProductId = 5,
+                            CategoryId = 2,
+                            ImageUrl = "/images/5.jpg",
+                            Price = 1500m,
+                            ProductName = "Deck",
+                            Showcase = false,
+                            Summary = ""
+                        },
+                        new
+                        {
+                            ProductId = 6,
+                            CategoryId = 1,
+                            ImageUrl = "/images/6.jpg",
+                            Price = 1500m,
+                            ProductName = "History",
+                            Showcase = false,
+                            Summary = ""
+                        },
+                        new
+                        {
+                            ProductId = 7,
+                            CategoryId = 1,
+                            ImageUrl = "/images/7.jpg",
+                            Price = 7000m,
+                            ProductName = "Maetmatic",
+                            Showcase = false,
+                            Summary = ""
+                        },
+                        new
+                        {
+                            ProductId = 8,
+                            CategoryId = 1,
+                            ImageUrl = "/images/1.jpg",
+                            Price = 7000m,
+                            ProductName = "Galaxy-fe",
+                            Showcase = true,
+                            Summary = ""
+                        },
+                        new
+                        {
+                            ProductId = 9,
+                            CategoryId = 2,
+                            ImageUrl = "/images/6.jpg",
+                            Price = 7000m,
+                            ProductName = "xp-pen",
+                            Showcase = true,
+                            Summary = ""
+                        },
+                        new
+                        {
+                            ProductId = 10,
+                            CategoryId = 1,
+                            ImageUrl = "/images/5.jpg",
+                            Price = 7000m,
+                            ProductName = "hp mouse",
+                            Showcase = true,
+                            Summary = ""
+                        });
+                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -43,6 +175,26 @@ namespace Survey.Migrations
                         .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "785c0427-a6dd-407e-b406-6c5639e8f5e2",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        },
+                        new
+                        {
+                            Id = "e7257fc1-4237-445b-9390-3d4ce24e27ac",
+                            Name = "Editor",
+                            NormalizedName = "EDITOR"
+                        },
+                        new
+                        {
+                            Id = "52fcf265-e2e6-4849-8d53-3aba1a29c613",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -209,38 +361,6 @@ namespace Survey.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
-                });
-
-            modelBuilder.Entity("Repositories.User", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Muhammet"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Ali"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Mehmet"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

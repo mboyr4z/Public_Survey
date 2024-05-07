@@ -1,47 +1,53 @@
-using System.Diagnostics;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+using StoreApp.Infrastructure.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-/*builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<RepositoryContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("sqlconnection"),
-    b => b.MigrationsAssembly("Survey"))
-);
+builder.Services.AddControllers()
+    .AddApplicationPart(typeof(Presentation.AssemblyReference).Assembly);
 
-builder.Services.AddIdentity<IdentityUser, IdentityRole>( options =>
-    {
-        options.SignIn.RequireConfirmedAccount = false;
-        options.User.RequireUniqueEmail = true;
-        options.Password.RequireUppercase = false;
-        options.Password.RequireLowercase = false;
-        options.Password.RequireDigit = false;
-        options.Password.RequiredLength = 6;
-    }
-).AddEntityFrameworkStores<RepositoryContext>();
-*/
+builder.Services.AddControllersWithViews();         // controllers ve views klasörü için
+builder.Services.AddRazorPages();       // razor pageler için
+
+builder.Services.ConfigureDbContext(builder.Configuration);     // extension yazdık
+builder.Services.ConfigureSession();
+
+builder.Services.ConfigureIdentity();   // identity eklendi
+
+builder.Services.ConfigureRepositoryRegistration();
+builder.Services.ConfigureServiceRegistration();
+
+builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.ConfigureRouting();
+builder.Services.ConfigureApplicationCookie();
+
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+app.UseStaticFiles();       // wwwroot klasöürün kullanılabilir hale getir
+app.UseSession();
+
+app.UseHttpsRedirection();      // yönlendirme https üzernden olcak, redirect için gerekli
+app.UseRouting(); // yönlendirme için gerekli
+
+app.UseAuthentication();   // önce oturum, sonra yetkilendirme 
+app.UseAuthorization();  // oturum açma ve yetkilendirme, bunlarda routing ile endpoint arasında olmalı yoksa çalışmaz
+
+app.UseEndpoints(endpoints =>
 {
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
-}
+    /*endpoints.MapAreaControllerRoute(
+        name: "Admin",
+        areaName: "Admin",
+        pattern: "Admin/{controller=Dashboard}/{action=Index}/{id?}"
+    );
+*/
+    endpoints.MapControllerRoute("default", "{controller=Login}/{action=Index}/{id?}"); // name and pattern
 
-app.UseHttpsRedirection();
-app.UseStaticFiles();
+    endpoints.MapRazorPages();
 
-app.UseRouting();
+    endpoints.MapControllers();     // api endpoint ayarı ekendi
+});
 
-app.UseAuthorization();
-
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-
+app.ConfigureAndCheckMigration();
+app.ConfigureLocalization();
+app.ConfigureDefaultAdminUser();
 app.Run();

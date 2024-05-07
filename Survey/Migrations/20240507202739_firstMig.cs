@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Survey.Migrations
 {
-    public partial class boyoss : Migration
+    public partial class firstMig : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -46,6 +46,24 @@ namespace Survey.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Product",
+                columns: table => new
+                {
+                    ProductId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ProductName = table.Column<string>(type: "TEXT", nullable: false),
+                    Price = table.Column<decimal>(type: "TEXT", nullable: false),
+                    Summary = table.Column<string>(type: "TEXT", nullable: true),
+                    ImageUrl = table.Column<string>(type: "TEXT", nullable: true),
+                    CategoryId = table.Column<int>(type: "INTEGER", nullable: true),
+                    Showcase = table.Column<bool>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Product", x => x.ProductId);
                 });
 
             migrationBuilder.CreateTable(
@@ -154,6 +172,71 @@ namespace Survey.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { "52fcf265-e2e6-4849-8d53-3aba1a29c613", null, "Admin", "ADMIN" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { "785c0427-a6dd-407e-b406-6c5639e8f5e2", null, "User", "USER" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { "e7257fc1-4237-445b-9390-3d4ce24e27ac", null, "Editor", "EDITOR" });
+
+            migrationBuilder.InsertData(
+                table: "Product",
+                columns: new[] { "ProductId", "CategoryId", "ImageUrl", "Price", "ProductName", "Showcase", "Summary" },
+                values: new object[] { 1, 2, "/images/1.jpg", 17000m, "Computer", false, "" });
+
+            migrationBuilder.InsertData(
+                table: "Product",
+                columns: new[] { "ProductId", "CategoryId", "ImageUrl", "Price", "ProductName", "Showcase", "Summary" },
+                values: new object[] { 2, 2, "/images/2.jpg", 1000m, "Keyboard", false, "" });
+
+            migrationBuilder.InsertData(
+                table: "Product",
+                columns: new[] { "ProductId", "CategoryId", "ImageUrl", "Price", "ProductName", "Showcase", "Summary" },
+                values: new object[] { 3, 2, "/images/3.jpg", 500m, "Mouse", false, "" });
+
+            migrationBuilder.InsertData(
+                table: "Product",
+                columns: new[] { "ProductId", "CategoryId", "ImageUrl", "Price", "ProductName", "Showcase", "Summary" },
+                values: new object[] { 4, 2, "/images/4.jpg", 7000m, "Monitor", false, "" });
+
+            migrationBuilder.InsertData(
+                table: "Product",
+                columns: new[] { "ProductId", "CategoryId", "ImageUrl", "Price", "ProductName", "Showcase", "Summary" },
+                values: new object[] { 5, 2, "/images/5.jpg", 1500m, "Deck", false, "" });
+
+            migrationBuilder.InsertData(
+                table: "Product",
+                columns: new[] { "ProductId", "CategoryId", "ImageUrl", "Price", "ProductName", "Showcase", "Summary" },
+                values: new object[] { 6, 1, "/images/6.jpg", 1500m, "History", false, "" });
+
+            migrationBuilder.InsertData(
+                table: "Product",
+                columns: new[] { "ProductId", "CategoryId", "ImageUrl", "Price", "ProductName", "Showcase", "Summary" },
+                values: new object[] { 7, 1, "/images/7.jpg", 7000m, "Maetmatic", false, "" });
+
+            migrationBuilder.InsertData(
+                table: "Product",
+                columns: new[] { "ProductId", "CategoryId", "ImageUrl", "Price", "ProductName", "Showcase", "Summary" },
+                values: new object[] { 8, 1, "/images/1.jpg", 7000m, "Galaxy-fe", true, "" });
+
+            migrationBuilder.InsertData(
+                table: "Product",
+                columns: new[] { "ProductId", "CategoryId", "ImageUrl", "Price", "ProductName", "Showcase", "Summary" },
+                values: new object[] { 9, 2, "/images/6.jpg", 7000m, "xp-pen", true, "" });
+
+            migrationBuilder.InsertData(
+                table: "Product",
+                columns: new[] { "ProductId", "CategoryId", "ImageUrl", "Price", "ProductName", "Showcase", "Summary" },
+                values: new object[] { 10, 1, "/images/5.jpg", 7000m, "hp mouse", true, "" });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -208,6 +291,9 @@ namespace Survey.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Product");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
