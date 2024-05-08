@@ -112,10 +112,10 @@ namespace Services
             return await _userManager.DeleteAsync(user);
         }
 
-        public  IdentityRole GetOneRoleWithId(string roleId)
+        public IdentityRole GetOneRoleWithId(string roleId)
         {
             IdentityRole role = Roles.FirstOrDefault(r => r.Id == roleId);
-            return  role;
+            return role;
         }
 
         public async Task<IdentityResult> CreateRole(RoleDtoForCreation roleDto)
@@ -129,7 +129,15 @@ namespace Services
         public IdentityRole GetOneRoleWithName(string roleName)
         {
             IdentityRole role = Roles.FirstOrDefault(r => r.Name == roleName);
-            return  role;
+            return role;
+        }
+
+        public async Task<IdentityResult> DeleteRole(string id)
+        {
+            var role = GetOneRoleWithId(id);
+
+            var result = await _roleManager.DeleteAsync(role);
+            return result;
         }
     }
 }

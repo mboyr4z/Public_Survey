@@ -16,5 +16,7 @@ namespace Services.Contracts
         IdentityRole GetOneRoleWithId(string roleId);
         IdentityRole GetOneRoleWithName(string roleName);
         Task<IdentityResult> CreateRole(RoleDtoForCreation roleDto);
+        Task<IdentityResult> DeleteRole(string id);
+        
     }
 }

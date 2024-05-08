@@ -60,9 +60,15 @@ namespace Survey.Areas.Controllers
 
 
         [HttpPost]
-        public IActionResult Delete(string id)
+        public async Task<IActionResult> Delete(string id)
         {
-            IdentityRole role = _manager.AuthService.GetOneRoleWithId(id);
+            IdentityResult result = await _manager.AuthService.DeleteRole(id);
+            
+            if(result.Succeeded){
+                P.f("Rol silme başarılı");
+            }else{
+                P.f("Silme esnasında bir hata ile karşılaşıldı");
+            }
             return RedirectToAction("Index");
         }
     }
