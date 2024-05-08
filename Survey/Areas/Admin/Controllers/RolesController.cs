@@ -24,6 +24,12 @@ namespace Survey.Areas.Controllers
             return View(roles);
         }
 
+        public IActionResult CreateRole()
+        {
+
+            return View();
+        }
+
         [HttpPost]
         public IActionResult Delete(string id)
         {

@@ -3,7 +3,7 @@
     <div class="col-md-4   my-2">
         <div class="card" style="width: 18rem;">
             <div class="card-header text-center">
-                <h5 class="card-title">Users(@ViewBag.userCount)</h5>
+                <h5 class="card-title">Users(@await Component.InvokeAsync("UserSummary"))</h5>
             </div>
             <div class="card-body bg-warning text-center">
 
@@ -23,7 +23,7 @@
     <div class="col-md-4   my-2">
         <div class="card" style="width: 18rem;">
             <div class="card-header text-center">
-                <h5 class="card-title">Roles(@ViewBag.roleCount)</h5>
+                <h5 class="card-title">Roles(@await Component.InvokeAsync("RoleSummary"))</h5>
             </div>
             <div class="card-body bg-warning text-center">
 

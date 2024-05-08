@@ -116,6 +116,11 @@ namespace Services
         {
             IdentityRole role = Roles.FirstOrDefault(r => r.Id == roleId);
             return  role;
-        } 
+        }
+
+        public Task<IdentityResult> CreateRole(RoleDtoForCreation roleDto)
+        {
+            return null;
+        }
     }
 }
