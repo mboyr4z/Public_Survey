@@ -1,3 +1,5 @@
+using Entities.Dtos;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Services;
 using Services.Contracts;
@@ -17,7 +19,17 @@ namespace Survey.Areas.Controllers
 
         public IActionResult Index()
         {
-            return View();
+
+            var roles = _manager.AuthService.Roles;
+            return View(roles);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(string id)
+        {
+            IdentityRole role = _manager.AuthService.GetOneRoleWithId(id);
+            P.f("name : " + role.Name );
+            return RedirectToAction("Index");
         }
     }
 }

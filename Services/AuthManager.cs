@@ -111,5 +111,11 @@ namespace Services
             var user = await GetOneUser(userName);
             return await _userManager.DeleteAsync(user);
         }
+
+        public  IdentityRole GetOneRoleWithId(string roleId)
+        {
+            IdentityRole role = Roles.FirstOrDefault(r => r.Id == roleId);
+            return  role;
+        } 
     }
 }

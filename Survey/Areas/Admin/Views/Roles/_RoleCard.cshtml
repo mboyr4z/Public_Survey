@@ -1,0 +1,23 @@
+@model IdentityRole
+<tr>
+    <td>
+        <div class="row">
+
+            <div class="col-md-4">@Model.Name</div>
+            <div class="col-md-4">
+
+                <form method="post" asp-action="Delete">
+                    <input type="hidden" name="id" value="@Model.Id">
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fa-solid fa-plus"></i>
+                        Delete
+                    </button>
+                </form>
+
+            </div>
+            <div class="col-md-4">
+
+            </div>
+        </div>
+    </td>
+</tr>
