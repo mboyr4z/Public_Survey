@@ -1,1 +1,42 @@
-Admin Dashboard
+<div class="row g-0">
+
+    <div class="col-md-4   my-2">
+        <div class="card" style="width: 18rem;">
+            <div class="card-header text-center">
+                <h5 class="card-title">Users(@ViewBag.userCount)</h5>
+            </div>
+            <div class="card-body bg-warning text-center">
+
+                <p class="card-text">--</p>
+                <div class="d-flrex justify-content-center">
+
+                </div>
+
+                <div class="btn btn-group text-center">
+                    <a class="btn btn-primary" asp-controller="Users" asp-action="Index">Get All Users</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-md-4   my-2">
+        <div class="card" style="width: 18rem;">
+            <div class="card-header text-center">
+                <h5 class="card-title">Roles(@ViewBag.roleCount)</h5>
+            </div>
+            <div class="card-body bg-warning text-center">
+
+                <p class="card-text">--</p>
+                <div class="d-flrex justify-content-center">
+
+                </div>
+
+                <div class="btn btn-group text-center">
+                    <a class="btn btn-primary" asp-controller="Roles" asp-action="Index">Get All Roles</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

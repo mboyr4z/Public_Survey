@@ -16,7 +16,5 @@ namespace Entities.Dtos
         public String? PhoneNumber { get; init; }
 
         public HashSet<String> Roles { get; set; } = new HashSet<string>();
-
-    
     }
 }
