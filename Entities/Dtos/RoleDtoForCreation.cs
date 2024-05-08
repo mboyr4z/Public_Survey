@@ -5,9 +5,7 @@ namespace Entities.Dtos
     public record RoleDtoForCreation
     {
         [DataType(DataType.Text)]
-        [Required(ErrorMessage ="UserName is required.")]
-        public String? RoleName { get; init; }
-
-
+        [Required(ErrorMessage ="Role Name is required.")]
+        public String? Name { get; init; }
     }
 }

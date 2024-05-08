@@ -1,1 +1,37 @@
-create role page
+@model RoleDtoForCreation
+
+
+
+<form method="post" asp-area="Admin" asp-controller="Roles" asp-action="CreateRole">
+    <div class="row my-10">
+        <div class="col-md-3">
+
+
+        </div>
+        <div class="col-md-6">
+
+            <div class="">
+                <div class="text-danger" asp-validation-summary="All">
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input class="form-control" type="form" asp-for="Name">
+            </div>
+
+            <div class="btn-group my-3">
+                <a class="btn btn-secondary rounded-10" asp-controller="Roles" asp-action="Index">Role Page</a>
+                <button type="submit" class="btn btn-outline-success" ><i class="fa fa-plus"></i> Add New Role</button>
+            </div>
+
+
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+
+
+
+
+</form>

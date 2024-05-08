@@ -14,7 +14,7 @@ namespace Services.Contracts
         Task<IdentityResult> ResetPassword(ResetPasswordDto model);
         Task<IdentityResult> DeleteOneUser(string userName);
         IdentityRole GetOneRoleWithId(string roleId);
-
+        IdentityRole GetOneRoleWithName(string roleName);
         Task<IdentityResult> CreateRole(RoleDtoForCreation roleDto);
     }
 }

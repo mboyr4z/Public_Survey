@@ -17,12 +17,6 @@ namespace Survey.Areas.Controllers
 
         public IActionResult Index()
         {
-             int userCount = _manager.AuthService.GetAllUsers().Count();
-              int roleCount = _manager.AuthService.Roles.Count();
-
-              ViewBag.userCount = userCount;
-              ViewBag.roleCount = roleCount;
-
             return View();
         }
     }

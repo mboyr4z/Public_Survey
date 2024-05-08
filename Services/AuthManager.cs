@@ -118,9 +118,18 @@ namespace Services
             return  role;
         }
 
-        public Task<IdentityResult> CreateRole(RoleDtoForCreation roleDto)
+        public async Task<IdentityResult> CreateRole(RoleDtoForCreation roleDto)
         {
-            return null;
+            var newUser = _mapper.Map<IdentityRole>(roleDto);
+            var result = await _roleManager.CreateAsync(newUser);
+
+            return result;
+        }
+
+        public IdentityRole GetOneRoleWithName(string roleName)
+        {
+            IdentityRole role = Roles.FirstOrDefault(r => r.Name == roleName);
+            return  role;
         }
     }
 }
