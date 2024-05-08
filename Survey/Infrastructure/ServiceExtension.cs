@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Repositories;
+using Repositories.Contracts;
+using Services;
+using Services.Contracts;
 
 namespace StoreApp.Infrastructure.Extensions
 {
@@ -12,11 +15,9 @@ namespace StoreApp.Infrastructure.Extensions
 
         public static void ConfigureServiceRegistration(this IServiceCollection services)
         {
-            /* services.AddScoped<IServiceManager, ServiceManager>();
+             services.AddScoped<IServiceManager, ServiceManager>();
              services.AddScoped<IProductService, ProductManager>();
-             services.AddScoped<ICategoryService, CategoryManager>();
-             services.AddScoped<IOrderService, OrderManager>();
-             services.AddScoped<IAuthService, AuthManager>();*/
+             services.AddScoped<IAuthService, AuthManager>();
 
         }
 
@@ -43,9 +44,9 @@ namespace StoreApp.Infrastructure.Extensions
 
         public static void ConfigureRepositoryRegistration(this IServiceCollection services)
         {
-            /* services.AddScoped<IRepositoryManager, RepositoryManager>();        // IOS için  yapılıyor bu
+             services.AddScoped<IRepositoryManager, RepositoryManager>();        // IOS için  yapılıyor bu
              services.AddScoped<IProductRepository, ProductRepository>();
-             services.AddScoped<ICategoryRepsitory, CategoryRepository>();
+            /* services.AddScoped<ICategoryRepsitory, CategoryRepository>();
              services.AddScoped<IOrderRepository, OrderRepository>();*/
         }
         public static void ConfigureIdentity(this IServiceCollection services)

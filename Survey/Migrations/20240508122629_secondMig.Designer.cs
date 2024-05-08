@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repositories;
 
@@ -10,9 +11,10 @@ using Repositories;
 namespace Survey.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    partial class RepositoryContextModelSnapshot : ModelSnapshot
+    [Migration("20240508122629_secondMig")]
+    partial class secondMig
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.0");
@@ -177,21 +179,26 @@ namespace Survey.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "cd333572-a216-4f6a-adc2-5ab30d38a955",
+                            Id = "d1504f47-f9e6-4037-933b-f76c0be408e4",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "521bd3fa-a0f5-4e96-8996-09ad2128a497",
+                            Id = "5fe7d10e-b17d-42b0-a6cb-7dc6a6bad700",
                             Name = "Editor",
                             NormalizedName = "EDITOR"
                         },
                         new
                         {
-                            Id = "f50bb90d-40ca-4e8b-82ae-bd6f15a06f94",
+                            Id = "fbc80466-86e5-4ae4-8101-564c6887696e",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "387ccc82-9365-4e40-b45d-c32398e58bf0",
+                            ConcurrencyStamp = "60c7ee5f-a61e-43fe-a82d-328091328fd0"
                         });
                 });
 

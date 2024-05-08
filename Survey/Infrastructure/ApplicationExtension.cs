@@ -9,7 +9,8 @@ namespace StoreApp.Infrastructure.Extensions
         private static Task userM;
         private static Task roleM;
 
-        public static void ConfigureAndCheckMigration(this IApplicationBuilder app){
+        public static void ConfigureAndCheckMigration(this IApplicationBuilder app)
+        {
 
             // app genişletme PROGRAM.CS TEKİ
             RepositoryContext context = app
@@ -20,22 +21,26 @@ namespace StoreApp.Infrastructure.Extensions
 
             // IOS gibi bir işlem oldu
 
-            if(context.Database.GetPendingMigrations().Any()){
+            if (context.Database.GetPendingMigrations().Any())
+            {
                 context.Database.Migrate();
             }
 
             // miggration aldıktan sorna dotnet ef databas drop ifadesi kullanmamıza gerek yok
         }
 
-        public static void ConfigureLocalization(this WebApplication app){
-            app.UseRequestLocalization(options =>{
+        public static void ConfigureLocalization(this WebApplication app)
+        {
+            app.UseRequestLocalization(options =>
+            {
                 options.AddSupportedCultures("tr-TR")
                     .AddSupportedUICultures("tr-TR")
                     .SetDefaultCulture("tr-TR");
             });
         }
 
-        public static async void ConfigureDefaultAdminUser( this IApplicationBuilder app){
+        public static async void ConfigureDefaultAdminUser(this IApplicationBuilder app)
+        {
             const string adminUser = "Admin";
             const string adminPassword = "Admin+123456";
 
@@ -55,8 +60,10 @@ namespace StoreApp.Infrastructure.Extensions
 
             IdentityUser user = await userManager.FindByNameAsync(adminUser);
 
-            if(user is null){
-                user = new IdentityUser(){
+            if (user is null)
+            {
+                user = new IdentityUser()
+                {
                     Email = "mboyraz@samsun.edu.tr",
                     PhoneNumber = "2011345246",
                     UserName = adminUser,
@@ -64,7 +71,8 @@ namespace StoreApp.Infrastructure.Extensions
 
                 var result = await userManager.CreateAsync(user, adminPassword);
 
-                if(!result.Succeeded){
+                if (!result.Succeeded)
+                {
                     throw new Exception("Admin user could not created.");
                 }
 
@@ -76,7 +84,8 @@ namespace StoreApp.Infrastructure.Extensions
                         .ToList()
                 );
 
-                if(!roleResult.Succeeded){
+                if (!roleResult.Succeeded)
+                {
                     throw new Exception("System have problems with role defination for admin.");
                 }
             }
@@ -84,5 +93,10 @@ namespace StoreApp.Infrastructure.Extensions
 
 
         }
+
+
+
+
+
     }
 }

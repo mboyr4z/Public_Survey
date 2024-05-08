@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repositories;
 
@@ -10,9 +11,10 @@ using Repositories;
 namespace Survey.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    partial class RepositoryContextModelSnapshot : ModelSnapshot
+    [Migration("20240508123022_lastMig")]
+    partial class lastMig
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.0");
@@ -177,19 +179,19 @@ namespace Survey.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "cd333572-a216-4f6a-adc2-5ab30d38a955",
+                            Id = "910e7fc0-0fe8-4852-8017-3e6a576dde4c",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "521bd3fa-a0f5-4e96-8996-09ad2128a497",
+                            Id = "9dadc502-e6da-4162-8eea-a6c861cbd68d",
                             Name = "Editor",
                             NormalizedName = "EDITOR"
                         },
                         new
                         {
-                            Id = "f50bb90d-40ca-4e8b-82ae-bd6f15a06f94",
+                            Id = "e43b1bd4-949b-4c06-b80d-2ae2756522aa",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -280,6 +282,21 @@ namespace Survey.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "7456b9fd-8bbd-473a-8274-5428b1cca0ff",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "efeaaee2-31e8-457c-8a54-cd3955e35c66",
+                            Email = "boyr4z.m@gmail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "9a14211f-97ba-44cb-a098-14358239dccf",
+                            TwoFactorEnabled = false,
+                            UserName = "Muhammet"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>

@@ -1,0 +1,8 @@
+@using Microsoft.AspNetCore.Identity
+@model IEnumerable<IdentityUser>
+
+@foreach(IdentityUser user in Model){
+    <p>
+        @user.UserName - @user.Email
+    </p>
+}
