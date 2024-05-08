@@ -34,12 +34,12 @@ app.UseAuthorization();  // oturum açma ve yetkilendirme, bunlarda routing ile 
 
 app.UseEndpoints(endpoints =>
 {
-    /*endpoints.MapAreaControllerRoute(
+    endpoints.MapAreaControllerRoute(
         name: "Admin",
         areaName: "Admin",
         pattern: "Admin/{controller=Dashboard}/{action=Index}/{id?}"
     );
-*/
+
     endpoints.MapControllerRoute("default", "{controller=Login}/{action=Index}/{id?}"); // name and pattern
 
     endpoints.MapRazorPages();
