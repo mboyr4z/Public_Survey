@@ -13,7 +13,7 @@ namespace Survey.Components
         }
 
         public string Invoke(){
-            return _manager.AuthService.GetAllUsers().Count().ToString();
+            return "yok"; // _manager.AuthService.GetAllUsers().Count().ToString();
         }
     }
 }

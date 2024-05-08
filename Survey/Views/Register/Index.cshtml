@@ -1,8 +1,4 @@
-@model RegisterDto
-
-@* <partial name="_AllUsers" model="@ViewBag.Users"></partial> *@
-
-
+@model account_RegisterDto
 
 <form method="post" asp-action="Index">
     <div class="row my-10">
@@ -35,8 +31,8 @@
             </div>
 
             <div class="btn-group ">
-                <a class="btn btn-secondary rounded-10" asp-controller="Login" asp-action="Index">Giriş Yap</a>
-                <button class="btn btn-outline-secondary" type="submit" value="Gönder">Gönderss</button>
+                <a class="btn btn-secondary rounded-10" asp-controller="Login" asp-action="Index">Login Page</a>
+                <button class="btn btn-outline-secondary" type="submit" value="Gönder">Register</button>
             </div>
 
 

@@ -9,11 +9,10 @@ namespace StoreApp.Infrastructure.Mapper
     {
         public MappingProfile()
         {
-            CreateMap<ProductDtoForInsertion, Product>();
-            CreateMap<ProductDtoForUpdate, Product>().ReverseMap();
-            CreateMap<UserDtoForCreation, IdentityUser>();
-            CreateMap<UserDtoForUpdate, IdentityUser>().ReverseMap();
             CreateMap<RoleDtoForCreation, IdentityRole>().ReverseMap();
+            
+            CreateMap<account_LoginDto, IdentityUser>().ReverseMap();
+            CreateMap<account_RegisterDto, IdentityUser>().ReverseMap();
         }
     }
 }

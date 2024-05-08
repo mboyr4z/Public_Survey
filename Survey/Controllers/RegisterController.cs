@@ -17,21 +17,8 @@ namespace Survey.Controllers
 
         public IActionResult Index()
         {
-
-            var users = _manager.AuthService.GetAllUsers();
-
-
-            ViewBag.Users = users;
-
             return View();
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Index([FromForm] RegisterDto userDto)
-        {
-            P.f("name : " + userDto.UserName + " mail : " + userDto.Email + " pass : " + userDto.Password);
-            return View();
-        }
     }
 }

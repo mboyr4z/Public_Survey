@@ -16,7 +16,6 @@ namespace StoreApp.Infrastructure.Extensions
         public static void ConfigureServiceRegistration(this IServiceCollection services)
         {
              services.AddScoped<IServiceManager, ServiceManager>();
-             services.AddScoped<IProductService, ProductManager>();
              services.AddScoped<IAuthService, AuthManager>();
 
         }

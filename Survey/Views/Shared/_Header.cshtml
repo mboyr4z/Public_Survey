@@ -1,14 +1,21 @@
-<header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-    <a asp-area="" asp-action="Index" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-        <svg class="bi me-2" width="40" height="32">
+<header
+    class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+    <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+        <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
             <use xlink:href="#bootstrap"></use>
         </svg>
-        
-        <span class="fs-4 fixed-left">Survey</span>
     </a>
 
-    <ul class="nav nav-pills">
-        <li class="nav-item"><a asp-area="" class="nav-link active" aria-current="page">Main Page</a></li>
-        <li class="nav-item"><a asp-area="admin" asp-controller="dashboard" asp-action="" class="nav-link">Admin</a></li>
+    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+        <li><a asp-area="" class="nav-link px-2 link-secondary">Home</a></li>
+        <li><a asp-area="admin" asp-controller="dashboard" class="nav-link px-2 link-dark">Admin</a></li>
+        <li><a class="nav-link px-2 link-dark">Null</a></li>
+        <li><a class="nav-link px-2 link-dark">Null</a></li>
+        <li><a class="nav-link px-2 link-dark">Null</a></li>
     </ul>
+
+    <div class="col-md-3 text-end">
+        <a  asp-controller="Login" asp-action="Index" class="btn btn-outline-primary me-2">Login</a>
+        <a  asp-controller="Register" asp-action="Index" class="btn btn-primary me-2">Sign-up</a>
+    </div>
 </header>

@@ -1,6 +1,4 @@
-@model RegisterDto
-
-@* <partial name="_AllUsers" model="@ViewBag.Users"></partial> *@
+@model account_LoginDto
 
 
 
@@ -25,18 +23,13 @@
             </div>
 
             <div class="form-group my-3">
-                <label asp-for="Email"></label>
-                <input class="form-control" type="text" asp-for="Email">
-            </div>
-
-            <div class="form-group my-3">
                 <label asp-for="Password"></label>
                 <input class="form-control" type="text" asp-for="Password">
             </div>
 
             <div class="btn-group ">
-                <a class="btn btn-secondary rounded-10" asp-controller="Login" asp-action="Index">Giriş Yap</a>
-                <button class="btn btn-outline-secondary" type="submit" value="Gönder">Gönderss</button>
+                <a class="btn btn-secondary rounded-10" asp-controller="Register" asp-action="Index">Register Page</a>
+                <button class="btn btn-outline-secondary" type="submit" value="Gönder">Login</button>
             </div>
 
 

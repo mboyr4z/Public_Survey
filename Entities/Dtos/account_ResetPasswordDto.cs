@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Entities.Dtos
 {
-    public record ResetPasswordDto
+    public record account_ResetPasswordDto
     {
         public string? UserName { get; init; }
 
