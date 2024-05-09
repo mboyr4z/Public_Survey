@@ -3,6 +3,7 @@ using Entities.Dtos;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Services;
+using Services.Benimkiler;
 using Services.Contracts;
 
 namespace Survey.Areas.Controllers
@@ -13,10 +14,14 @@ namespace Survey.Areas.Controllers
         private readonly IServiceManager _manager;
         private readonly IMapper _mapper;
 
-        public RolesController(IServiceManager manager, IMapper mapper)
+          private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly UserManager<IdentityUser> _userManager;
+        public RolesController(IServiceManager manager, IMapper mapper, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             _manager = manager;
             _mapper = mapper;
+            _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         public IActionResult Index()
@@ -34,25 +39,32 @@ namespace Survey.Areas.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public  async Task<IActionResult> CreateRole(RoleDtoForCreation roleDto)
+        public async Task<IActionResult> CreateRole(RoleDtoForCreation roleDto)
         {
-            
+
             IdentityRole role = _manager.AuthService.GetOneRoleWithName(roleDto.Name);
 
-            if(role is null){
-                IdentityResult result = await _manager.AuthService.CreateRole(roleDto);
+            if (role is null)
+            {
+                var newUser = _mapper.Map<IdentityRole>(roleDto);
+                var result = await _roleManager.CreateAsync(newUser);
 
-                if(result.Succeeded){
+                if (result.Succeeded)
+                {
                     P.f("Başarılı şeklde " + roleDto.Name + " eklendi");
-                }else{
+                }
+                else
+                {
                     P.f("Bir hata ile karşılaşıldı");
                 }
-            }else{
+            }
+            else
+            {
                 P.f("Zaten rol daha önce yaratılmş");
             }
-            
+
             // P.f("roleDtroName : " + roleDto.Name);
-            
+
 
             return RedirectToAction("Index");
         }
@@ -62,11 +74,16 @@ namespace Survey.Areas.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(string id)
         {
-            IdentityResult result = await _manager.AuthService.DeleteRole(id);
-            
-            if(result.Succeeded){
+             var role = _manager.AuthService.GetOneRoleWithId(id);
+
+            var result = await _roleManager.DeleteAsync(role);
+
+            if (result.Succeeded)
+            {
                 P.f("Rol silme başarılı");
-            }else{
+            }
+            else
+            {
                 P.f("Silme esnasında bir hata ile karşılaşıldı");
             }
             return RedirectToAction("Index");
