@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Services.Contracts;
 
@@ -5,15 +6,14 @@ namespace Survey.Components
 {
     public class UserSummaryViewComponent : ViewComponent
     {
-        private readonly IServiceManager _manager;
-
-        public UserSummaryViewComponent(IServiceManager manager)
+        private readonly UserManager<IdentityUser> _userManager;
+        public UserSummaryViewComponent(UserManager<IdentityUser> userManager)
         {
-            _manager = manager;
+            _userManager = userManager;
         }
 
         public string Invoke(){
-            return "yok"; // _manager.AuthService.GetAllUsers().Count().ToString();
+            return _userManager.Users.Count().ToString();
         }
     }
 }
