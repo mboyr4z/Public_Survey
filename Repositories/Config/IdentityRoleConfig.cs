@@ -9,8 +9,9 @@ namespace Repositories.Config
         {
             builder.HasData(
                 new IdentityRole() { Name = "User", NormalizedName = "USER" },
-                new IdentityRole() { Name = "Editor", NormalizedName = "EDITOR" },
-                new IdentityRole() { Name = "Admin", NormalizedName = "ADMIN" }
+                new IdentityRole() { Name = "Admin", NormalizedName = "ADMIN" },
+                new IdentityRole() { Name = "Author", NormalizedName = "AUTHOR"},
+                new IdentityRole() { Name = "Boss", NormalizedName = "BOSS" }
             );
         }
 

@@ -10,5 +10,8 @@ namespace Entities.Dtos
         public string? Email { get; init; }
         [Required(ErrorMessage = "Password is required")]
         public string? Password { get; init; }
+
+        [Required(ErrorMessage = "RoleId is required")]
+        public string? RoleId{get; init;}
     }
 }
