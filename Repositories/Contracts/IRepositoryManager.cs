@@ -2,8 +2,9 @@ namespace Repositories.Contracts
 {
     public interface IRepositoryManager
     {
-        IProductRepository Product { get; }
-
+        IAuthorRepository Author { get; }
+        IBossRepository Boss { get; }
+        ICommenterRepository Commenter { get; }
         void Save();
     }
 }

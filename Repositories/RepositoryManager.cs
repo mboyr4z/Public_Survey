@@ -5,15 +5,22 @@ namespace Repositories
     public class RepositoryManager : IRepositoryManager
     {
         private readonly RepositoryContext _context;
-        private readonly IProductRepository _productRepository;
+        private readonly IAuthorRepository _authorRepository;
+
+        private readonly IBossRepository _bossRepository;
+        private readonly ICommenterRepository _commenterRepository;
 
 
-        public RepositoryManager(IProductRepository productRepository, RepositoryContext context)
+        public RepositoryManager(RepositoryContext context, ICommenterRepository commenterRepository, IBossRepository bossRepository, IAuthorRepository authorRepository)
         {
-            _productRepository = productRepository;
             _context = context;
+            _commenterRepository = commenterRepository;
+            _bossRepository = bossRepository;
+            _authorRepository = authorRepository;
         }
-        public IProductRepository Product => _productRepository;
+        public IAuthorRepository Author => _authorRepository;
+        public IBossRepository Boss => _bossRepository;
+        public ICommenterRepository Commenter => _commenterRepository;
 
         public void Save()
         {
