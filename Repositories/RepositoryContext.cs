@@ -9,9 +9,9 @@ namespace Repositories;
 
 public class RepositoryContext : IdentityDbContext<IdentityUser>//  DbContext    esski implemention  // bu class vt olarak düşünülecek, modeli tabloya dönüştürmek için db set
 {
-    public DbSet<Author>? Products { get; set; }
-    public DbSet<Boss> Categories { get; set; }
-    public DbSet<Commenter> Orders { get; set; }
+    public DbSet<Author>? Authors { get; set; }
+    public DbSet<Boss> Bosses { get; set; }
+    public DbSet<Commenter> Commenters { get; set; }
 
     public RepositoryContext(DbContextOptions<RepositoryContext> options) : base(options)   // baseye yolla
     {

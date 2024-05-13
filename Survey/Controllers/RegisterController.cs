@@ -28,9 +28,15 @@ namespace Survey.Controllers
 
         public IActionResult Index()
         {
-            ViewBag.allRoles = new SelectList(_manager.AuthService.Roles, "Id", "Name", "1");
+            ViewBag.allRoles = new SelectList(_manager.AuthService.Roles.Where(role => role.Name!= "Admin"), "Id", "Name", "1");
             return View();
         }
+
+        public IActionResult Success()
+        {
+            return View();
+        }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -53,6 +59,8 @@ namespace Survey.Controllers
 
                 if(result2.Succeeded){
                     P.f("Rol de başarıyla eklendi");
+
+                    
                 }
             }
             else

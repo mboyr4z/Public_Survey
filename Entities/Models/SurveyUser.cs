@@ -8,5 +8,6 @@ namespace Entities.Models
         public int? Age {get; set;}
         public string? City {get; set;}
         public float? LikeRate{get; set;}
+        public string? ImageUrl{get; set;}
     }
 }

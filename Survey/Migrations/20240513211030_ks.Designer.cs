@@ -11,144 +11,138 @@ using Repositories;
 namespace Survey.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20240513134426_Merhabaas")]
-    partial class Merhabaas
+    [Migration("20240513211030_ks")]
+    partial class ks
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.0");
 
-            modelBuilder.Entity("Entities.Product", b =>
+            modelBuilder.Entity("Entities.Models.Author", b =>
                 {
-                    b.Property<int>("ProductId")
-                        .ValueGeneratedOnAdd()
+                    b.Property<string>("id")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("Age")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("CategoryId")
+                    b.Property<string>("City")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("CompanyId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("Confirmed")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("ImageUrl")
                         .HasColumnType("TEXT");
 
-                    b.Property<decimal>("Price")
+                    b.Property<float?>("LikeRate")
+                        .HasColumnType("REAL");
+
+                    b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("ProductName")
+                    b.Property<string>("Surname")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("CompanyId");
+
+                    b.ToTable("Authors");
+                });
+
+            modelBuilder.Entity("Entities.Models.Boss", b =>
+                {
+                    b.Property<string>("id")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("Age")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("City")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("CompanyId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("Confirmed")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("TEXT");
+
+                    b.Property<float?>("LikeRate")
+                        .HasColumnType("REAL");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Surname")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("CompanyId");
+
+                    b.ToTable("Bosses");
+                });
+
+            modelBuilder.Entity("Entities.Models.Commenter", b =>
+                {
+                    b.Property<string>("id")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("Age")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("City")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("Confirmed")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("TEXT");
+
+                    b.Property<float?>("LikeRate")
+                        .HasColumnType("REAL");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Surname")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Commenters");
+                });
+
+            modelBuilder.Entity("Entities.Models.Company", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Address")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<bool>("Showcase")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Summary")
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("ProductId");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
-                    b.ToTable("Product");
+                    b.HasKey("Id");
 
-                    b.HasData(
-                        new
-                        {
-                            ProductId = 1,
-                            CategoryId = 2,
-                            ImageUrl = "/images/1.jpg",
-                            Price = 17000m,
-                            ProductName = "Computer",
-                            Showcase = false,
-                            Summary = ""
-                        },
-                        new
-                        {
-                            ProductId = 2,
-                            CategoryId = 2,
-                            ImageUrl = "/images/2.jpg",
-                            Price = 1000m,
-                            ProductName = "Keyboard",
-                            Showcase = false,
-                            Summary = ""
-                        },
-                        new
-                        {
-                            ProductId = 3,
-                            CategoryId = 2,
-                            ImageUrl = "/images/3.jpg",
-                            Price = 500m,
-                            ProductName = "Mouse",
-                            Showcase = false,
-                            Summary = ""
-                        },
-                        new
-                        {
-                            ProductId = 4,
-                            CategoryId = 2,
-                            ImageUrl = "/images/4.jpg",
-                            Price = 7000m,
-                            ProductName = "Monitor",
-                            Showcase = false,
-                            Summary = ""
-                        },
-                        new
-                        {
-                            ProductId = 5,
-                            CategoryId = 2,
-                            ImageUrl = "/images/5.jpg",
-                            Price = 1500m,
-                            ProductName = "Deck",
-                            Showcase = false,
-                            Summary = ""
-                        },
-                        new
-                        {
-                            ProductId = 6,
-                            CategoryId = 1,
-                            ImageUrl = "/images/6.jpg",
-                            Price = 1500m,
-                            ProductName = "History",
-                            Showcase = false,
-                            Summary = ""
-                        },
-                        new
-                        {
-                            ProductId = 7,
-                            CategoryId = 1,
-                            ImageUrl = "/images/7.jpg",
-                            Price = 7000m,
-                            ProductName = "Maetmatic",
-                            Showcase = false,
-                            Summary = ""
-                        },
-                        new
-                        {
-                            ProductId = 8,
-                            CategoryId = 1,
-                            ImageUrl = "/images/1.jpg",
-                            Price = 7000m,
-                            ProductName = "Galaxy-fe",
-                            Showcase = true,
-                            Summary = ""
-                        },
-                        new
-                        {
-                            ProductId = 9,
-                            CategoryId = 2,
-                            ImageUrl = "/images/6.jpg",
-                            Price = 7000m,
-                            ProductName = "xp-pen",
-                            Showcase = true,
-                            Summary = ""
-                        },
-                        new
-                        {
-                            ProductId = 10,
-                            CategoryId = 1,
-                            ImageUrl = "/images/5.jpg",
-                            Price = 7000m,
-                            ProductName = "hp mouse",
-                            Showcase = true,
-                            Summary = ""
-                        });
+                    b.ToTable("Company");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -179,25 +173,25 @@ namespace Survey.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "dadb9f7f-7084-49d4-9a58-b5e4fba99097",
+                            Id = "0c6b6500-1887-4e18-b762-2ee76080f138",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "29de7a71-e533-4540-9820-e9939fafd4c2",
+                            Id = "230172b1-b774-4045-80f8-f5c8eab9aed4",
                             Name = "Author",
                             NormalizedName = "AUTHOR"
                         },
                         new
                         {
-                            Id = "211a2e09-25e7-4607-af69-fbf837847a36",
+                            Id = "0a0aa30d-4656-4189-bd35-73d9808d1fbb",
                             Name = "Boss",
                             NormalizedName = "BOSS"
                         },
                         new
                         {
-                            Id = "524981fa-dd2c-4654-ad56-b22bf5b8dc2b",
+                            Id = "7426c844-0705-4967-af5f-3b3465eee682",
                             Name = "Commentator",
                             NormalizedName = "COMMENTATOR"
                         });
@@ -367,6 +361,28 @@ namespace Survey.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("Entities.Models.Author", b =>
+                {
+                    b.HasOne("Entities.Models.Company", "Company")
+                        .WithMany()
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Company");
+                });
+
+            modelBuilder.Entity("Entities.Models.Boss", b =>
+                {
+                    b.HasOne("Entities.Models.Company", "Company")
+                        .WithMany()
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Company");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

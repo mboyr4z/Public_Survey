@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repositories;
 
@@ -10,115 +11,13 @@ using Repositories;
 namespace Survey.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    partial class RepositoryContextModelSnapshot : ModelSnapshot
+    [Migration("20240513210810_ksks")]
+    partial class ksks
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.0");
-
-            modelBuilder.Entity("Entities.Models.Author", b =>
-                {
-                    b.Property<string>("id")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int?>("Age")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("City")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("CompanyId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<bool>("Confirmed")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("ImageUrl")
-                        .HasColumnType("TEXT");
-
-                    b.Property<float?>("LikeRate")
-                        .HasColumnType("REAL");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Surname")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("id");
-
-                    b.HasIndex("CompanyId");
-
-                    b.ToTable("Authors");
-                });
-
-            modelBuilder.Entity("Entities.Models.Boss", b =>
-                {
-                    b.Property<string>("id")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int?>("Age")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("City")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("CompanyId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<bool>("Confirmed")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("ImageUrl")
-                        .HasColumnType("TEXT");
-
-                    b.Property<float?>("LikeRate")
-                        .HasColumnType("REAL");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Surname")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("id");
-
-                    b.HasIndex("CompanyId");
-
-                    b.ToTable("Bosses");
-                });
-
-            modelBuilder.Entity("Entities.Models.Commenter", b =>
-                {
-                    b.Property<string>("id")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int?>("Age")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("City")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("Confirmed")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("ImageUrl")
-                        .HasColumnType("TEXT");
-
-                    b.Property<float?>("LikeRate")
-                        .HasColumnType("REAL");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Surname")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("id");
-
-                    b.ToTable("Commenters");
-                });
 
             modelBuilder.Entity("Entities.Models.Company", b =>
                 {
@@ -141,6 +40,45 @@ namespace Survey.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Company");
+                });
+
+            modelBuilder.Entity("Entities.Models.SurveyUser", b =>
+                {
+                    b.Property<string>("id")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("Age")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Authorid")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("City")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("TEXT");
+
+                    b.Property<float?>("LikeRate")
+                        .HasColumnType("REAL");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Surname")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("Authorid");
+
+                    b.ToTable("SurveyUser");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("SurveyUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -171,25 +109,25 @@ namespace Survey.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "0c6b6500-1887-4e18-b762-2ee76080f138",
+                            Id = "272633e6-5404-4ead-afcb-fa09f23a3f94",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "230172b1-b774-4045-80f8-f5c8eab9aed4",
+                            Id = "98d164a3-162f-4b5b-ae78-5c2b1dce3eb7",
                             Name = "Author",
                             NormalizedName = "AUTHOR"
                         },
                         new
                         {
-                            Id = "0a0aa30d-4656-4189-bd35-73d9808d1fbb",
+                            Id = "6ccdb484-b43d-4fa3-8bb5-de14dd911360",
                             Name = "Boss",
                             NormalizedName = "BOSS"
                         },
                         new
                         {
-                            Id = "7426c844-0705-4967-af5f-3b3465eee682",
+                            Id = "22735325-9069-4bc3-b285-60083799306a",
                             Name = "Commentator",
                             NormalizedName = "COMMENTATOR"
                         });
@@ -363,24 +301,52 @@ namespace Survey.Migrations
 
             modelBuilder.Entity("Entities.Models.Author", b =>
                 {
-                    b.HasOne("Entities.Models.Company", "Company")
-                        .WithMany()
-                        .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasBaseType("Entities.Models.SurveyUser");
 
-                    b.Navigation("Company");
+                    b.Property<int>("CompanyId")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("Author_CompanyId");
+
+                    b.Property<bool>("Confirmed")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("Author_Confirmed");
+
+                    b.HasIndex("CompanyId");
+
+                    b.HasDiscriminator().HasValue("Author");
                 });
 
             modelBuilder.Entity("Entities.Models.Boss", b =>
                 {
-                    b.HasOne("Entities.Models.Company", "Company")
-                        .WithMany()
-                        .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasBaseType("Entities.Models.SurveyUser");
 
-                    b.Navigation("Company");
+                    b.Property<int>("CompanyId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("Confirmed")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("Boss_Confirmed");
+
+                    b.HasIndex("CompanyId");
+
+                    b.HasDiscriminator().HasValue("Boss");
+                });
+
+            modelBuilder.Entity("Entities.Models.Commenter", b =>
+                {
+                    b.HasBaseType("Entities.Models.SurveyUser");
+
+                    b.Property<bool>("Confirmed")
+                        .HasColumnType("INTEGER");
+
+                    b.HasDiscriminator().HasValue("Commenter");
+                });
+
+            modelBuilder.Entity("Entities.Models.SurveyUser", b =>
+                {
+                    b.HasOne("Entities.Models.Author", null)
+                        .WithMany("Followers")
+                        .HasForeignKey("Authorid");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -432,6 +398,33 @@ namespace Survey.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Entities.Models.Author", b =>
+                {
+                    b.HasOne("Entities.Models.Company", "Company")
+                        .WithMany()
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Company");
+                });
+
+            modelBuilder.Entity("Entities.Models.Boss", b =>
+                {
+                    b.HasOne("Entities.Models.Company", "Company")
+                        .WithMany()
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Company");
+                });
+
+            modelBuilder.Entity("Entities.Models.Author", b =>
+                {
+                    b.Navigation("Followers");
                 });
 #pragma warning restore 612, 618
         }
