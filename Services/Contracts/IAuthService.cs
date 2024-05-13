@@ -10,7 +10,6 @@ namespace Services.Contracts
         IdentityRole GetOneRoleWithId(string roleId);
         IdentityRole GetOneRoleWithName(string roleName);
         Task<IdentityUser> GetUserWithIdAsync(string id);
-
         Task<IdentityUser> GetUserWithUsernameAsync(string id);
 
         
