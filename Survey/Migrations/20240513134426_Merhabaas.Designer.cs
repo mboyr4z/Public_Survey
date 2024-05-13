@@ -11,8 +11,8 @@ using Repositories;
 namespace Survey.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20240507202739_firstMig")]
-    partial class firstMig
+    [Migration("20240513134426_Merhabaas")]
+    partial class Merhabaas
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -179,21 +179,27 @@ namespace Survey.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "785c0427-a6dd-407e-b406-6c5639e8f5e2",
-                            Name = "User",
-                            NormalizedName = "USER"
-                        },
-                        new
-                        {
-                            Id = "e7257fc1-4237-445b-9390-3d4ce24e27ac",
-                            Name = "Editor",
-                            NormalizedName = "EDITOR"
-                        },
-                        new
-                        {
-                            Id = "52fcf265-e2e6-4849-8d53-3aba1a29c613",
+                            Id = "dadb9f7f-7084-49d4-9a58-b5e4fba99097",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "29de7a71-e533-4540-9820-e9939fafd4c2",
+                            Name = "Author",
+                            NormalizedName = "AUTHOR"
+                        },
+                        new
+                        {
+                            Id = "211a2e09-25e7-4607-af69-fbf837847a36",
+                            Name = "Boss",
+                            NormalizedName = "BOSS"
+                        },
+                        new
+                        {
+                            Id = "524981fa-dd2c-4654-ad56-b22bf5b8dc2b",
+                            Name = "Commentator",
+                            NormalizedName = "COMMENTATOR"
                         });
                 });
 

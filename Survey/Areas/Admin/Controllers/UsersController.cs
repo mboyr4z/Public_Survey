@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Services;
 using Services.Benimkiler;
 using Services.Contracts;
@@ -17,9 +18,10 @@ namespace Survey.Areas.Controllers
             _userManager = userManager;
         }
 
-    
+
         public IActionResult Index()
         {
+          
             var model = _userManager.Users;
             return View(model);
         }

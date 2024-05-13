@@ -177,27 +177,27 @@ namespace Survey.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "416715ad-3351-450a-a03b-e744d4b64f92",
-                            Name = "User",
-                            NormalizedName = "USER"
-                        },
-                        new
-                        {
-                            Id = "3748b36a-29ee-40f3-a79a-e2e4bf4ccb42",
+                            Id = "dadb9f7f-7084-49d4-9a58-b5e4fba99097",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "6108522a-ae3c-4a8f-b006-59a91f3d6d35",
+                            Id = "29de7a71-e533-4540-9820-e9939fafd4c2",
                             Name = "Author",
                             NormalizedName = "AUTHOR"
                         },
                         new
                         {
-                            Id = "c0c1d969-04f1-4221-ac87-918cc4b37cba",
+                            Id = "211a2e09-25e7-4607-af69-fbf837847a36",
                             Name = "Boss",
                             NormalizedName = "BOSS"
+                        },
+                        new
+                        {
+                            Id = "524981fa-dd2c-4654-ad56-b22bf5b8dc2b",
+                            Name = "Commentator",
+                            NormalizedName = "COMMENTATOR"
                         });
                 });
 

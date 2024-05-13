@@ -64,8 +64,8 @@ namespace StoreApp.Infrastructure.Extensions
             {
                 user = new IdentityUser()
                 {
-                    Email = "mboyraz@samsun.edu.tr",
-                    PhoneNumber = "2011345246",
+                    Email = "admin@samsun.edu.tr",
+                    PhoneNumber = "05425896434",
                     UserName = adminUser,
                 };
 
