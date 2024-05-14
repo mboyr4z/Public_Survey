@@ -59,8 +59,7 @@ namespace Survey.Controllers
 
                 if(result2.Succeeded){
                     P.f("Rol de başarıyla eklendi");
-
-                    
+                    return RedirectToAction("Success");
                 }
             }
             else
@@ -68,15 +67,11 @@ namespace Survey.Controllers
                 // Hata durumunda hata mesajlarını yazdır
                 foreach (var error in result.Errors)
                 {
-                    P.f($"Hata: {error.Description}");
-                }
-
-                return RedirectToAction("Index");
+                     ModelState.AddModelError("", error.Description);
+                } 
             }
-
-
-
-            return RedirectToAction("Index");
+            ViewBag.allRoles = new SelectList(_manager.AuthService.Roles.Where(role => role.Name!= "Admin"), "Id", "Name", "1");
+            return View();
         }
 
     }

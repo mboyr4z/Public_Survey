@@ -14,7 +14,6 @@
                 </div>
             </div>
 
-
             <div class="form-group">
                 <label asp-for="UserName"></label>
                 <input class="form-control" type="text" asp-for="UserName">
@@ -38,7 +37,8 @@
 
             <div class="form-group d-flex align-items-center justify-content-between">
                 <button class="btn btn-success" type="submit">Register</button>
-                <p class="m-0">Are You Already a Member <a asp-area="" asp-controller="Login" asp-action="Index">Login</a>
+                <p class="m-0">Are You Already a Member <a asp-area="" asp-controller="Login"
+                        asp-action="Index">Login</a>
                 </p>
 
             </div>
@@ -52,3 +52,9 @@
 
 
 </form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
