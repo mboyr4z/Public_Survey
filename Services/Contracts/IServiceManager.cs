@@ -2,10 +2,9 @@ namespace Services.Contracts
 {
     public interface IServiceManager
     {
-      /*  IProductService ProductService { get; }
-        ICategoryService CategoryService { get; }
-        IOrderService OrderService { get; }
-*/
+        IAuthorService AuthorService{get;}
+        IBossService BossService{get;}
+        ICommenterService CommenterService{get;}
         IAuthService AuthService{get;}
     }
 }
