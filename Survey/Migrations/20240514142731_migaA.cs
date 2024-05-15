@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Survey.Migrations
 {
-    public partial class ksks : Migration
+    public partial class migaA : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -46,6 +46,24 @@ namespace Survey.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Commenters",
+                columns: table => new
+                {
+                    id = table.Column<string>(type: "TEXT", nullable: false),
+                    Confirmed = table.Column<bool>(type: "INTEGER", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", nullable: true),
+                    Surname = table.Column<string>(type: "TEXT", nullable: true),
+                    Age = table.Column<int>(type: "INTEGER", nullable: true),
+                    City = table.Column<string>(type: "TEXT", nullable: true),
+                    LikeRate = table.Column<float>(type: "REAL", nullable: true),
+                    ImageUrl = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Commenters", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -170,65 +188,74 @@ namespace Survey.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "SurveyUser",
+                name: "Authors",
                 columns: table => new
                 {
                     id = table.Column<string>(type: "TEXT", nullable: false),
+                    Confirmed = table.Column<bool>(type: "INTEGER", nullable: false),
+                    CompanyId = table.Column<int>(type: "INTEGER", nullable: false),
                     Name = table.Column<string>(type: "TEXT", nullable: true),
                     Surname = table.Column<string>(type: "TEXT", nullable: true),
                     Age = table.Column<int>(type: "INTEGER", nullable: true),
                     City = table.Column<string>(type: "TEXT", nullable: true),
                     LikeRate = table.Column<float>(type: "REAL", nullable: true),
-                    ImageUrl = table.Column<string>(type: "TEXT", nullable: true),
-                    Authorid = table.Column<string>(type: "TEXT", nullable: true),
-                    Discriminator = table.Column<string>(type: "TEXT", nullable: false),
-                    Author_Confirmed = table.Column<bool>(type: "INTEGER", nullable: true),
-                    Author_CompanyId = table.Column<int>(type: "INTEGER", nullable: true),
-                    Boss_Confirmed = table.Column<bool>(type: "INTEGER", nullable: true),
-                    CompanyId = table.Column<int>(type: "INTEGER", nullable: true),
-                    Confirmed = table.Column<bool>(type: "INTEGER", nullable: true)
+                    ImageUrl = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SurveyUser", x => x.id);
+                    table.PrimaryKey("PK_Authors", x => x.id);
                     table.ForeignKey(
-                        name: "FK_SurveyUser_Company_Author_CompanyId",
-                        column: x => x.Author_CompanyId,
-                        principalTable: "Company",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_SurveyUser_Company_CompanyId",
+                        name: "FK_Authors_Company_CompanyId",
                         column: x => x.CompanyId,
                         principalTable: "Company",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Bosses",
+                columns: table => new
+                {
+                    id = table.Column<string>(type: "TEXT", nullable: false),
+                    Confirmed = table.Column<bool>(type: "INTEGER", nullable: false),
+                    CompanyId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", nullable: true),
+                    Surname = table.Column<string>(type: "TEXT", nullable: true),
+                    Age = table.Column<int>(type: "INTEGER", nullable: true),
+                    City = table.Column<string>(type: "TEXT", nullable: true),
+                    LikeRate = table.Column<float>(type: "REAL", nullable: true),
+                    ImageUrl = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Bosses", x => x.id);
                     table.ForeignKey(
-                        name: "FK_SurveyUser_SurveyUser_Authorid",
-                        column: x => x.Authorid,
-                        principalTable: "SurveyUser",
-                        principalColumn: "id");
+                        name: "FK_Bosses_Company_CompanyId",
+                        column: x => x.CompanyId,
+                        principalTable: "Company",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "22735325-9069-4bc3-b285-60083799306a", null, "Commentator", "COMMENTATOR" });
+                values: new object[] { "5e9230de-a7f9-4d0e-9659-dd3317ffdc33", null, "Author", "AUTHOR" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "272633e6-5404-4ead-afcb-fa09f23a3f94", null, "Admin", "ADMIN" });
+                values: new object[] { "71efdd3c-5c95-4f69-812d-995c60022e37", null, "Commentator", "COMMENTATOR" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "6ccdb484-b43d-4fa3-8bb5-de14dd911360", null, "Boss", "BOSS" });
+                values: new object[] { "ab839968-6433-43e9-bc4f-25620ff17759", null, "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "98d164a3-162f-4b5b-ae78-5c2b1dce3eb7", null, "Author", "AUTHOR" });
+                values: new object[] { "f297e57e-1174-4ef1-b733-5557d4744fda", null, "Boss", "BOSS" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -268,18 +295,13 @@ namespace Survey.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_SurveyUser_Author_CompanyId",
-                table: "SurveyUser",
-                column: "Author_CompanyId");
+                name: "IX_Authors_CompanyId",
+                table: "Authors",
+                column: "CompanyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SurveyUser_Authorid",
-                table: "SurveyUser",
-                column: "Authorid");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_SurveyUser_CompanyId",
-                table: "SurveyUser",
+                name: "IX_Bosses_CompanyId",
+                table: "Bosses",
                 column: "CompanyId");
         }
 
@@ -301,7 +323,13 @@ namespace Survey.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "SurveyUser");
+                name: "Authors");
+
+            migrationBuilder.DropTable(
+                name: "Bosses");
+
+            migrationBuilder.DropTable(
+                name: "Commenters");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

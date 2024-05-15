@@ -42,7 +42,7 @@ namespace StoreApp.Infrastructure.Extensions
         public static async void ConfigureDefaultAdminUser(this IApplicationBuilder app)
         {
             const string adminUser = "Admin";
-            const string adminPassword = "Admin+123456";
+            const string adminPassword = "admin123.";
 
             // UserManager kulanıcı kaydı için
             UserManager<IdentityUser> userManager = app
@@ -78,10 +78,7 @@ namespace StoreApp.Infrastructure.Extensions
 
                 // tüm rolleri admine atayabilmek için
                 var roleResult = await userManager.AddToRolesAsync(user,
-                    roleManager
-                        .Roles
-                        .Select(r => r.Name)
-                        .ToList()
+                    new List<string>{"Admin"}
                 );
 
                 if (!roleResult.Succeeded)

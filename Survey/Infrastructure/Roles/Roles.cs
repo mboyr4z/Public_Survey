@@ -4,6 +4,7 @@ namespace StoreApp.Infrastructure.Roles
         Admin,
         Author,
         Boss,
-        Commenter
+        Commentator,
+        Guess
     }
 }

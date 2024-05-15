@@ -25,10 +25,11 @@ namespace Repositories
 
             public IQueryable<Commenter> GetAllCommentersWithDetails(CommenterRequestParameters pr)
         {
-            IQueryable<Commenter> commenters = GetAllCommenters(false)
-                .FilteredByName(commenter => commenter.Name, pr.Name)
-                .FilteredBySurname(commenter => commenter.Surname, pr.Surname)
-                .FilteredByLikeRate(commenter => (int)commenter.LikeRate, pr.minLikeRate, pr.maxLikeRate, pr.IsValidLikeRate);
+            IQueryable<Commenter> commenters = GetAllCommenters(false);
+
+             return  commenters.FilteredByName( pr.Name)
+                .FilteredBySurname( pr.Surname)
+                .FilteredByLikeRate(pr.minLikeRate, pr.maxLikeRate, pr.IsValidLikeRate) as IQueryable<Commenter>;
 
             return commenters;
         }

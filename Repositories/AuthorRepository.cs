@@ -26,12 +26,13 @@ namespace Repositories
 
         public IQueryable<Author> GetAllAuthorsWithDetails(AuthorRequestParameters pr)
         {
-            IQueryable<Author> authors = GetAllAuthors(false)
-            .FilteredByName(author => author.Name, pr.Name)
-            .FilteredBySurname(author => author.Surname, pr.Surname)
-            .FilteredByLikeRate(author => (int)author.LikeRate, pr.minLikeRate, pr.maxLikeRate, pr.IsValidLikeRate);
+            IQueryable<Author> authors = GetAllAuthors(false);
 
-            return authors;
+            return authors.FilteredByName(pr.Name)
+                .FilteredBySurname( pr.Surname)
+                .FilteredByLikeRate(pr.minLikeRate, pr.maxLikeRate, pr.IsValidLikeRate) as IQueryable<Author>;
+
+            
         }
 
         public Author? GetOneAuthor(string id, bool trackChanges)

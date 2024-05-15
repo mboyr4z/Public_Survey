@@ -23,6 +23,11 @@ namespace Survey.Controllers
             return View();
         }
 
+        public async Task<IActionResult> LogOutAsync(){
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "MainPage");
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Index([FromForm] account_LoginDto userDto){

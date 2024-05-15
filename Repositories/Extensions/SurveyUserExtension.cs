@@ -7,21 +7,43 @@ namespace Repositories.Extensions
     public static class SurveyUserExtension
     {
 
-        public static IQueryable<T> FilteredByName<T>(this IQueryable<T> source, Expression<Func<T, string>> nameProperty, string? name)
+
+
+
+
+        public static IQueryable<SurveyUser> FilteredByName(this IQueryable<SurveyUser> source, string name)
+
         {
             if (string.IsNullOrWhiteSpace(name))
             {
                 return source;
+
             }
             else
             {
                 var toLowerName = name.ToLower();
-                return source
-                    .Where(entity => nameProperty.Compile()(entity).ToLower().Contains(toLowerName));
+
+                return source.Where(author => author.Name.Contains(name));
             }
         }
 
-        public static IQueryable<T> FilteredBySurname<T>(this IQueryable<T> source, Expression<Func<T, string>> surNameProperty, string? surname)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        public static IQueryable<SurveyUser> FilteredBySurname(this IQueryable<SurveyUser> source, string surname)
         {
             if (string.IsNullOrWhiteSpace(surname))
             {
@@ -30,29 +52,22 @@ namespace Repositories.Extensions
             else
             {
                 var toLowerSurname = surname.ToLower();
-                return source
-                    .Where(entity => surNameProperty.Compile()(entity).ToLower().Contains(toLowerSurname));
+
+                return source.Where(author => author.Surname.Contains(surname));
             }
         }
 
-      
 
 
-        public static IQueryable<T> FilteredByLikeRate<T>(
-            this IQueryable<T> source,
-            Expression<Func<T, int>> likeRateProperty,
-            int minLikeRate,
-            int maxLikeRate,
-            bool isValidLikeRate)
+
+        public static IQueryable<SurveyUser> FilteredByLikeRate(this IQueryable<SurveyUser> source,int minLikeRate, int maxLikeRate, bool isValidLikeRate)
         {
             if (!isValidLikeRate)
             {
                 return source;
             }
 
-            return source.Where(entity =>
-                likeRateProperty.Compile()(entity) >= minLikeRate &&
-                likeRateProperty.Compile()(entity) <= maxLikeRate);
+            return source.Where(entity => entity.LikeRate >= minLikeRate && entity.LikeRate <= maxLikeRate);
         }
 
 

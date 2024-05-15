@@ -46,8 +46,8 @@ namespace Survey.Controllers
                     P.f ("bossr");
                         return await BossPage();
                         break;
-                    case Roles.Commenter:
-                    P.f ("commenter");
+                    case Roles.Commentator:
+                    P.f ("commentator");
                         return await CommenterPage();
                         break;
                     default:
@@ -77,7 +77,5 @@ namespace Survey.Controllers
         {
             return await CustomizeAccordingToRole();
         }
-
-
     }
 }

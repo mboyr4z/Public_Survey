@@ -171,25 +171,25 @@ namespace Survey.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "0c6b6500-1887-4e18-b762-2ee76080f138",
+                            Id = "ab839968-6433-43e9-bc4f-25620ff17759",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "230172b1-b774-4045-80f8-f5c8eab9aed4",
+                            Id = "5e9230de-a7f9-4d0e-9659-dd3317ffdc33",
                             Name = "Author",
                             NormalizedName = "AUTHOR"
                         },
                         new
                         {
-                            Id = "0a0aa30d-4656-4189-bd35-73d9808d1fbb",
+                            Id = "f297e57e-1174-4ef1-b733-5557d4744fda",
                             Name = "Boss",
                             NormalizedName = "BOSS"
                         },
                         new
                         {
-                            Id = "7426c844-0705-4967-af5f-3b3465eee682",
+                            Id = "71efdd3c-5c95-4f69-812d-995c60022e37",
                             Name = "Commentator",
                             NormalizedName = "COMMENTATOR"
                         });

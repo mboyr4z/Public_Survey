@@ -32,12 +32,18 @@ namespace Repositories
         
       public IQueryable<Boss> GetAllBossesWithDetails(BossRequestParameters pr)
         {
-            IQueryable<Boss> bosses = GetAllBosses(false)
-            .FilteredByName(boss => boss.Name, pr.Name)
-            .FilteredBySurname(boss => boss.Surname, pr.Surname)
-            .FilteredByLikeRate(boss => (int)boss.LikeRate, pr.minLikeRate, pr.maxLikeRate, pr.IsValidLikeRate);
+            IQueryable<Boss> bosses = GetAllBosses(false);
 
-            return bosses;
+             IQueryable<Boss> bosses2 = bosses.FilteredByName(pr.Name)
+                .FilteredBySurname( pr.Surname)
+                .FilteredByLikeRate(pr.minLikeRate, pr.maxLikeRate, pr.IsValidLikeRate) as IQueryable<Boss>;
+
+            if(bosses2 is null){
+                throw new Exception("Hata");
+            }
+
+            return bosses2;
+
         }
        
 
