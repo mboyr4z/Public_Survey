@@ -4,7 +4,9 @@ namespace Services.Contracts
     {
         IAuthorService AuthorService{get;}
         IBossService BossService{get;}
-        ICommenterService CommenterService{get;}
+        ICommentatorService CommentatorService{get;}
+        ICompanyService CompanyService{get;}
+
         IAuthService AuthService{get;}
     }
 }

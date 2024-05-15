@@ -1,6 +1,6 @@
 namespace Entities.Models
 {
-    public class Commenter : SurveyUser
+    public class Commentator : SurveyUser
     {
         public bool Confirmed { get; set; } = true;
     }

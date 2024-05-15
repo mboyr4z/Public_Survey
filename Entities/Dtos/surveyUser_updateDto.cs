@@ -2,7 +2,7 @@ namespace Entities.Models
 {
     public record surveyUser_updateDto
     {
-        public string? id {get; set;}
+        public string? Id {get; set;}
         public string? Name {get; set;}
         public string? Surname {get; set;}
         public int? Age {get; set;}

@@ -1,3 +1,5 @@
+using AutoMapper;
+using Entities.Dtos;
 using Entities.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -10,14 +12,15 @@ namespace Survey.Controllers
     public class CheckingSurveyUserController : Controller
     {
         private readonly UserManager<IdentityUser> _userManager;
-
         private readonly IServiceManager _manager;
+        private readonly IMapper _mapper;
 
 
-        public CheckingSurveyUserController(UserManager<IdentityUser> userManager, IServiceManager manager)
+        public CheckingSurveyUserController(UserManager<IdentityUser> userManager, IServiceManager manager, IMapper mapper)
         {
             _userManager = userManager;
             _manager = manager;
+            _mapper = mapper;
         }
 
 
@@ -47,7 +50,7 @@ namespace Survey.Controllers
                     break;
                 case Roles.Commentator:
                     P.f("commentator");
-                    return await CommenterPage();
+                    return await CommentatorPage();
                     break;
                 default:
                     P.f("guestt");
@@ -115,7 +118,7 @@ namespace Survey.Controllers
             return View("BossPage");
         }
 
-        public async Task<IActionResult> CommenterPage()
+        public async Task<IActionResult> CommentatorPage()
         {
             var user = await _userManager.GetUserAsync(User);
 
@@ -123,25 +126,34 @@ namespace Survey.Controllers
             {
                 var userId = user.Id;
 
-                Commenter? commenter = _manager.CommenterService.GetOneCommenter(userId, false);
+                Commentator? Commentator = _manager.CommentatorService.GetOneCommentator(userId, false);
 
 
-                if (commenter is not null)
+                if (Commentator is not null)
                 {
-                    P.f("commenter tablosunda var");
+                    P.f("Commentator tablosunda var");
                     ViewBag.completedMembership = true;
                 }
                 else
                 {
-                    P.f("commenter tablosunda yok");
+                    P.f("Commentator tablosunda yok");
                     ViewBag.completedMembership = false;
                 }
             }
 
 
-            return View("CommenterPage");
+            return View("CommentatorPage");
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CompleteBossMembership([FromForm] boss_createDto bossDto){
 
+
+            _manager.BossService.CreateBoss(bossDto);
+           _manager.CompanyService.CreateCompany(bossDto.companyCreateDto);
+
+            return RedirectToAction("Index","MainPage");
+        }
     }
 }

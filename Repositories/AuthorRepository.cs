@@ -37,7 +37,7 @@ namespace Repositories
 
         public Author? GetOneAuthor(string id, bool trackChanges)
         {
-            return FindByCondition(a => a.id.Equals(id), trackChanges);
+            return FindByCondition(a => a.Id.Equals(id), trackChanges);
         }
 
       

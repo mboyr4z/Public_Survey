@@ -5,7 +5,7 @@ namespace Entities.Models
     public record surveyUser_createDto
     {
         
-        public string? id {get; set;}
+        public string? Id {get; set;}
         [Required(ErrorMessage = "Name is required")]
         public string? Name {get; set;}
         [Required(ErrorMessage = "Surname is required")]

@@ -20,7 +20,8 @@ namespace StoreApp.Infrastructure.Extensions
              services.AddScoped<IAuthService, AuthManager>();
              services.AddScoped<IAuthorService, AuthorManager>();
              services.AddScoped<IBossService, BossManager>();
-             services.AddScoped<ICommenterService, CommenterManager>();
+             services.AddScoped<ICommentatorService, CommentatorManager>();
+             services.AddScoped<ICompanyService, CompanyManager>();
 
         }
 
@@ -50,9 +51,9 @@ namespace StoreApp.Infrastructure.Extensions
              services.AddScoped<IRepositoryManager, RepositoryManager>();        // IOS için  yapılıyor bu
              services.AddScoped<IAuthorRepository, AuthorRepository>();
              services.AddScoped<IBossRepository, BossRepository>();
-             services.AddScoped<ICommenterRepository, CommenterRepository>();
-            /* services.AddScoped<ICategoryRepsitory, CategoryRepository>();
-             services.AddScoped<IOrderRepository, OrderRepository>();*/
+             services.AddScoped<ICommentatorRepository, CommentatorRepository>();
+               services.AddScoped<ICompanyRepository, CompanyRepository>();
+           
         }
         public static void ConfigureIdentity(this IServiceCollection services)
         {

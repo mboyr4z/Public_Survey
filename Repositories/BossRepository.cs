@@ -49,7 +49,7 @@ namespace Repositories
 
         public Boss? GetOneBoss(string id, bool trackChanges)
         {
-            return FindByCondition(b => b.id.Equals(id), trackChanges);
+            return FindByCondition(b => b.Id.Equals(id), trackChanges);
         }
 
        

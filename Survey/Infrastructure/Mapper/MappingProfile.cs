@@ -21,8 +21,11 @@ namespace StoreApp.Infrastructure.Mapper
             CreateMap<author_createDto, Author>();
             CreateMap<author_updateDto, Author>();
 
-            CreateMap<commenter_createDto, Commenter>();
-            CreateMap<commenter_updateDto, Commenter>();
+            CreateMap<commentator_createDto, Commentator>();
+            CreateMap<commentator_updateDto, Commentator>();
+
+            CreateMap<company_createDto, Company>();
+            CreateMap<company_updateDto, Company>();
 
             
         }

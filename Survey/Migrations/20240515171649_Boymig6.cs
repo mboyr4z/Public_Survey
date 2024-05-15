@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Survey.Migrations
 {
-    public partial class migaA : Migration
+    public partial class Boymig6 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -49,10 +49,10 @@ namespace Survey.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Commenters",
+                name: "Commentators",
                 columns: table => new
                 {
-                    id = table.Column<string>(type: "TEXT", nullable: false),
+                    Id = table.Column<string>(type: "TEXT", nullable: false),
                     Confirmed = table.Column<bool>(type: "INTEGER", nullable: false),
                     Name = table.Column<string>(type: "TEXT", nullable: true),
                     Surname = table.Column<string>(type: "TEXT", nullable: true),
@@ -63,11 +63,11 @@ namespace Survey.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Commenters", x => x.id);
+                    table.PrimaryKey("PK_Commentators", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Company",
+                name: "Companies",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -78,7 +78,7 @@ namespace Survey.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Company", x => x.Id);
+                    table.PrimaryKey("PK_Companies", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -191,7 +191,7 @@ namespace Survey.Migrations
                 name: "Authors",
                 columns: table => new
                 {
-                    id = table.Column<string>(type: "TEXT", nullable: false),
+                    Id = table.Column<string>(type: "TEXT", nullable: false),
                     Confirmed = table.Column<bool>(type: "INTEGER", nullable: false),
                     CompanyId = table.Column<int>(type: "INTEGER", nullable: false),
                     Name = table.Column<string>(type: "TEXT", nullable: true),
@@ -203,11 +203,11 @@ namespace Survey.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Authors", x => x.id);
+                    table.PrimaryKey("PK_Authors", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Authors_Company_CompanyId",
+                        name: "FK_Authors_Companies_CompanyId",
                         column: x => x.CompanyId,
-                        principalTable: "Company",
+                        principalTable: "Companies",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -216,7 +216,7 @@ namespace Survey.Migrations
                 name: "Bosses",
                 columns: table => new
                 {
-                    id = table.Column<string>(type: "TEXT", nullable: false),
+                    Id = table.Column<string>(type: "TEXT", nullable: false),
                     Confirmed = table.Column<bool>(type: "INTEGER", nullable: false),
                     CompanyId = table.Column<int>(type: "INTEGER", nullable: false),
                     Name = table.Column<string>(type: "TEXT", nullable: true),
@@ -228,11 +228,11 @@ namespace Survey.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Bosses", x => x.id);
+                    table.PrimaryKey("PK_Bosses", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Bosses_Company_CompanyId",
+                        name: "FK_Bosses_Companies_CompanyId",
                         column: x => x.CompanyId,
-                        principalTable: "Company",
+                        principalTable: "Companies",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -240,22 +240,22 @@ namespace Survey.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "5e9230de-a7f9-4d0e-9659-dd3317ffdc33", null, "Author", "AUTHOR" });
+                values: new object[] { "0a13f4c7-2861-4de6-8474-efbae5c82ead", null, "Author", "AUTHOR" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "71efdd3c-5c95-4f69-812d-995c60022e37", null, "Commentator", "COMMENTATOR" });
+                values: new object[] { "573edefb-0c28-4719-ad7d-f1c429932d0a", null, "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "ab839968-6433-43e9-bc4f-25620ff17759", null, "Admin", "ADMIN" });
+                values: new object[] { "63295825-b879-4a65-abef-48c8ffc2b939", null, "Commentator", "COMMENTATOR" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "f297e57e-1174-4ef1-b733-5557d4744fda", null, "Boss", "BOSS" });
+                values: new object[] { "f3ab4aab-4db6-45c6-9e2c-f34b5ebfda33", null, "Boss", "BOSS" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -329,7 +329,7 @@ namespace Survey.Migrations
                 name: "Bosses");
 
             migrationBuilder.DropTable(
-                name: "Commenters");
+                name: "Commentators");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -338,7 +338,7 @@ namespace Survey.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Company");
+                name: "Companies");
         }
     }
 }

@@ -11,8 +11,8 @@ using Repositories;
 namespace Survey.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20240514142731_migaA")]
-    partial class migaA
+    [Migration("20240515171649_Boymig6")]
+    partial class Boymig6
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,7 +21,7 @@ namespace Survey.Migrations
 
             modelBuilder.Entity("Entities.Models.Author", b =>
                 {
-                    b.Property<string>("id")
+                    b.Property<string>("Id")
                         .HasColumnType("TEXT");
 
                     b.Property<int?>("Age")
@@ -48,7 +48,7 @@ namespace Survey.Migrations
                     b.Property<string>("Surname")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.HasIndex("CompanyId");
 
@@ -57,7 +57,7 @@ namespace Survey.Migrations
 
             modelBuilder.Entity("Entities.Models.Boss", b =>
                 {
-                    b.Property<string>("id")
+                    b.Property<string>("Id")
                         .HasColumnType("TEXT");
 
                     b.Property<int?>("Age")
@@ -84,16 +84,16 @@ namespace Survey.Migrations
                     b.Property<string>("Surname")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.HasIndex("CompanyId");
 
                     b.ToTable("Bosses");
                 });
 
-            modelBuilder.Entity("Entities.Models.Commenter", b =>
+            modelBuilder.Entity("Entities.Models.Commentator", b =>
                 {
-                    b.Property<string>("id")
+                    b.Property<string>("Id")
                         .HasColumnType("TEXT");
 
                     b.Property<int?>("Age")
@@ -117,9 +117,9 @@ namespace Survey.Migrations
                     b.Property<string>("Surname")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
-                    b.ToTable("Commenters");
+                    b.ToTable("Commentators");
                 });
 
             modelBuilder.Entity("Entities.Models.Company", b =>
@@ -142,7 +142,7 @@ namespace Survey.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Company");
+                    b.ToTable("Companies");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -173,25 +173,25 @@ namespace Survey.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "ab839968-6433-43e9-bc4f-25620ff17759",
+                            Id = "573edefb-0c28-4719-ad7d-f1c429932d0a",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "5e9230de-a7f9-4d0e-9659-dd3317ffdc33",
+                            Id = "0a13f4c7-2861-4de6-8474-efbae5c82ead",
                             Name = "Author",
                             NormalizedName = "AUTHOR"
                         },
                         new
                         {
-                            Id = "f297e57e-1174-4ef1-b733-5557d4744fda",
+                            Id = "f3ab4aab-4db6-45c6-9e2c-f34b5ebfda33",
                             Name = "Boss",
                             NormalizedName = "BOSS"
                         },
                         new
                         {
-                            Id = "71efdd3c-5c95-4f69-812d-995c60022e37",
+                            Id = "63295825-b879-4a65-abef-48c8ffc2b939",
                             Name = "Commentator",
                             NormalizedName = "COMMENTATOR"
                         });

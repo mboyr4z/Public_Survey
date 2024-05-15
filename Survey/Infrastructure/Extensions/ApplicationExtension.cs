@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Repositories;
+using Survey.Benimkiler;
 
 namespace StoreApp.Infrastructure.Extensions
 {
@@ -41,9 +42,8 @@ namespace StoreApp.Infrastructure.Extensions
 
         public static async void ConfigureDefaultAdminUser(this IApplicationBuilder app)
         {
-            const string adminUser = "Admin";
-            const string adminPassword = "admin123.";
 
+            P.f("admin ayarlanıyorr");
             // UserManager kulanıcı kaydı için
             UserManager<IdentityUser> userManager = app
                 .ApplicationServices
@@ -58,6 +58,9 @@ namespace StoreApp.Infrastructure.Extensions
                 .ServiceProvider
                 .GetRequiredService<RoleManager<IdentityRole>>();
 
+
+            const string adminUser = "Admin";
+            const string adminPassword = "admin123.";
             IdentityUser user = await userManager.FindByNameAsync(adminUser);
 
             if (user is null)
@@ -78,7 +81,7 @@ namespace StoreApp.Infrastructure.Extensions
 
                 // tüm rolleri admine atayabilmek için
                 var roleResult = await userManager.AddToRolesAsync(user,
-                    new List<string>{"Admin"}
+                    new List<string> { "Admin" }
                 );
 
                 if (!roleResult.Succeeded)
@@ -86,6 +89,97 @@ namespace StoreApp.Infrastructure.Extensions
                     throw new Exception("System have problems with role defination for admin.");
                 }
             }
+
+         
+            user = await userManager.FindByNameAsync("Boss");
+
+            if (user is null)
+            {
+                user = new IdentityUser()
+                {
+                    Email = "Boss@samsun.edu.tr",
+                    PhoneNumber = "1241245343",
+                    UserName = "Boss",
+                };
+
+                var result = await userManager.CreateAsync(user, "Boss123.");
+
+                if (!result.Succeeded)
+                {
+                    throw new Exception("Boss user could not created.");
+                }
+
+                // tüm rolleri admine atayabilmek için
+                var roleResult = await userManager.AddToRolesAsync(user,
+                    new List<string> { "Boss" }
+                );
+
+                if (!roleResult.Succeeded)
+                {
+                    throw new Exception("System have problems with role defination for Boss.");
+                }
+            }
+
+
+            user = await userManager.FindByNameAsync("Author");
+
+            if (user is null)
+            {
+                user = new IdentityUser()
+                {
+                    Email = "Author@samsun.edu.tr",
+                    PhoneNumber = "1252357454",
+                    UserName = "Author",
+                };
+
+                var result = await userManager.CreateAsync(user, "Author123.");
+
+                if (!result.Succeeded)
+                {
+                    throw new Exception("Author user could not created.");
+                }
+
+                // tüm rolleri admine atayabilmek için
+                var roleResult = await userManager.AddToRolesAsync(user,
+                    new List<string> { "Author" }
+                );
+
+                if (!roleResult.Succeeded)
+                {
+                    throw new Exception("System have problems with role defination for Author.");
+                }
+            }
+
+
+            user = await userManager.FindByNameAsync("Commentator");
+
+            if (user is null)
+            {
+                user = new IdentityUser()
+                {
+                    Email = "Commentator@samsun.edu.tr",
+                    PhoneNumber = "25336786554",
+                    UserName = "Commentator",
+                };
+
+                var result = await userManager.CreateAsync(user, "Commentator123.");
+
+                if (!result.Succeeded)
+                {
+                    throw new Exception("Commentator user could not created.");
+                }
+
+                // tüm rolleri admine atayabilmek için
+                var roleResult = await userManager.AddToRolesAsync(user,
+                    new List<string> { "Commentator" }
+                );
+
+                if (!roleResult.Succeeded)
+                {
+                    throw new Exception("System have problems with role defination for Commentator.");
+                }
+            }
+
 
 
 

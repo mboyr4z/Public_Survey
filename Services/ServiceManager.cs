@@ -11,16 +11,19 @@ namespace Services
        
         private readonly IBossService _bossService;
 
-        private readonly ICommenterService _commenterService;
+        private readonly ICommentatorService _commentatorService;
+
+        private readonly ICompanyService _companyService;
 
 
 
-        public ServiceManager(IAuthService authService, IBossService bossService, ICommenterService commenterService, IAuthorService authorService)
+        public ServiceManager(IAuthService authService, IBossService bossService, ICommentatorService commentatorService, IAuthorService authorService, ICompanyService companyService)
         {
             _authService = authService;
             _bossService = bossService;
-            _commenterService = commenterService;
+            _commentatorService = commentatorService;
             _authorService = authorService;
+            _companyService = companyService;
         }
 
         public IAuthService AuthService => _authService;
@@ -29,6 +32,8 @@ namespace Services
 
         public IBossService BossService => _bossService;
 
-        public ICommenterService CommenterService => _commenterService;
+        public ICommentatorService CommentatorService => _commentatorService;
+
+        public ICompanyService CompanyService => _companyService;
     }
 }

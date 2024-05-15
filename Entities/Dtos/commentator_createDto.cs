@@ -3,7 +3,7 @@ using Entities.Models;
 
 namespace Entities.Dtos
 {
-    public record commenter_updateDto : surveyUser_updateDto
+    public record commentator_createDto : surveyUser_createDto
     {
     
     }
