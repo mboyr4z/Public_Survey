@@ -12,8 +12,8 @@ public class RepositoryContext : IdentityDbContext<IdentityUser>//  DbContext   
     public DbSet<Author>? Authors { get; set; }
     public DbSet<Boss> Bosses { get; set; }
     public DbSet<Commentator> Commentators { get; set; }
+    public DbSet<Company> Companies { get; set; }
 
-        public DbSet<Company> Companies { get; set; }
 
     public RepositoryContext(DbContextOptions<RepositoryContext> options) : base(options)   // baseye yolla
     {

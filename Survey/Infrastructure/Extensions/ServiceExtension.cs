@@ -52,7 +52,7 @@ namespace StoreApp.Infrastructure.Extensions
              services.AddScoped<IAuthorRepository, AuthorRepository>();
              services.AddScoped<IBossRepository, BossRepository>();
              services.AddScoped<ICommentatorRepository, CommentatorRepository>();
-               services.AddScoped<ICompanyRepository, CompanyRepository>();
+             services.AddScoped<ICompanyRepository, CompanyRepository >();
            
         }
         public static void ConfigureIdentity(this IServiceCollection services)

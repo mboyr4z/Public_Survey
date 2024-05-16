@@ -4,7 +4,7 @@ using Entities.Dtos;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Services.Benimkiler;
+using Survey.Benimkiler;
 using Services.Contracts;
 
 namespace Survey.Controllers
@@ -43,7 +43,7 @@ namespace Survey.Controllers
         public async Task<IActionResult> Index([FromForm] account_RegisterDto userDto)
         {
 
-            P.f("role name : " + userDto.RoleId);
+            p.f("role name : " + userDto.RoleId);
 
             IdentityUser newUser = _mapper.Map<IdentityUser>(userDto);
 
@@ -52,13 +52,13 @@ namespace Survey.Controllers
 
             if (result.Succeeded)
             {
-                P.f("Kullanıcı başarıyla eklendi");
+                p.f("Kullanıcı başarıyla eklendi");
 
                 IdentityRole role = _manager.AuthService.GetOneRoleWithId(userDto.RoleId);
                 var result2 = await _userManager.AddToRoleAsync(newUser, role.Name);
 
                 if(result2.Succeeded){
-                    P.f("Rol de başarıyla eklendi");
+                    p.f("Rol de başarıyla eklendi");
                     return RedirectToAction("Success");
                 }
             }

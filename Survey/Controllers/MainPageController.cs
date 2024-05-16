@@ -20,11 +20,11 @@ namespace Survey.Controllers
             var user = await _userManager.GetUserAsync(User);
 
             if(user is not null){
-                P.f("Giriş Yapılmış");
+                p.f("Giriş Yapılmış");
                 return RedirectToAction("CustomizeAccordingToRole","CheckingSurveyUser");
             }
             else{
-                 P.f("giriş yapılmamış");
+                 p.f("giriş yapılmamış");
                  return View();
             }
         }

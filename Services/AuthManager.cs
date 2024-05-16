@@ -1,7 +1,6 @@
 using AutoMapper;
 using Entities.Dtos;
 using Microsoft.AspNetCore.Identity;
-using Services.Benimkiler;
 using Services.Contracts;
 using SQLitePCL;
 
@@ -49,11 +48,11 @@ namespace Services
         public async Task<IdentityResult> CreateUser(account_RegisterDto userDto)
         {
 
-            P.f("USERTDO - > name : " + userDto.UserName + "mail : " + userDto.Email + " pass : "  + userDto.Password);
+            //p.f("USERTDO - > name : " + userDto.UserName + "mail : " + userDto.Email + " pass : "  + userDto.Password);
             IdentityUser user = _mapper.Map<IdentityUser>(userDto);
             IdentityResult result = await _userManager.CreateAsync(user, userDto.Password);
 
-            P.f("ıdentıty user - > name : " + user.UserName + "mail : " + user.Email + " pass : "  + user.PasswordHash);
+           // p.f("ıdentıty user - > name : " + user.UserName + "mail : " + user.Email + " pass : "  + user.PasswordHash);
             return result;
 
         }

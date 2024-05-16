@@ -28,6 +28,12 @@ namespace Services
             _manager.Save();
         }
 
+        public void CreateBoss(Boss boss)
+        {
+            _manager.Boss.Create(boss);
+            _manager.Save();
+        }
+
         public void Delete(Boss boss)
         {
             _manager.Boss.Delete(boss);

@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Services;
-using Services.Benimkiler;
+using Survey.Benimkiler;
 using Services.Contracts;
 
 namespace Survey.Areas.Controllers
@@ -35,11 +35,11 @@ namespace Survey.Areas.Controllers
 
             if (result.Succeeded)
             {
-                P.f("Rol silme başarılı");
+                p.f("Rol silme başarılı");
             }
             else
             {
-                P.f("Silme esnasında bir hata ile karşılaşıldı");
+                p.f("Silme esnasında bir hata ile karşılaşıldı");
             }
             return RedirectToAction("Index");
         }

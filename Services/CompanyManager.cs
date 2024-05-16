@@ -6,6 +6,7 @@ using Entities.RequestParameters;
 using Repositories.Contracts;
 using Services.Contracts;
 using SQLitePCL;
+using Survey.Benimkiler;
 
 namespace Services
 {
@@ -47,6 +48,11 @@ namespace Services
         public Company? GetOneCompany(string id, bool trackChanges)
         {
             return _manager.Company.GetOneCompany(id, trackChanges);
+        }
+
+        public Company? GetOneCompanyWithName(string name, bool trackChanges)
+        {
+            return _manager.Company.GetOneCompanyWithName(name,trackChanges);
         }
 
         public void UpdateOneCompany(company_updateDto entity)

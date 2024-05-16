@@ -11,8 +11,11 @@ namespace Services.Contracts
         IQueryable<Company> GetAllCompanies(bool trackChanges);
         IQueryable<Company> GetAllCompaniesWithDetails(CompanyRequestParameter p);
         Company? GetOneCompany(string id, bool trackChanges);
+        Company? GetOneCompanyWithName(string name, bool trackChanges);
         void CreateCompany(company_createDto company);
         void Delete(Company company);
         void UpdateOneCompany(company_updateDto entity);
+
+
     }
 }

@@ -31,7 +31,7 @@ namespace Survey.Migrations
                     b.Property<int>("CompanyId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<bool>("Confirmed")
+                    b.Property<bool?>("Confirmed")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("ImageUrl")
@@ -41,6 +41,7 @@ namespace Survey.Migrations
                         .HasColumnType("REAL");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Surname")
@@ -67,7 +68,7 @@ namespace Survey.Migrations
                     b.Property<int>("CompanyId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<bool>("Confirmed")
+                    b.Property<bool?>("Confirmed")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("ImageUrl")
@@ -77,6 +78,7 @@ namespace Survey.Migrations
                         .HasColumnType("REAL");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Surname")
@@ -100,7 +102,7 @@ namespace Survey.Migrations
                     b.Property<string>("City")
                         .HasColumnType("TEXT");
 
-                    b.Property<bool>("Confirmed")
+                    b.Property<bool?>("Confirmed")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("ImageUrl")
@@ -110,6 +112,7 @@ namespace Survey.Migrations
                         .HasColumnType("REAL");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Surname")
@@ -127,11 +130,9 @@ namespace Survey.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Address")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ImageUrl")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
@@ -171,25 +172,25 @@ namespace Survey.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "573edefb-0c28-4719-ad7d-f1c429932d0a",
+                            Id = "be35b985-43cf-45a8-8288-4f3d5036041e",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "0a13f4c7-2861-4de6-8474-efbae5c82ead",
+                            Id = "f4908b9c-ce48-4d7d-942b-385a652fb891",
                             Name = "Author",
                             NormalizedName = "AUTHOR"
                         },
                         new
                         {
-                            Id = "f3ab4aab-4db6-45c6-9e2c-f34b5ebfda33",
+                            Id = "05e9efcf-a634-49cc-abf2-535e77d2c8ed",
                             Name = "Boss",
                             NormalizedName = "BOSS"
                         },
                         new
                         {
-                            Id = "63295825-b879-4a65-abef-48c8ffc2b939",
+                            Id = "bed98546-c00a-4617-b873-a27213208d7b",
                             Name = "Commentator",
                             NormalizedName = "COMMENTATOR"
                         });

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Survey.Migrations
 {
-    public partial class Boymig6 : Migration
+    public partial class mig20 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -53,8 +53,8 @@ namespace Survey.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "TEXT", nullable: false),
-                    Confirmed = table.Column<bool>(type: "INTEGER", nullable: false),
-                    Name = table.Column<string>(type: "TEXT", nullable: true),
+                    Confirmed = table.Column<bool>(type: "INTEGER", nullable: true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
                     Surname = table.Column<string>(type: "TEXT", nullable: true),
                     Age = table.Column<int>(type: "INTEGER", nullable: true),
                     City = table.Column<string>(type: "TEXT", nullable: true),
@@ -73,8 +73,8 @@ namespace Survey.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
-                    Address = table.Column<string>(type: "TEXT", nullable: false),
-                    ImageUrl = table.Column<string>(type: "TEXT", nullable: false)
+                    Address = table.Column<string>(type: "TEXT", nullable: true),
+                    ImageUrl = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -192,9 +192,9 @@ namespace Survey.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "TEXT", nullable: false),
-                    Confirmed = table.Column<bool>(type: "INTEGER", nullable: false),
+                    Confirmed = table.Column<bool>(type: "INTEGER", nullable: true),
                     CompanyId = table.Column<int>(type: "INTEGER", nullable: false),
-                    Name = table.Column<string>(type: "TEXT", nullable: true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
                     Surname = table.Column<string>(type: "TEXT", nullable: true),
                     Age = table.Column<int>(type: "INTEGER", nullable: true),
                     City = table.Column<string>(type: "TEXT", nullable: true),
@@ -217,9 +217,9 @@ namespace Survey.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "TEXT", nullable: false),
-                    Confirmed = table.Column<bool>(type: "INTEGER", nullable: false),
+                    Confirmed = table.Column<bool>(type: "INTEGER", nullable: true),
                     CompanyId = table.Column<int>(type: "INTEGER", nullable: false),
-                    Name = table.Column<string>(type: "TEXT", nullable: true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
                     Surname = table.Column<string>(type: "TEXT", nullable: true),
                     Age = table.Column<int>(type: "INTEGER", nullable: true),
                     City = table.Column<string>(type: "TEXT", nullable: true),
@@ -240,22 +240,22 @@ namespace Survey.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "0a13f4c7-2861-4de6-8474-efbae5c82ead", null, "Author", "AUTHOR" });
+                values: new object[] { "05e9efcf-a634-49cc-abf2-535e77d2c8ed", null, "Boss", "BOSS" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "573edefb-0c28-4719-ad7d-f1c429932d0a", null, "Admin", "ADMIN" });
+                values: new object[] { "be35b985-43cf-45a8-8288-4f3d5036041e", null, "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "63295825-b879-4a65-abef-48c8ffc2b939", null, "Commentator", "COMMENTATOR" });
+                values: new object[] { "bed98546-c00a-4617-b873-a27213208d7b", null, "Commentator", "COMMENTATOR" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "f3ab4aab-4db6-45c6-9e2c-f34b5ebfda33", null, "Boss", "BOSS" });
+                values: new object[] { "f4908b9c-ce48-4d7d-942b-385a652fb891", null, "Author", "AUTHOR" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

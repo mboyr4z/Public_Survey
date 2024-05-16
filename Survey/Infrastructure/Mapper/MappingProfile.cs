@@ -15,17 +15,17 @@ namespace StoreApp.Infrastructure.Mapper
             CreateMap<account_LoginDto, IdentityUser>().ReverseMap();
             CreateMap<account_RegisterDto, IdentityUser>().ReverseMap();
 
-            CreateMap<boss_createDto, Boss>();
-            CreateMap<boss_updateDto, Boss>();
+            CreateMap<boss_createDto, Boss>().ReverseMap();
+            CreateMap<boss_updateDto, Boss>().ReverseMap();
 
-            CreateMap<author_createDto, Author>();
-            CreateMap<author_updateDto, Author>();
+            CreateMap<author_createDto, Author>().ReverseMap();
+            CreateMap<author_updateDto, Author>().ReverseMap();
 
-            CreateMap<commentator_createDto, Commentator>();
-            CreateMap<commentator_updateDto, Commentator>();
+            CreateMap<commentator_createDto, Commentator>().ReverseMap();
+            CreateMap<commentator_updateDto, Commentator>().ReverseMap();
 
-            CreateMap<company_createDto, Company>();
-            CreateMap<company_updateDto, Company>();
+            CreateMap<company_createDto, Company>().ReverseMap();
+            CreateMap<company_updateDto, Company>().ReverseMap();
 
             
         }

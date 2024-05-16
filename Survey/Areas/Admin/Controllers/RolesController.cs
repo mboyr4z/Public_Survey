@@ -3,7 +3,7 @@ using Entities.Dtos;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Services;
-using Services.Benimkiler;
+using Survey.Benimkiler;
 using Services.Contracts;
 
 namespace Survey.Areas.Controllers
@@ -33,7 +33,6 @@ namespace Survey.Areas.Controllers
 
         public IActionResult CreateRole()
         {
-            P.f("GET İSTEGİ ");
             return View();
         }
 
@@ -51,19 +50,19 @@ namespace Survey.Areas.Controllers
 
                 if (result.Succeeded)
                 {
-                    P.f("Başarılı şeklde " + roleDto.Name + " eklendi");
+                    //p.f("Başarılı şeklde " + roleDto.Name + " eklendi");
                 }
                 else
                 {
-                    P.f("Bir hata ile karşılaşıldı");
+                    //p.f("Bir hata ile karşılaşıldı");
                 }
             }
             else
             {
-                P.f("Zaten rol daha önce yaratılmş");
+                //p.f("Zaten rol daha önce yaratılmş");
             }
 
-            // P.f("roleDtroName : " + roleDto.Name);
+            // p.f("roleDtroName : " + roleDto.Name);
 
 
             return RedirectToAction("Index");
@@ -80,11 +79,11 @@ namespace Survey.Areas.Controllers
 
             if (result.Succeeded)
             {
-                P.f("Rol silme başarılı");
+                p.f("Rol silme başarılı");
             }
             else
             {
-                P.f("Silme esnasında bir hata ile karşılaşıldı");
+                p.f("Silme esnasında bir hata ile karşılaşıldı");
             }
             return RedirectToAction("Index");
         }

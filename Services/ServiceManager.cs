@@ -7,12 +7,8 @@ namespace Services
 
         private readonly IAuthService _authService;
         private readonly IAuthorService _authorService;
-
-       
         private readonly IBossService _bossService;
-
         private readonly ICommentatorService _commentatorService;
-
         private readonly ICompanyService _companyService;
 
 

@@ -3,6 +3,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Repositories\Repositories.csproj" />
     <ProjectReference Include="..\Entities\Entities.csproj" />
+    <ProjectReference Include="..\Benimkiler\Benimkiler.csproj" />
   </ItemGroup>
 
   <ItemGroup>

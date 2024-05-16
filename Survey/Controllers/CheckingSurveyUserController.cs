@@ -3,6 +3,7 @@ using Entities.Dtos;
 using Entities.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Repositories.Contracts;
 using Services.Contracts;
 using StoreApp.Infrastructure.Roles;
 using Survey.Benimkiler;
@@ -14,46 +15,48 @@ namespace Survey.Controllers
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IServiceManager _manager;
         private readonly IMapper _mapper;
+        
+        private readonly IRepositoryManager _repoManager;
 
-
-        public CheckingSurveyUserController(UserManager<IdentityUser> userManager, IServiceManager manager, IMapper mapper)
+        public CheckingSurveyUserController(UserManager<IdentityUser> userManager, IServiceManager manager, IMapper mapper, IRepositoryManager repoManager)
         {
             _userManager = userManager;
             _manager = manager;
             _mapper = mapper;
+            _repoManager = repoManager;
         }
 
-
+        private IdentityUser user;
         public async Task<IActionResult> CustomizeAccordingToRole()
         {
-            P.f("buradayyım");
-            var user = await _userManager.GetUserAsync(User);
+            p.f("buradayyım");
+            user = await _userManager.GetUserAsync(User);
 
             string firstRole = (await _userManager.GetRolesAsync(user))[0];
 
             Roles signingRole = (Roles)Enum.Parse(typeof(Roles), firstRole);
-            P.f("first:role : " + firstRole);
+            p.f("first:role : " + firstRole);
             switch (signingRole)
             {
                 case Roles.Admin:
-                    P.f("admins");
+                    p.f("admins");
                     return await AdminPage();
                     break;
 
                 case Roles.Author:
-                    P.f("author");
+                    p.f("author");
                     return await AuthorPage();
                     break;
                 case Roles.Boss:
-                    P.f("boss");
+                    p.f("boss");
                     return await BossPage();
                     break;
                 case Roles.Commentator:
-                    P.f("commentator");
+                    p.f("commentator");
                     return await CommentatorPage();
                     break;
                 default:
-                    P.f("guestt");
+                    p.f("guestt");
                     return await GuestPage();
                     break;
             }
@@ -77,12 +80,12 @@ namespace Survey.Controllers
 
                 if (author is not null)
                 {
-                    P.f("author tablosunda var");
+                    p.f("author tablosunda var");
                     ViewBag.completedMembership = true;
                 }
                 else
                 {
-                    P.f("author tablosunda yok");
+                    p.f("author tablosunda yok");
                     ViewBag.completedMembership = false;
                 }
             }
@@ -104,12 +107,12 @@ namespace Survey.Controllers
 
                 if (boss is not null)
                 {
-                    P.f("boss tablosunda var");
+                    p.f("boss tablosunda var");
                     ViewBag.completedMembership = true;
                 }
                 else
                 {
-                    P.f("boss tablosunda yok");
+                    p.f("boss tablosunda yok");
                     ViewBag.completedMembership = false;
                 }
             }
@@ -131,12 +134,12 @@ namespace Survey.Controllers
 
                 if (Commentator is not null)
                 {
-                    P.f("Commentator tablosunda var");
+                    p.f("Commentator tablosunda var");
                     ViewBag.completedMembership = true;
                 }
                 else
                 {
-                    P.f("Commentator tablosunda yok");
+                    p.f("Commentator tablosunda yok");
                     ViewBag.completedMembership = false;
                 }
             }
@@ -147,13 +150,26 @@ namespace Survey.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CompleteBossMembership([FromForm] boss_createDto bossDto){
+        public async Task<IActionResult> CompleteBossMembership([FromForm] boss_createDto bossDto)
+        {
+            user = await _userManager.GetUserAsync(User);
+            if (user is not null)
+            {
 
 
-            _manager.BossService.CreateBoss(bossDto);
-           _manager.CompanyService.CreateCompany(bossDto.companyCreateDto);
+                Boss newBoss = _mapper.Map<Boss>(bossDto);
+                Company newCompany = _mapper.Map<Company>(bossDto.companyCreateDto);
+                newBoss.Company = newCompany;
+                newBoss.Id = user.Id;
+                _manager.BossService.CreateBoss(newBoss);
 
-            return RedirectToAction("Index","MainPage");
+                p.f(newBoss.Company.Name);
+            }else{
+                p.f("kullanıcı yok ");
+            }
+
+
+            return RedirectToAction("Index", "Login");
         }
     }
 }

@@ -3,7 +3,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Razor.TagHelpers;
-using Services.Benimkiler;
+using Survey.Benimkiler;
 using Services.Contracts;
 
 namespace StoreApp.Infrastructure.TagHelpers

@@ -43,7 +43,7 @@ namespace StoreApp.Infrastructure.Extensions
         public static async void ConfigureDefaultAdminUser(this IApplicationBuilder app)
         {
 
-            P.f("admin ayarlanıyorr");
+            p.f("admin ayarlanıyorr");
             // UserManager kulanıcı kaydı için
             UserManager<IdentityUser> userManager = app
                 .ApplicationServices

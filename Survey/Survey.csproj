@@ -11,6 +11,7 @@
     <ProjectReference Include="..\Repositories\Repositories.csproj" />
     <ProjectReference Include="..\Services\Services.csproj" />
     <ProjectReference Include="..\Presentation\Presentation.csproj" />
+    <ProjectReference Include="..\Benimkiler\Benimkiler.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,6 +1,6 @@
-namespace Services.Benimkiler;
+namespace Survey.Benimkiler;
 
-public static class P
+public static class p
 {
     public static void f(string yazi)
     {

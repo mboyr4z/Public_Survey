@@ -21,7 +21,7 @@ namespace Repositories
         public void Delete(Company company) => Delete(company);
        
 
-        public IQueryable<Company> GetAllCompanies(bool trackChanges) =>  GetAllCompanies(trackChanges);
+        public IQueryable<Company> GetAllCompanies(bool trackChanges) =>  FindAll(trackChanges);
         
 
         public IQueryable<Company> GetAllCompaniesWithDetails(CompanyRequestParameter p){
@@ -29,8 +29,12 @@ namespace Repositories
         }
         
 
-        public Company? GetOneCompany(string id, bool trackChanges) => GetOneCompany(id, trackChanges);
-       
+        public Company? GetOneCompany(string id, bool trackChanges) => FindByCondition(p=> p.Id.Equals(id),false);
+
+        public Company? GetOneCompanyWithName(string name, bool trackChanges)
+        {
+            return FindByCondition(p => p.Name.Equals(name), false);
+        }
 
         public void UpdateOneCompany(Company entity) => Update(entity);
     }

@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositories", "Repositorie
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{F680B056-84A5-460E-AE7A-43AB39BFB052}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Benimkiler", "Benimkiler\Benimkiler.csproj", "{1723E9CD-B19F-45F5-9A52-8ACEC0895BA8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,5 +44,9 @@ Global
 		{F680B056-84A5-460E-AE7A-43AB39BFB052}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F680B056-84A5-460E-AE7A-43AB39BFB052}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F680B056-84A5-460E-AE7A-43AB39BFB052}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1723E9CD-B19F-45F5-9A52-8ACEC0895BA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1723E9CD-B19F-45F5-9A52-8ACEC0895BA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1723E9CD-B19F-45F5-9A52-8ACEC0895BA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1723E9CD-B19F-45F5-9A52-8ACEC0895BA8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
