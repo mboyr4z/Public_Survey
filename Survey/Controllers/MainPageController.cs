@@ -18,19 +18,24 @@ namespace Survey.Controllers
         private async Task<IActionResult> CustomizeAccordingByLogin(){
             
             var user = await _userManager.GetUserAsync(User);
+            
 
             if(user is not null){
-                p.f("Giriş Yapılmış");
+                
+                // p.f("Giriş Yapılmış");
                 return RedirectToAction("CustomizeAccordingToRole","CheckingSurveyUser");
             }
             else{
-                 p.f("giriş yapılmamış");
-                 return View();
+                 // p.f("giriş yapılmamış");
+                 return View("Index");
             }
         }
 
 
-        
+        public async Task<IActionResult> ConfirmedMembershipLogin()
+        {
+            return View("Index");
+        }
         
 
         public async Task<IActionResult> Index()

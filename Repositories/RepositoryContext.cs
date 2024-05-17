@@ -27,6 +27,9 @@ public class RepositoryContext : IdentityDbContext<IdentityUser>//  DbContext   
         base.OnModelCreating(modelBuilder);
 
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
+        base.OnModelCreating(modelBuilder);
+    
     }
 
 

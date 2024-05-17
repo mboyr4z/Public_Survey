@@ -27,6 +27,12 @@ namespace Services
             _manager.Save();
         }
 
+        public void CreateAuthor(Author author)
+        {
+            _manager.Author.Create(author);
+            _manager.Save();
+        }
+
         public void Delete(Author author)
         {
             _manager.Author.Delete(author);

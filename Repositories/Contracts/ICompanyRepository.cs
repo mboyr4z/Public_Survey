@@ -10,6 +10,9 @@ namespace Repositories.Contracts
         IQueryable<Company> GetAllCompaniesWithDetails(CompanyRequestParameter p);
         Company? GetOneCompany(string id, bool trackChanges);
         Company? GetOneCompanyWithName(string name, bool trackChanges);
+
+        
+        public Company? GetOneCompany(int id, bool trackChanges);
         void  CreateCompany(Company company);
         void Delete(Company company);
         void UpdateOneCompany(Company entity);

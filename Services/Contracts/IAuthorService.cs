@@ -11,6 +11,8 @@ namespace Services.Contracts
         IQueryable<Author> GetAllAuthorsWithDetails(AuthorRequestParameters p);
         Author? GetOneAuthor(string id, bool trackChanges);
         void CreateAuthor(author_createDto authorDto);
+
+        void CreateAuthor(Author author);
         void Delete(Author author);
         void UpdateOneAuthor(author_updateDto entity);
     }

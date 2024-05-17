@@ -11,8 +11,8 @@ using Repositories;
 namespace Survey.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20240516135023_mig20")]
-    partial class mig20
+    [Migration("20240517083419_migs1")]
+    partial class migs1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -37,6 +37,7 @@ namespace Survey.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("ImageUrl")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<float?>("LikeRate")
@@ -50,8 +51,6 @@ namespace Survey.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CompanyId");
 
                     b.ToTable("Authors");
                 });
@@ -74,6 +73,7 @@ namespace Survey.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("ImageUrl")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<float?>("LikeRate")
@@ -108,6 +108,7 @@ namespace Survey.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("ImageUrl")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<float?>("LikeRate")
@@ -135,6 +136,7 @@ namespace Survey.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ImageUrl")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
@@ -174,25 +176,25 @@ namespace Survey.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "be35b985-43cf-45a8-8288-4f3d5036041e",
+                            Id = "ef5cb3de-9230-4ddf-ab84-af5dc893bc74",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "f4908b9c-ce48-4d7d-942b-385a652fb891",
+                            Id = "922bd9a9-cb83-4caf-8722-5da97de00979",
                             Name = "Author",
                             NormalizedName = "AUTHOR"
                         },
                         new
                         {
-                            Id = "05e9efcf-a634-49cc-abf2-535e77d2c8ed",
+                            Id = "66e1b409-9727-4e66-8588-209f5bf8810c",
                             Name = "Boss",
                             NormalizedName = "BOSS"
                         },
                         new
                         {
-                            Id = "bed98546-c00a-4617-b873-a27213208d7b",
+                            Id = "cd34d735-779f-4f70-9ada-254d326185e7",
                             Name = "Commentator",
                             NormalizedName = "COMMENTATOR"
                         });
@@ -362,17 +364,6 @@ namespace Survey.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
-                });
-
-            modelBuilder.Entity("Entities.Models.Author", b =>
-                {
-                    b.HasOne("Entities.Models.Company", "Company")
-                        .WithMany()
-                        .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Company");
                 });
 
             modelBuilder.Entity("Entities.Models.Boss", b =>
