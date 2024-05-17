@@ -33,6 +33,9 @@
              <li><a  asp-controller="CheckingSurveyUser" asp-action="CustomizeAccordingToRole" class="nav-link px-2 link-dark text-danger" >Complete Membership..</a></li>
         }
 
+        @if(isLoggedIn && (signingRole == Roles.Author || signingRole == Roles.Boss) ){
+             <li><a class="nav-link px-2 link-dark text-danger" > @await Component.InvokeAsync("ConfirmedMembershipForAuthorAndBoss")</a></li>
+        }
         
         
     </ul>
