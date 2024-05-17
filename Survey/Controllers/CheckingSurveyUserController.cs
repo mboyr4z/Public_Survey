@@ -15,7 +15,7 @@ namespace Survey.Controllers
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IServiceManager _manager;
         private readonly IMapper _mapper;
-        
+
         private readonly IRepositoryManager _repoManager;
 
         public CheckingSurveyUserController(UserManager<IdentityUser> userManager, IServiceManager manager, IMapper mapper, IRepositoryManager repoManager)
@@ -150,26 +150,57 @@ namespace Survey.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CompleteBossMembership([FromForm] boss_createDto bossDto)
+        public async Task<IActionResult> CompleteBossMembership([FromForm] boss_createDto bossDto, IFormFile imageFileBoss, IFormFile imageFileCompany)
         {
+            
+
+           
+
             user = await _userManager.GetUserAsync(User);
-            if (user is not null)
+           if (user is not null)
             {
 
+            String bossImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images","boss", imageFileBoss.FileName);
+            String companyImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images","company", imageFileCompany.FileName);
+
+            bossDto.ImageUrl = bossImagePath;
+            bossDto.companyCreateDto.ImageUrl = companyImagePath;
+
+            p.f("bosspath : " + bossImagePath);
+            p.f("company path : " + companyImagePath);
+
+
+                using (var stream = new FileStream(bossImagePath, FileMode.Create))
+                {
+                    await imageFileBoss.CopyToAsync(stream);
+                }
+
+
+                using (var stream = new FileStream(companyImagePath, FileMode.Create))
+                {
+                    await imageFileBoss.CopyToAsync(stream);
+                }
 
                 Boss newBoss = _mapper.Map<Boss>(bossDto);
                 Company newCompany = _mapper.Map<Company>(bossDto.companyCreateDto);
+
                 newBoss.Company = newCompany;
                 newBoss.Id = user.Id;
+
                 _manager.BossService.CreateBoss(newBoss);
 
                 p.f(newBoss.Company.Name);
-            }else{
+            }
+            else
+            {
                 p.f("kullanıcı yok ");
             }
 
-
             return RedirectToAction("Index", "Login");
         }
+
+
+
+
     }
 }

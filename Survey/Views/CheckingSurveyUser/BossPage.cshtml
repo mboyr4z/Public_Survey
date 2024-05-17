@@ -8,7 +8,8 @@
 }
 else
 {
-    <form method="post" asp-controller="CheckingSurveyUser" asp-action="CompleteBossMembership">
+    <form method="post" asp-controller="CheckingSurveyUser" asp-action="CompleteBossMembership"
+        enctype="multipart/form-data">
         <div class="row my-10">
             <div class="col-md-3">
                 <div class="text-muted">Hello Boss</div><br>
@@ -45,9 +46,12 @@ else
                             <input class="form-control" type="text" asp-for="City">
                         </div>
 
+                     
+
                         <div class="form-group my-3">
                             <label asp-for="ImageUrl"></label>
-                            <input class="form-control" type="text" asp-for="ImageUrl">
+                            <input type="file" name="imageFileBoss" class="form-control" asp-for="ImageUrl"
+                                placeholder="Enter this.">
                         </div>
 
                     </div>
@@ -55,7 +59,7 @@ else
 
                     <div class="col-md-7">
 
-                            <h2 class="blockquote-footer">Company Information</h2>
+                        <h2 class="blockquote-footer">Company Information</h2>
 
                         <div class="form-group my-3">
                             <label asp-for="companyCreateDto.Name"></label>
@@ -67,9 +71,11 @@ else
                             <input class="form-control" type="text" asp-for="companyCreateDto.Address">
                         </div>
 
+
                         <div class="form-group my-3">
                             <label asp-for="companyCreateDto.ImageUrl"></label>
-                            <input class="form-control" type="text" asp-for="companyCreateDto.ImageUrl">
+                            <input type="file" name="imageFileCompany" class="form-control" asp-for="companyCreateDto.ImageUrl"
+                                placeholder="Enter this.">
                         </div>
                     </div>
 

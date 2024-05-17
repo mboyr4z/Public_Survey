@@ -10,6 +10,6 @@ namespace Entities.Dtos
         public string Name{get;set;}
        // [Required(ErrorMessage = "Address is required")]
         public string? Address {get;set;}
-        public string? ImageUrl {get; set;}
+        public string ImageUrl {get; set;}
     }
 }
