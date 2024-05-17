@@ -1,4 +1,5 @@
 using AutoMapper;
+using Benimkiler.Roles;
 using Entities.Dtos;
 using Entities.Models;
 using Microsoft.AspNetCore.Identity;
@@ -6,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Repositories.Contracts;
 using Services.Contracts;
-using StoreApp.Infrastructure.Roles;
 using Survey.Benimkiler;
 
 namespace Survey.Controllers

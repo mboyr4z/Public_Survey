@@ -28,6 +28,12 @@
         @if(signingRole == Roles.Admin){
             <li><a asp-area="admin" asp-controller="dashboard" class="nav-link px-2 link-dark">Admin</a></li>
         }
+
+        @if(!ViewBag.isMemberShipCompleted && isLoggedIn){
+             <li><a  asp-controller="CheckingSurveyUser" asp-action="CustomizeAccordingToRole" class="nav-link px-2 link-dark text-danger" >Complete Membership..</a></li>
+        }
+
+        
         
     </ul>
 

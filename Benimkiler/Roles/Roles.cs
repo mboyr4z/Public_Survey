@@ -1,4 +1,4 @@
-namespace StoreApp.Infrastructure.Roles
+namespace Benimkiler.Roles
 {
     public enum Roles{
         Admin,

@@ -1,3 +1,7 @@
+using System.Dynamic;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Identity;
+
 namespace Services.Contracts
 {
     public interface IServiceManager
@@ -8,5 +12,7 @@ namespace Services.Contracts
         ICompanyService CompanyService{get;}
 
         IAuthService AuthService{get;}
+
+        Task<bool> IsSurveyUserMembershipCompletedAsync(ClaimsPrincipal curUser);
     }
 }
