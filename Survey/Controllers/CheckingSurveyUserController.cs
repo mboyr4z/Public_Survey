@@ -64,7 +64,7 @@ namespace Survey.Controllers
 
         }
 
-        public async Task<IActionResult> GuestPage() => RedirectToAction("ConfirmedMembershipLogin","MainPage");
+        public async Task<IActionResult> GuestPage() => RedirectToAction("GuestPage","MainPage");
 
         public async Task<IActionResult> AdminPage() => View("AdminPage");
 
@@ -152,6 +152,7 @@ namespace Survey.Controllers
                 {
                     p.f("Commentator tablosunda var");
                     ViewBag.completedMembership = true;
+                    return await GuestPage();
                 }
                 else
                 {
@@ -253,6 +254,38 @@ namespace Survey.Controllers
                 _manager.AuthorService.CreateAuthor(newAuthor);
 
                 // p.f(newBoss.Company.Name);
+            }
+            else
+            {
+                p.f("kullanıcı yok ");
+            }
+
+            return RedirectToAction("Index", "CheckingSurveyUser");
+        }
+
+          [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CompleteCommentatorMembership([FromForm] commentator_createDto commentatorDto, IFormFile imageFileCommentator)
+        {
+
+            user = await _userManager.GetUserAsync(User);
+            if (user is not null)
+            {
+
+                String commentatorImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", "commentator", user.UserName+".jpeg");
+
+                commentatorDto.ImageUrl = commentatorImagePath;
+
+
+                using (var stream = new FileStream(commentatorImagePath, FileMode.Create))
+                {
+                    await imageFileCommentator.CopyToAsync(stream);
+                }
+
+
+                commentatorDto.Id = user.Id;
+                _manager.CommentatorService.CreateCommentator(commentatorDto);
+
             }
             else
             {

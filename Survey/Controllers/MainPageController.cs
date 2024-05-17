@@ -32,7 +32,7 @@ namespace Survey.Controllers
         }
 
 
-        public async Task<IActionResult> ConfirmedMembershipLogin()
+        public async Task<IActionResult> GuestPage()
         {
             return View("Index");
         }
