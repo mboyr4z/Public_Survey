@@ -26,7 +26,7 @@
         <li><a asp-area="" asp-controller="MainPage" asp-action="Index" class="nav-link px-2 link-secondary">Home</a></li>
 
         @if(signingRole == Roles.Admin){
-            <li><a asp-area="admin" asp-controller="dashboard" class="nav-link px-2 link-dark">Admin</a></li>
+            <li><a asp-area="admin" asp-controller="dashboard" asp-action="Index" class="nav-link px-2 link-dark">Admin</a></li>
         }
 
         @if(!ViewBag.isMemberShipCompleted && isLoggedIn){

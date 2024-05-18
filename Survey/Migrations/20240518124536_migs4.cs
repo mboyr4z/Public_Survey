@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Survey.Migrations
 {
-    public partial class migs1 : Migration
+    public partial class migs4 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -234,22 +234,22 @@ namespace Survey.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "66e1b409-9727-4e66-8588-209f5bf8810c", null, "Boss", "BOSS" });
+                values: new object[] { "0cd22dde-9c20-4935-823f-90c0b9fd636a", null, "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "922bd9a9-cb83-4caf-8722-5da97de00979", null, "Author", "AUTHOR" });
+                values: new object[] { "2d3887f9-2782-45ed-9d81-20718da26c51", null, "Commentator", "COMMENTATOR" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "cd34d735-779f-4f70-9ada-254d326185e7", null, "Commentator", "COMMENTATOR" });
+                values: new object[] { "a1670b2d-5778-463c-9fcf-2d45d3fabc7c", null, "Boss", "BOSS" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "ef5cb3de-9230-4ddf-ab84-af5dc893bc74", null, "Admin", "ADMIN" });
+                values: new object[] { "d479a23e-826c-41a3-ac9a-a295101d7555", null, "Author", "AUTHOR" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

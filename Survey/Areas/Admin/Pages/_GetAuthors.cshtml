@@ -1,0 +1,65 @@
+@using MyApp.Pages
+
+@model List<ListedAuthor>
+
+<div class="row text-center">
+   
+    <div class="col-md-12">
+        <h2>Admins</h2>
+        <table class="table table-hover">
+
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Name</th>
+                    <th>Surname</th>
+                    <th>Age</th>
+                    <th>City</th>
+                    <th>Confirmed</th>
+                    <th>Like Rate</th>
+                    <th>Image</th>
+                    <th>Operations</th>
+                </tr>
+
+            </thead>
+            @foreach (ListedAuthor author in Model)
+            {
+                <tr class="text-center">
+                    <td>@author.user.UserName</td>
+                    <td>@author.user.Email</td>
+                    <td>@author.author?.Name</td>
+                    <td>@author.author?.Surname</td>
+                    <td>@author.author?.Age</td>
+                    <td>@author.author?.City</td>
+                    <td>
+                        @if((bool)author.author.Confirmed){
+                            <i class="fa-solid fa-check"></i>
+                        }else{
+                            <i class="fa-solid fa-exclamation"></i>
+                        }
+                    </td>
+                    <td>@author.author?.LikeRate</td>
+                    <td>
+                        @if(@author.author is not null){
+                            <img class="img-thumbnail" style="width: 60px; height: 60px;" src="~/@author.author?.ImageUrl" alt="">
+                        }
+                        
+                      
+                    </td>
+                    
+                    <td>
+                        <div class="btn-group">
+                                <input type="hidden" name="Username" value="@author.user.Id">
+                                <button type="submit" class="btn btn-danger rounded-0">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                        </div>
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+    </div>
+</div>

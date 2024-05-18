@@ -30,13 +30,13 @@ namespace Survey.Controllers
         private IdentityUser user;
         public async Task<IActionResult> CustomizeAccordingToRole()
         {
-           // p.f("buradayyım");
+            // p.f("buradayyım");
             user = await _userManager.GetUserAsync(User);
 
             string firstRole = (await _userManager.GetRolesAsync(user))[0];
 
             Roles signingRole = (Roles)Enum.Parse(typeof(Roles), firstRole);
-           // p.f("first:role : " + firstRole);
+            // p.f("first:role : " + firstRole);
             switch (signingRole)
             {
                 case Roles.Admin:
@@ -57,16 +57,16 @@ namespace Survey.Controllers
                     return await CommentatorPage();
                     break;
                 default:
-                   // p.f("guestt");
+                    // p.f("guestt");
                     return await GuestPage();
                     break;
             }
 
         }
 
-        public async Task<IActionResult> GuestPage() => RedirectToAction("GuestPage","MainPage");
+        public async Task<IActionResult> GuestPage() => RedirectToAction("GuestPage", "MainPage");
 
-        public async Task<IActionResult> AdminPage() => View("AdminPage");
+        public async Task<IActionResult> AdminPage() => await GuestPage();
 
         public async Task<IActionResult> AuthorPage()
         {
@@ -106,8 +106,8 @@ namespace Survey.Controllers
         public SelectList GetCompaniesSelectList()
         {
             IQueryable<Company> companies = _manager.CompanyService.GetAllCompanies(false);
-            SelectList companySelectList = new SelectList( companies, "Id", "Name", "1");
-            return         companySelectList;
+            SelectList companySelectList = new SelectList(companies, "Id", "Name", "1");
+            return companySelectList;
         }
         public async Task<IActionResult> BossPage()
         {
@@ -177,13 +177,16 @@ namespace Survey.Controllers
             if (user is not null)
             {
 
-           
 
-                String bossImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", "boss", user.UserName+".jpeg");
-                String companyImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", "company", user.UserName+".jpeg");
 
-                bossDto.ImageUrl = bossImagePath;
-                bossDto.companyCreateDto.ImageUrl = companyImagePath;
+                String bossImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", "boss", user.UserName + ".jpeg");
+                String companyImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", "company", user.UserName + ".jpeg");
+
+                string bossImageInRootPath = Path.Combine("images", "boss", user.UserName + ".jpeg");
+                string companyImageInRootPath = Path.Combine("images", "company", user.UserName + ".jpeg");
+
+                bossDto.ImageUrl = bossImageInRootPath;
+                bossDto.companyCreateDto.ImageUrl = companyImageInRootPath;
 
                 Boss newBoss = _mapper.Map<Boss>(bossDto);
                 Company newCompany = _mapper.Map<Company>(bossDto.companyCreateDto);
@@ -203,7 +206,7 @@ namespace Survey.Controllers
                     await imageFileCompany.CopyToAsync(stream);
                 }
 
-                
+
 
                 newBoss.Company = newCompany;
                 p.f("company URL : " + newBoss.Company.ImageUrl);
@@ -212,6 +215,9 @@ namespace Survey.Controllers
                 _manager.BossService.CreateBoss(newBoss);
 
                 p.f(newBoss.Company.Name);
+
+
+                return RedirectToAction("GuestPage", "MainPage");
             }
             else
             {
@@ -231,9 +237,11 @@ namespace Survey.Controllers
             if (user is not null)
             {
 
-                String authorImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", "author", user.UserName+".jpeg");
+                String authorImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", "author", user.UserName + ".jpeg");
 
-                authorDto.ImageUrl = authorImagePath;
+                string authorImageInRootPath = Path.Combine("images", "author", user.UserName + ".jpeg");
+
+                authorDto.ImageUrl = authorImageInRootPath;
 
 
                 using (var stream = new FileStream(authorImagePath, FileMode.Create))
@@ -245,7 +253,7 @@ namespace Survey.Controllers
                 Author newAuthor = _mapper.Map<Author>(authorDto);
 
 
-               // p.f("new company ıd : " + newCompany.Id + " name : " + newCompany.Name);
+                // p.f("new company ıd : " + newCompany.Id + " name : " + newCompany.Name);
 
                 //newAuthor.Company = newCompany;
 
@@ -254,6 +262,9 @@ namespace Survey.Controllers
                 _manager.AuthorService.CreateAuthor(newAuthor);
 
                 // p.f(newBoss.Company.Name);
+
+                
+                return RedirectToAction("GuestPage", "MainPage");
             }
             else
             {
@@ -263,7 +274,7 @@ namespace Survey.Controllers
             return RedirectToAction("Index", "CheckingSurveyUser");
         }
 
-          [HttpPost]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CompleteCommentatorMembership([FromForm] commentator_createDto commentatorDto, IFormFile imageFileCommentator)
         {
@@ -272,9 +283,10 @@ namespace Survey.Controllers
             if (user is not null)
             {
 
-                String commentatorImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", "commentator", user.UserName+".jpeg");
+                String commentatorImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", "commentator", user.UserName + ".jpeg");
 
-                commentatorDto.ImageUrl = commentatorImagePath;
+                string commentatorImageInRootPath = Path.Combine("images", "commentator", user.UserName + ".jpeg");
+                commentatorDto.ImageUrl = commentatorImageInRootPath;
 
 
                 using (var stream = new FileStream(commentatorImagePath, FileMode.Create))
@@ -285,6 +297,9 @@ namespace Survey.Controllers
 
                 commentatorDto.Id = user.Id;
                 _manager.CommentatorService.CreateCommentator(commentatorDto);
+
+                
+                return RedirectToAction("GuestPage", "MainPage");
 
             }
             else

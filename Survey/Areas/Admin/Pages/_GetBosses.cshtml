@@ -1,0 +1,65 @@
+@using MyApp.Pages
+
+@model List<ListedBoss>
+
+<div class="row text-center">
+   
+    <div class="col-md-12">
+        <h2>Admins</h2>
+        <table class="table table-hover">
+
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Name</th>
+                    <th>Surname</th>
+                    <th>Age</th>
+                    <th>City</th>
+                    <th>Confirmed</th>
+                    <th>Like Rate</th>
+                    <th>Image</th>
+                    <th>Operations</th>
+                </tr>
+
+            </thead>
+            @foreach (ListedBoss boss in Model)
+            {
+                <tr class="text-center">
+                    <td>@boss.user.UserName</td>
+                    <td>@boss.user.Email</td>
+                    <td>@boss.boss?.Name</td>
+                    <td>@boss.boss?.Surname</td>
+                    <td>@boss.boss?.Age</td>
+                    <td>@boss.boss?.City</td>
+                    <td>
+                        @if((bool)boss.boss.Confirmed){
+                            <i class="fa-solid fa-check"></i>
+                        }else{
+                            <i class="fa-solid fa-exclamation"></i>
+                        }
+                    </td>
+                    <td>@boss.boss?.LikeRate</td>
+                    <td>
+                        @if(@boss.boss is not null){
+                            <img class="img-thumbnail" style="width: 60px; height: 60px;" src="~/@boss.boss?.ImageUrl" alt="">
+                        }
+                        
+                      
+                    </td>
+                    
+                    <td>
+                        <div class="btn-group">
+                                <input type="hidden" name="Username" value="@boss.user.Id">
+                                <button type="submit" class="btn btn-danger rounded-0">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                        </div>
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+    </div>
+</div>
