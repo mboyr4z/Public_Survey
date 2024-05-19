@@ -9,7 +9,6 @@ namespace Services.Contracts
     {
 
         IQueryable<Company> GetAllCompanies(bool trackChanges);
-        IQueryable<Company> GetAllCompaniesWithDetails(CompanyRequestParameter p);
         Company? GetOneCompany(string id, bool trackChanges);
 
         Company? GetOneCompany(int id, bool trackChanges);

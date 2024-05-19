@@ -19,21 +19,8 @@ namespace Repositories
 
        
         public void Delete(Author author) => Remove(author);
-        
 
-        
         public IQueryable<Author> GetAllAuthors(bool trackChanges) => FindAll(trackChanges);
-
-        public IQueryable<Author> GetAllAuthorsWithDetails(AuthorRequestParameters pr)
-        {
-            IQueryable<Author> authors = GetAllAuthors(false);
-
-            return authors.FilteredByName(pr.Name)
-                .FilteredBySurname( pr.Surname)
-                .FilteredByLikeRate(pr.minLikeRate, pr.maxLikeRate, pr.IsValidLikeRate) as IQueryable<Author>;
-
-            
-        }
 
         public Author? GetOneAuthor(string id, bool trackChanges)
         {

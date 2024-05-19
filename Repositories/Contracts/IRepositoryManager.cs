@@ -5,7 +5,6 @@ namespace Repositories.Contracts
         IAuthorRepository Author { get; }
         IBossRepository Boss { get; }
         ICommentatorRepository Commentator { get; }
-
         ICompanyRepository Company { get; }
         void Save();
     }

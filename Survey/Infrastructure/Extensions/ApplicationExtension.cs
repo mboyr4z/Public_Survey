@@ -90,6 +90,64 @@ namespace StoreApp.Infrastructure.Extensions
                 }
             }
 
+            user = await userManager.FindByNameAsync("Admin2");
+
+            if (user is null)
+            {
+                user = new IdentityUser()
+                {
+                    Email = "admin2@samsun.edu.tr",
+                    PhoneNumber = "05366765246",
+                    UserName = "Admin2",
+                };
+
+                var result = await userManager.CreateAsync(user, adminPassword);
+
+                if (!result.Succeeded)
+                {
+                    throw new Exception("Admin user could not created.");
+                }
+
+                // tüm rolleri admine atayabilmek için
+                var roleResult = await userManager.AddToRolesAsync(user,
+                    new List<string> { "Admin" }
+                );
+
+                if (!roleResult.Succeeded)
+                {
+                    throw new Exception("System have problems with role defination for admin.");
+                }
+            }
+
+             user = await userManager.FindByNameAsync("Admin3");
+
+            if (user is null)
+            {
+                user = new IdentityUser()
+                {
+                    Email = "admin2@maras.edu.tr",
+                    PhoneNumber = "05462567896",
+                    UserName = "Admin3",
+                };
+
+                var result = await userManager.CreateAsync(user, adminPassword);
+
+                if (!result.Succeeded)
+                {
+                    throw new Exception("Admin user could not created.");
+                }
+
+                // tüm rolleri admine atayabilmek için
+                var roleResult = await userManager.AddToRolesAsync(user,
+                    new List<string> { "Admin" }
+                );
+
+                if (!roleResult.Succeeded)
+                {
+                    throw new Exception("System have problems with role defination for admin.");
+                }
+            }
+
          
             user = await userManager.FindByNameAsync("Boss");
 

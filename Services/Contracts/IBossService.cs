@@ -8,7 +8,6 @@ namespace Services.Contracts
     public interface IBossService
     {
          IQueryable<Boss> GetAllBosses(bool trackChanges);
-        IQueryable<Boss> GetAllBossesWithDetails(BossRequestParameters p);
         Boss? GetOneBoss(string id, bool trackChanges);
         void CreateBoss(boss_createDto bossDto);
         void CreateBoss(Boss boss);

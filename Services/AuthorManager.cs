@@ -44,10 +44,6 @@ namespace Services
             return _manager.Author.GetAllAuthors(trackChanges);
         }
 
-        public IQueryable<Author> GetAllAuthorsWithDetails(AuthorRequestParameters p)
-        {
-            return _manager.Author.GetAllAuthorsWithDetails(p);
-        }
 
         public Author? GetOneAuthor(string id, bool trackChanges)
         {

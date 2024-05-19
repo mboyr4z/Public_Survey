@@ -7,7 +7,6 @@ namespace Repositories.Contracts
     public interface ICompanyRepository : IRepositoryBase<Company>{
         
         IQueryable<Company> GetAllCompanies(bool trackChanges);
-        IQueryable<Company> GetAllCompaniesWithDetails(CompanyRequestParameter p);
         Company? GetOneCompany(string id, bool trackChanges);
         Company? GetOneCompanyWithName(string name, bool trackChanges);
 

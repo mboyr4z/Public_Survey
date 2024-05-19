@@ -20,20 +20,6 @@ namespace Repositories
 
         public void Delete(Commentator commentator) => Remove(commentator);
 
-
-   
-
-            public IQueryable<Commentator> GetAllCommentatorsWithDetails(CommentatorRequestParameters pr)
-        {
-            IQueryable<Commentator> commentators = GetAllCommentators(false);
-
-             return  commentators.FilteredByName( pr.Name)
-                .FilteredBySurname( pr.Surname)
-                .FilteredByLikeRate(pr.minLikeRate, pr.maxLikeRate, pr.IsValidLikeRate) as IQueryable<Commentator>;
-
-            return commentators;
-        }
-
         public void UpdateOneCommentator(Commentator entity)
         {
             Update(entity);

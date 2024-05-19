@@ -29,22 +29,7 @@ namespace Repositories
        
 
       
-        
-      public IQueryable<Boss> GetAllBossesWithDetails(BossRequestParameters pr)
-        {
-            IQueryable<Boss> bosses = GetAllBosses(false);
 
-             IQueryable<Boss> bosses2 = bosses.FilteredByName(pr.Name)
-                .FilteredBySurname( pr.Surname)
-                .FilteredByLikeRate(pr.minLikeRate, pr.maxLikeRate, pr.IsValidLikeRate) as IQueryable<Boss>;
-
-            if(bosses2 is null){
-                throw new Exception("Hata");
-            }
-
-            return bosses2;
-
-        }
        
 
         public Boss? GetOneBoss(string id, bool trackChanges)

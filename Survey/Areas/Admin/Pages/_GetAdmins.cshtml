@@ -1,10 +1,40 @@
+@using Microsoft.AspNetCore.Identity
 @using MyApp.Pages
 
-@model List<ListedAdmin>
+@model RegisteredAdmins
 
 <div class="row text-center">
-    <div class="col-md-3"></div>
+    <div class="col-md-3">
+        <div class="row">
+            <div class="col-md-10">
+                <form method="post" asp-page="GetUsers">
+                    
+                    <input type="hidden" name="RoleName" value="Admin">
+
+                     <div class="form-group row">
+                        <label class="col-sm-2 col-form-label small">Username</label>
+                        <input type="text" name="Username">
+                    </div>
+
+
+                    <div class="form-group row">
+                         <label class="col-sm-2 col-form-label small">Email</label>
+                        <input type="text" name="Email">
+                    </div>
+
+                    <div class="form-group my-3 row">
+                        <button class="btn btn-success" type="submit">Get By Filter</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+
+    </div>
     <div class="col-md-6">
+
+
         <h2>Admins</h2>
         <table class="table table-hover">
 
@@ -16,20 +46,20 @@
                 </tr>
 
             </thead>
-            @foreach (ListedAdmin admin in Model)
+            @foreach (IdentityUser admin in Model.adminList)
             {
                 <tr>
-                    <td>@admin.user.UserName</td>
-                    <td>@admin.user.Email</td>
+                    <td>@admin.UserName</td>
+                    <td>@admin.Email</td>
                     <td>
                         <div class="btn-group">
 
-                            
-                                <input type="hidden" name="Username" value="@admin.user.UserName">
-                                <button type="submit" class="btn btn-danger rounded-0">
-                                    None
-                                </button>
-                            
+
+                            <input type="hidden" name="Username" value="@admin.UserName">
+                            <button type="submit" class="btn btn-danger rounded-0">
+                                None
+                            </button>
+
                         </div>
                     </td>
                 </tr>

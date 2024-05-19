@@ -1,6 +1,6 @@
 @using MyApp.Pages
 
-@model List<ListedBoss>
+@model RegisteredBosses
 
 <div class="row text-center">
    
@@ -23,7 +23,7 @@
                 </tr>
 
             </thead>
-            @foreach (ListedBoss boss in Model)
+            @foreach (BossItem boss in Model.bossList)
             {
                 <tr class="text-center">
                     <td>@boss.user.UserName</td>

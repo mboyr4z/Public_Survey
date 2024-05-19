@@ -1,7 +1,7 @@
+@using Entities.Models
 @using MyApp.Pages
 
-@model List<ListedAuthor>
-
+@model RegisteredAuthors
 <div class="row text-center">
    
     <div class="col-md-12">
@@ -23,7 +23,7 @@
                 </tr>
 
             </thead>
-            @foreach (ListedAuthor author in Model)
+            @foreach (AuthorItem author in Model.authorList)
             {
                 <tr class="text-center">
                     <td>@author.user.UserName</td>

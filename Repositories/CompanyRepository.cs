@@ -16,18 +16,10 @@ namespace Repositories
         }
 
         public void CreateCompany(Company company) => Create(company);
-        
 
         public void Delete(Company company) => Delete(company);
        
-
         public IQueryable<Company> GetAllCompanies(bool trackChanges) =>  FindAll(trackChanges);
-        
-
-        public IQueryable<Company> GetAllCompaniesWithDetails(CompanyRequestParameter p){
-            return GetAllCompanies(false).FilteredByName(p.Name);
-        }
-        
 
         public Company? GetOneCompany(string id, bool trackChanges) => FindByCondition(p=> p.Id.Equals(id),false);
 

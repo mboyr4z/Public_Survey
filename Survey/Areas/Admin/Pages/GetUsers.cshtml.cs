@@ -1,26 +1,32 @@
 using Benimkiler.Roles;
 using Entities.Models;
+using Entities.RequestParameters;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Services.Contracts;
 using Survey.Benimkiler;
+using Survey.Infrastructure.Extensions;
 
 namespace MyApp.Pages
 {
     public class GetUsersModel : PageModel
     {
         [BindProperty]
-        public string Name { get; set; }
+        public string RoleName { get; set; }
+
+        [BindProperty]
+        public SurveyUserRequestParameters _surveyUserRequestParameters {get;set;}
+        [BindProperty]
+        public IdentityUserRequestParameters _identityUserRequestParameters{get;set;}
 
         public SelectList roleSelectList;
-
         public Roles role;
-        public List<ListedAdmin> admins;
-        public List<ListedAuthor> authors;
-        public List<ListedBoss> bosses;
-        public List<ListedCommentator> commentators;
+        public RegisteredAdmins registeredAdmins;
+        public RegisteredAuthors registeredAuthors;
+        public RegisteredBosses registeredBosses;
+        public RegisteredCommentators registeredCommentators;
 
         private readonly IServiceManager _manager;
 
@@ -32,26 +38,35 @@ namespace MyApp.Pages
             _userManager = userManager;
         }
 
+        private void FindRoles()
+        {
+            roleSelectList = new SelectList(_manager.AuthService.Roles.Select(
+               r => new SelectListItem
+               {
+                   Value = r.Name,
+                   Text = r.Name
+               }
+           ), "Value", "Text");
+
+        }
         public void OnGet()
         {
             role = Roles.Guess;
-           FindRoles();
+            // p.f("get ");
+            FindRoles();
         }
 
-        private void FindRoles(){
-             roleSelectList = new SelectList(_manager.AuthService.Roles.Select(
-                r => new SelectListItem
-                {
-                    Value = r.Name,
-                    Text = r.Name
-                }
-            ), "Value", "Text");
-
-        }
+      
 
         public async Task OnPostAsync()
         {
-            role = p.RoleToEnum(Name);
+            // p.f("param : username : " + _identityUserRequestParameters.Username);
+            // p.f("param : mail : " + _identityUserRequestParameters.Email);
+
+            // p.f("role name : " + role.ToString());
+            // p.f("post");
+
+            role = p.RoleToEnum(RoleName);
             switch (role)
             {
                 case Roles.Admin:
@@ -73,7 +88,7 @@ namespace MyApp.Pages
                 default:
                     break;
             }
-                  FindRoles();
+            FindRoles();
 
         }
 
@@ -81,17 +96,16 @@ namespace MyApp.Pages
         {
             IList<IdentityUser> IdentityAdmins = await _userManager.GetUsersInRoleAsync("Admin");
 
-            admins = new List<ListedAdmin>();
+            registeredAdmins = new RegisteredAdmins();
 
             foreach (IdentityUser item in IdentityAdmins)
             {
-                admins.Add(
-                    new ListedAdmin
-                    {
-                        user = item
-                    }
+                registeredAdmins.adminList.Add(
+                    item
                 );
             }
+
+            registeredAdmins.FilteringRegisteredAdmins(_identityUserRequestParameters);
         }
 
 
@@ -99,34 +113,38 @@ namespace MyApp.Pages
         {
             IList<IdentityUser> IdentityAuthors = await _userManager.GetUsersInRoleAsync("Author");
 
-            authors = new List<ListedAuthor>();
+            registeredAuthors = new RegisteredAuthors();
 
             foreach (IdentityUser item in IdentityAuthors)
             {
-                authors.Add(
-                    new ListedAuthor
+                registeredAuthors.authorList.Add(
+                    new AuthorItem
                     {
                         user = item,
                         author = _manager.AuthorService.GetOneAuthor(item.Id, false)
+
                     }
                 );
             }
+
+            
         }
 
         private async Task FindAllBossesAsync()
         {
             IList<IdentityUser> IdentityBosses = await _userManager.GetUsersInRoleAsync("Boss");
 
-            bosses = new List<ListedBoss>();
+            registeredBosses = new RegisteredBosses();
 
             foreach (IdentityUser item in IdentityBosses)
             {
-                bosses.Add(
-                    new ListedBoss
+                registeredBosses.bossList.Add(
+                    new BossItem
                     {
                         user = item,
                         boss = _manager.BossService.GetOneBoss(item.Id, false)
                     }
+
                 );
             }
         }
@@ -135,43 +153,85 @@ namespace MyApp.Pages
         {
             IList<IdentityUser> IdentityCommentators = await _userManager.GetUsersInRoleAsync("Commentator");
 
-            commentators = new List<ListedCommentator>();
+            registeredCommentators = new RegisteredCommentators();
 
             foreach (IdentityUser item in IdentityCommentators)
             {
-                commentators.Add(
-                    new ListedCommentator
+                registeredCommentators.commentatorList.Add(
+                    new CommentatorItem
                     {
                         user = item,
                         commentator = _manager.CommentatorService.GetOneCommentator(item.Id, false)
                     }
+
                 );
             }
         }
     }
 
-    public class ListedUser
-    {
-        public IdentityUser user;
 
+    public class RegisteredAdmins
+    {
+     
+        public string Username { get; set; }
+
+
+        public string Email { get; set; }
+
+        public RegisteredAdmins()
+        {
+            adminList = new List<IdentityUser>();
+        }
+        public List<IdentityUser> adminList;
     }
 
-    public class ListedAuthor : ListedUser
+    public class RegisteredAuthors
     {
+        public RegisteredAuthors()
+        {
+            authorList = new List<AuthorItem>();
+        }
+        public List<AuthorItem> authorList;
+    }
+
+    public class AuthorItem
+    {
+        
+        public IdentityUser user;
         public Author author;
     }
 
-    public class ListedAdmin : ListedUser
+
+
+    public class RegisteredBosses
     {
+        public RegisteredBosses()
+        {
+            bossList = new List<BossItem>();
+        }
+        public List<BossItem> bossList;
     }
 
-    public class ListedBoss : ListedUser
+
+    public class BossItem
     {
+        public IdentityUser user;
         public Boss boss;
     }
-
-    public class ListedCommentator : ListedUser
+    public class RegisteredCommentators
     {
+          public RegisteredCommentators()
+        {
+            commentatorList = new List<CommentatorItem>();
+        }
+        public List<CommentatorItem> commentatorList;
+    }
+
+    public class CommentatorItem
+    {
+        public IdentityUser user;
         public Commentator commentator;
     }
+
+
 }

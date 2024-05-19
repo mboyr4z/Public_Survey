@@ -45,10 +45,6 @@ namespace Services
            return _manager.Boss.GetAllBosses(trackChanges);
         }
 
-        public IQueryable<Boss> GetAllBossesWithDetails(BossRequestParameters p)
-        {
-            return _manager.Boss.GetAllBossesWithDetails(p);
-        }
 
         public Boss? GetOneBoss(string id, bool trackChanges)
         {

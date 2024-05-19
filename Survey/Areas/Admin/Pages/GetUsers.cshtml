@@ -2,6 +2,7 @@
 @using Benimkiler.Roles
 @using MyApp.Pages
 
+
 @model GetUsersModel
 @{
     ViewData["Title"] = "Home Page";
@@ -16,15 +17,11 @@
         </div>
         <div class="col-md-6">
 
-            <div class="">
-                <div class="text-danger" asp-validation-summary="All">
-
-                </div>
-            </div>
+            
 
             <div class="form-group my-3">
-                <label asp-for="Name">Role</label>
-                <select class="form-control" asp-items="@Model.roleSelectList" asp-for="Name">
+                <label asp-for="RoleName">Role</label>
+                <select class="form-control" asp-items="@Model.roleSelectList" asp-for="RoleName">
                 </select>
             </div>
 
@@ -40,20 +37,20 @@
 
 @if (Model.role == Roles.Admin)
 {
-   <partial name="_GetAdmins" model="@Model.admins"></partial>
+   <partial name="_GetAdmins" model="@Model.registeredAdmins"></partial>
 }
 else if (Model.role == Roles.Boss)
 {
-       <partial name="_GetBosses" model="@Model.bosses"></partial>
+    <partial name="_GetBosses" model="@Model.registeredBosses"></partial>
 
 }
 else if (Model.role == Roles.Commentator)
 {
-      <partial name="_GetCommentators" model="@Model.commentators"></partial>
+    <partial name="_GetCommentators" model="@Model.registeredCommentators"></partial>
 }
 else if (Model.role == Roles.Author)
 {
-      <partial name="_GetAuthors" model="@Model.authors"></partial>
+    <partial name="_GetAuthors" model="@Model.registeredAuthors"></partial>
 }
 
 @section Scripts {

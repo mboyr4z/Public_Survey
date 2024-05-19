@@ -40,10 +40,7 @@ namespace Services
 
        
 
-        public IQueryable<Commentator> GetAllCommentatorsWithDetails(CommentatorRequestParameters p)
-        {
-             return _manager.Commentator.GetAllCommentatorsWithDetails(p);
-        }
+       
 
         public Commentator? GetOneCommentator(string id, bool trackChanges)
         {

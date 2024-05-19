@@ -39,12 +39,6 @@ namespace Services
         {
            return _manager.Company.GetAllCompanies(trackChanges);
         }
-
-        public IQueryable<Company> GetAllCompaniesWithDetails(CompanyRequestParameter p)
-        {
-            return _manager.Company.GetAllCompaniesWithDetails(p);
-        }
-
         public Company? GetOneCompany(string id, bool trackChanges)
         {
             return _manager.Company.GetOneCompany(id, trackChanges);

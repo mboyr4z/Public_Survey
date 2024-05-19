@@ -8,7 +8,6 @@ namespace Services.Contracts
     public interface IAuthorService
     {
         IQueryable<Author> GetAllAuthors(bool trackChanges);
-        IQueryable<Author> GetAllAuthorsWithDetails(AuthorRequestParameters p);
         Author? GetOneAuthor(string id, bool trackChanges);
         void CreateAuthor(author_createDto authorDto);
 

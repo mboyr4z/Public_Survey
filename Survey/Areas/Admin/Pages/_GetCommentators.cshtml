@@ -1,6 +1,6 @@
 @using MyApp.Pages
 
-@model List<ListedCommentator>
+@model RegisteredCommentators
 
 <div class="row text-center">
    
@@ -23,7 +23,7 @@
                 </tr>
 
             </thead>
-            @foreach (ListedCommentator commentator in Model)
+            @foreach (CommentatorItem commentator in Model.commentatorList)
             {
                 <tr class="text-center">
                     <td>@commentator.user.UserName</td>
