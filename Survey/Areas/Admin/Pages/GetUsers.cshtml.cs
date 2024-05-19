@@ -106,7 +106,7 @@ namespace MyApp.Pages
             }
 
             registeredAdmins.FilteringRegisteredAdmins(_identityUserRequestParameters);
-                registeredAdmins._surveyUserRequestParameters = _surveyUserRequestParameters;
+            registeredAdmins._surveyUserRequestParameters = _surveyUserRequestParameters;
             registeredAdmins._identityUserRequestParameters = _identityUserRequestParameters;
         }
 
@@ -154,7 +154,8 @@ namespace MyApp.Pages
                 );
             }
 
-                 registeredBosses._surveyUserRequestParameters = _surveyUserRequestParameters;
+            registeredBosses.FilteringRegisteredBossesByIdentityUser(_surveyUserRequestParameters,_identityUserRequestParameters);
+            registeredBosses._surveyUserRequestParameters = _surveyUserRequestParameters;
             registeredBosses._identityUserRequestParameters = _identityUserRequestParameters;
         }
 

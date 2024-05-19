@@ -60,6 +60,39 @@ namespace Survey.Infrastructure.Extensions
             return registeredAuthors;
         }
 
+           public static RegisteredBosses FilteringRegisteredBossesByIdentityUser(
+            this RegisteredBosses registeredBosses,SurveyUserRequestParameters surveyUserParameters, IdentityUserRequestParameters identityUserParameters){
+            
+            if(!string.IsNullOrEmpty(identityUserParameters.Email)){
+                registeredBosses.bossList = registeredBosses.bossList.Where(bossItem => bossItem.user.Email.ToLower().Contains(identityUserParameters.Email.ToLower())).ToList();
+            }
+
+            if(!string.IsNullOrEmpty(identityUserParameters.Username)){
+                registeredBosses.bossList = registeredBosses.bossList.Where(bossItem => bossItem.user.UserName.ToLower().Contains(identityUserParameters.Username.ToLower())).ToList();
+            }
+
+            if(!string.IsNullOrEmpty(surveyUserParameters.Name)){
+                registeredBosses.bossList = registeredBosses.bossList.Where(bossItem => bossItem.boss.Name.ToLower().Contains(surveyUserParameters.Name.ToLower())).ToList();
+            }
+
+            if(!string.IsNullOrEmpty(surveyUserParameters.Surname)){
+                registeredBosses.bossList = registeredBosses.bossList.Where(bossItem => bossItem.boss.Surname.ToLower().Contains(surveyUserParameters.Surname.ToLower())).ToList();
+            }
+
+            if(!string.IsNullOrEmpty(surveyUserParameters.minLikeRate.ToString())){
+                registeredBosses.bossList = registeredBosses.bossList.Where(bossItem => bossItem.boss.LikeRate > surveyUserParameters.minLikeRate).ToList();
+            }
+
+            if(!string.IsNullOrEmpty(surveyUserParameters.maxLikeRate.ToString())){
+                registeredBosses.bossList = registeredBosses.bossList.Where(bossItem => bossItem.boss.LikeRate < surveyUserParameters.maxLikeRate).ToList();
+            }
+
+
+            
+           // registeredAuthors.authorList = registeredAuthors.authorList..FilterByIdentityUserParams(parameters);
+            return registeredBosses;
+        }
+
         // public static RegisteredAdmins FilteringRegisteredBosses(this RegisteredBosses registeredBosses,SurveyUserRequestParameters surveyParameters, IdentityUserRequestParameters identityParameters){
 
         //     registeredAdmins.adminList = registeredAdmins.adminList.FilterByIdentityUserParams(parameters);

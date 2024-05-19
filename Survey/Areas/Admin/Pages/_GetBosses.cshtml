@@ -23,6 +23,42 @@
                 </tr>
 
             </thead>
+
+            <tbody>
+                  <form method="post" asp-page="GetUsers">
+
+                    <input type="hidden" name="RoleName" value="Boss">
+
+                    <tr>
+                        <td>
+                                <input type="text" name="Username" value="@Model._identityUserRequestParameters.Username">
+                        </td>
+                        <td>
+                                <input type="text" name="Email" value="@Model._identityUserRequestParameters.Email">
+                        </td>
+                        
+
+                            
+                        <td><input type="text" name="Name" value="@Model._surveyUserRequestParameters.Name"></td>
+                        <td><input type="text" name="Surname" value="@Model._surveyUserRequestParameters.Surname"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <div class="row">
+                                <input class="col-md-6" type="text" name="minLikeRate" placeholder="min">
+                                <input class="col-md-6" type="text" name="maxLikeRate" placeholder="max">
+                            </div>
+                        </td>
+                        <td></td>
+                        
+                       <td>
+                                <button class="btn btn-success" type="submit">Filter</button>
+                        </td>
+                    </tr>
+
+            </form>
+
             @foreach (BossItem boss in Model.bossList)
             {
                 <tr class="text-center">
@@ -58,6 +94,7 @@
                     </td>
                 </tr>
             }
+            </tbody>
 
         </table>
 
