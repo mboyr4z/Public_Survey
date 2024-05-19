@@ -5,7 +5,7 @@
 <div class="row text-center">
    
     <div class="col-md-12">
-        <h2>Admins</h2>
+        <h2>Bosses</h2>
         <table class="table table-hover">
 
             <thead>
@@ -14,6 +14,7 @@
                     <th>Email</th>
                     <th>Name</th>
                     <th>Surname</th>
+                    <th>Company</th>
                     <th>Age</th>
                     <th>City</th>
                     <th>Confirmed</th>
@@ -44,6 +45,7 @@
                         <td></td>
                         <td></td>
                         <td></td>
+                        <td></td>
                         <td>
                             <div class="row">
                                 <input class="col-md-6" type="text" name="minLikeRate" placeholder="min">
@@ -66,10 +68,11 @@
                     <td>@boss.user.Email</td>
                     <td>@boss.boss?.Name</td>
                     <td>@boss.boss?.Surname</td>
+                    <td>@boss.boss?.Company.Name</td>
                     <td>@boss.boss?.Age</td>
                     <td>@boss.boss?.City</td>
                     <td>
-                        @if((bool)boss.boss.Confirmed){
+                        @if(boss.boss != null &&  (bool)boss.boss.Confirmed){
                             <i class="fa-solid fa-check"></i>
                         }else{
                             <i class="fa-solid fa-exclamation"></i>
@@ -86,11 +89,14 @@
                     
                     <td>
                         <div class="btn-group">
-                                <input type="hidden" name="Username" value="@boss.user.Id">
-                                <button type="submit" class="btn btn-danger rounded-0">
-                                    <i class="fa fa-trash"></i>
-                                </button>
-                        </div>
+                                <form method="post" asp-page="./DeleteUser">
+                                    <input type="hidden" name="UserId" value="@boss.user.Id">
+                                    <button type="submit" class="btn btn-danger"
+                                        onclick="return confirm('Are you sure you want to delete @boss.user.UserName?')">
+                                        Delete
+                                    </button>
+                                </form>
+                            </div>
                     </td>
                 </tr>
             }

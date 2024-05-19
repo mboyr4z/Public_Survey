@@ -27,9 +27,7 @@ namespace MyApp.Pages
         public RegisteredAuthors registeredAuthors;
         public RegisteredBosses registeredBosses;
         public RegisteredCommentators registeredCommentators;
-
         private readonly IServiceManager _manager;
-
         private readonly UserManager<IdentityUser> _userManager;
 
         public GetUsersModel(IServiceManager manager, UserManager<IdentityUser> userManager)
@@ -55,8 +53,6 @@ namespace MyApp.Pages
             // p.f("get ");
             FindRoles();
         }
-
-
 
         public async Task OnPostAsync()
         {
@@ -110,7 +106,6 @@ namespace MyApp.Pages
             registeredAdmins._identityUserRequestParameters = _identityUserRequestParameters;
         }
 
-
         private async Task FindAllAuthorsAsync()
         {
             IList<IdentityUser> IdentityAuthors = await _userManager.GetUsersInRoleAsync("Author");
@@ -144,13 +139,17 @@ namespace MyApp.Pages
 
             foreach (IdentityUser item in IdentityBosses)
             {
-                registeredBosses.bossList.Add(
-                    new BossItem
-                    {
+                BossItem newBossItem = new BossItem
+                {
                         user = item,
                         boss = _manager.BossService.GetOneBoss(item.Id, false)
-                    }
+                };
 
+                newBossItem.boss.Company = _manager.CompanyService.GetOneCompany(newBossItem.boss.CompanyId, false);
+
+                
+                registeredBosses.bossList.Add(
+                    newBossItem    
                 );
             }
 

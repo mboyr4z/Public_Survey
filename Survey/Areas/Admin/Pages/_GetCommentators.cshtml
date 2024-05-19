@@ -3,9 +3,9 @@
 @model RegisteredCommentators
 
 <div class="row text-center">
-   
+
     <div class="col-md-12">
-        <h2>Admins</h2>
+        <h2>Commentators</h2>
         <table class="table table-hover">
 
             <thead>
@@ -16,7 +16,6 @@
                     <th>Surname</th>
                     <th>Age</th>
                     <th>City</th>
-                    <th>Confirmed</th>
                     <th>Like Rate</th>
                     <th>Image</th>
                     <th>Operations</th>
@@ -25,25 +24,25 @@
             </thead>
 
             <tbody>
-                 <form method="post" asp-page="GetUsers">
+                <form method="post" asp-page="GetUsers">
 
                     <input type="hidden" name="RoleName" value="Commentator">
 
                     <tr>
                         <td>
-                                <input type="text" name="Username" value="@Model._identityUserRequestParameters.Username">
+                            <input type="text" name="Username" value="@Model._identityUserRequestParameters.Username">
                         </td>
                         <td>
-                                <input type="text" name="Email" value="@Model._identityUserRequestParameters.Email">
+                            <input type="text" name="Email" value="@Model._identityUserRequestParameters.Email">
                         </td>
-                        
 
-                            
+
+
                         <td><input type="text" name="Name" value="@Model._surveyUserRequestParameters.Name"></td>
                         <td><input type="text" name="Surname" value="@Model._surveyUserRequestParameters.Surname"></td>
                         <td></td>
                         <td></td>
-                        <td></td>
+                  
                         <td>
                             <div class="row">
                                 <input class="col-md-6" type="text" name="minLikeRate" placeholder="min">
@@ -51,49 +50,48 @@
                             </div>
                         </td>
                         <td></td>
-                        
-                       <td>
-                                <button class="btn btn-success" type="submit">Filter</button>
+
+                        <td>
+                            <button class="btn btn-success" type="submit">Filter</button>
                         </td>
                     </tr>
 
-            </form>
+                </form>
 
-            @foreach (CommentatorItem commentator in Model.commentatorList)
-            {
-                <tr class="text-center">
-                    <td>@commentator.user.UserName</td>
-                    <td>@commentator.user.Email</td>
-                    <td>@commentator.commentator?.Name</td>
-                    <td>@commentator.commentator?.Surname</td>
-                    <td>@commentator.commentator?.Age</td>
-                    <td>@commentator.commentator?.City</td>
-                    <td>
-                        @if((bool)commentator.commentator.Confirmed){
-                            <i class="fa-solid fa-check"></i>
-                        }else{
-                            <i class="fa-solid fa-exclamation"></i>
-                        }
-                    </td>
-                    <td>@commentator.commentator?.LikeRate</td>
-                    <td>
-                        @if(@commentator.commentator is not null){
-                            <img class="img-thumbnail" style="width: 60px; height: 60px;" src="~/@commentator.commentator?.ImageUrl" alt="">
-                        }
+                @foreach (CommentatorItem commentator in Model.commentatorList)
+                {
+                    <tr class="text-center">
+                        <td>@commentator.user.UserName</td>
+                        <td>@commentator.user.Email</td>
+                        <td>@commentator.commentator?.Name</td>
+                        <td>@commentator.commentator?.Surname</td>
+                        <td>@commentator.commentator?.Age</td>
+                        <td>@commentator.commentator?.City</td>
                         
-                      
-                    </td>
-                    
-                    <td>
-                        <div class="btn-group">
-                                <input type="hidden" name="Username" value="@commentator.user.Id">
-                                <button type="submit" class="btn btn-danger rounded-0">
-                                    <i class="fa fa-trash"></i>
-                                </button>
-                        </div>
-                    </td>
-                </tr>
-            }
+                        <td>@commentator.commentator?.LikeRate</td>
+                        <td>
+                            @if (@commentator.commentator is not null)
+                            {
+                                <img class="img-thumbnail" style="width: 60px; height: 60px;"
+                                    src="~/@commentator.commentator?.ImageUrl" alt="">
+                            }
+
+
+                        </td>
+
+                        <td>
+                            <div class="btn-group">
+                                <form method="post" asp-page="./DeleteUser">
+                                    <input type="hidden" name="UserId" value="@commentator.user.Id">
+                                    <button type="submit" class="btn btn-danger"
+                                        onclick="return confirm('Are you sure you want to delete @commentator.user.UserName?')">
+                                        Delete
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
             </tbody>
 
         </table>

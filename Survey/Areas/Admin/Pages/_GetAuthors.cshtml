@@ -17,6 +17,7 @@
                     <th>Email</th>
                     <th>Name</th>
                     <th>Surname</th>
+                    @* <th>Company</th> *@
                     <th>Age</th>
                     <th>City</th>
                     <th>Confirmed</th>
@@ -45,6 +46,7 @@
                             
                         <td><input type="text" name="Name" value="@Model._surveyUserRequestParameters.Name"></td>
                         <td><input type="text" name="Surname" value="@Model._surveyUserRequestParameters.Surname"></td>
+                        @* <td></td> *@
                         <td></td>
                         <td></td>
                         <td></td>
@@ -71,10 +73,11 @@
                     <td>@author.user.Email</td>
                     <td>@author.author?.Name</td>
                     <td>@author.author?.Surname</td>
+                    @* <td>@author.author?.c</td> *@
                     <td>@author.author?.Age</td>
                     <td>@author.author?.City</td>
                     <td>
-                        @if((bool)author.author.Confirmed){
+                        @if( author.author != null && (bool)author.author.Confirmed){
                             <i class="fa-solid fa-check"></i>
                         }else{
                             <i class="fa-solid fa-exclamation"></i>
@@ -90,12 +93,15 @@
                     </td>
                     
                     <td>
-                        <div class="btn-group">
-                                <input type="hidden" name="Username" value="@author.user.Id">
-                                <button type="submit" class="btn btn-danger rounded-0">
-                                    <i class="fa fa-trash"></i>
-                                </button>
-                        </div>
+                       <div class="btn-group">
+                                <form method="post" asp-page="./DeleteUser">
+                                    <input type="hidden" name="UserId" value="@author.user.Id">
+                                    <button type="submit" class="btn btn-danger"
+                                        onclick="return confirm('Are you sure you want to delete @author.user.UserName?')">
+                                        Delete
+                                    </button>
+                                </form>
+                            </div>
                     </td>
                 </tr>
             }
