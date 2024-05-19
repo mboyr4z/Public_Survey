@@ -208,6 +208,63 @@ namespace StoreApp.Infrastructure.Extensions
                 }
             }
 
+            user = await userManager.FindByNameAsync("Author2");
+
+            if (user is null)
+            {
+                user = new IdentityUser()
+                {
+                    Email = "Author2@alibakir",
+                    PhoneNumber = "1252357454",
+                    UserName = "Author2",
+                };
+
+                var result = await userManager.CreateAsync(user, "Author123.");
+
+                if (!result.Succeeded)
+                {
+                    throw new Exception("Author user could not created.");
+                }
+
+                // tüm rolleri admine atayabilmek için
+                var roleResult = await userManager.AddToRolesAsync(user,
+                    new List<string> { "Author" }
+                );
+
+                if (!roleResult.Succeeded)
+                {
+                    throw new Exception("System have problems with role defination for Author.");
+                }
+            }
+
+               user = await userManager.FindByNameAsync("Author3");
+
+            if (user is null)
+            {
+                user = new IdentityUser()
+                {
+                    Email = "Author3@nabersin",
+                    PhoneNumber = "14325345",
+                    UserName = "Author3",
+                };
+
+                var result = await userManager.CreateAsync(user, "Author123.");
+
+                if (!result.Succeeded)
+                {
+                    throw new Exception("Author user could not created.");
+                }
+
+                // tüm rolleri admine atayabilmek için
+                var roleResult = await userManager.AddToRolesAsync(user,
+                    new List<string> { "Author" }
+                );
+
+                if (!roleResult.Succeeded)
+                {
+                    throw new Exception("System have problems with role defination for Author.");
+                }
+            }
 
             user = await userManager.FindByNameAsync("Commentator");
 

@@ -4,34 +4,7 @@
 @model RegisteredAdmins
 
 <div class="row text-center">
-    <div class="col-md-3">
-        <div class="row">
-            <div class="col-md-10">
-                <form method="post" asp-page="GetUsers">
-                    
-                    <input type="hidden" name="RoleName" value="Admin">
-
-                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label small">Username</label>
-                        <input type="text" name="Username">
-                    </div>
-
-
-                    <div class="form-group row">
-                         <label class="col-sm-2 col-form-label small">Email</label>
-                        <input type="text" name="Email">
-                    </div>
-
-                    <div class="form-group my-3 row">
-                        <button class="btn btn-success" type="submit">Get By Filter</button>
-                    </div>
-                </form>
-            </div>
-
-        </div>
-
-
-    </div>
+    <div class="col-md-3"></div>
     <div class="col-md-6">
 
 
@@ -39,6 +12,9 @@
         <table class="table table-hover">
 
             <thead>
+
+
+
                 <tr>
                     <th>Username</th>
                     <th>Email</th>
@@ -46,25 +22,48 @@
                 </tr>
 
             </thead>
-            @foreach (IdentityUser admin in Model.adminList)
-            {
-                <tr>
-                    <td>@admin.UserName</td>
-                    <td>@admin.Email</td>
-                    <td>
-                        <div class="btn-group">
+
+            <tbody>
 
 
-                            <input type="hidden" name="Username" value="@admin.UserName">
-                            <button type="submit" class="btn btn-danger rounded-0">
-                                None
-                            </button>
 
-                        </div>
-                    </td>
-                </tr>
-            }
+                <form method="post" asp-page="GetUsers">
 
+                    <input type="hidden" name="RoleName" value="Admin">
+
+                    <tr>
+                        <td>
+                                <input type="text" name="Username">
+                            </td>
+                        <td>
+                                <input type="text" name="Email">
+                        </td>
+                        <td>
+                                <button class="btn btn-success" type="submit">Get By Filter</button>
+                        </td>
+                    </tr>
+                </form>
+
+
+                @foreach (IdentityUser admin in Model.adminList)
+                {
+                    <tr>
+                        <td>@admin.UserName</td>
+                        <td>@admin.Email</td>
+                        <td>
+                            <div class="btn-group">
+
+
+                                <input type="hidden" name="Username" value="@admin.UserName">
+                                <button type="submit" class="btn btn-danger rounded-0">
+                                    None
+                                </button>
+
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
         </table>
 
     </div>
