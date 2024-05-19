@@ -176,7 +176,7 @@ namespace MyApp.Pages
 
                 );
             }
-
+            registeredCommentators.FilteringRegisteredCommentatorsByIdentityUser(_surveyUserRequestParameters, _identityUserRequestParameters);
             registeredCommentators._surveyUserRequestParameters = _surveyUserRequestParameters;
             registeredCommentators._identityUserRequestParameters = _identityUserRequestParameters;
         }
