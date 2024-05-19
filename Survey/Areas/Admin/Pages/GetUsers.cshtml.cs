@@ -106,6 +106,8 @@ namespace MyApp.Pages
             }
 
             registeredAdmins.FilteringRegisteredAdmins(_identityUserRequestParameters);
+                registeredAdmins._surveyUserRequestParameters = _surveyUserRequestParameters;
+            registeredAdmins._identityUserRequestParameters = _identityUserRequestParameters;
         }
 
 
@@ -151,6 +153,9 @@ namespace MyApp.Pages
 
                 );
             }
+
+                 registeredBosses._surveyUserRequestParameters = _surveyUserRequestParameters;
+            registeredBosses._identityUserRequestParameters = _identityUserRequestParameters;
         }
 
         private async Task FindAllCommentatorsAsync()
@@ -170,11 +175,14 @@ namespace MyApp.Pages
 
                 );
             }
+
+            registeredCommentators._surveyUserRequestParameters = _surveyUserRequestParameters;
+            registeredCommentators._identityUserRequestParameters = _identityUserRequestParameters;
         }
     }
 
 
-    public class RegisteredAdmins
+    public class RegisteredAdmins : RequestClass
     {
 
         public RegisteredAdmins()
@@ -184,10 +192,15 @@ namespace MyApp.Pages
         public List<IdentityUser> adminList;
     }
 
-    public class RegisteredAuthors
+    public abstract class RequestClass 
     {
-        public SurveyUserRequestParameters _surveyUserRequestParameters { get; set; }
+           public SurveyUserRequestParameters _surveyUserRequestParameters { get; set; }
         public IdentityUserRequestParameters _identityUserRequestParameters { get; set; }
+    }
+
+    public class RegisteredAuthors : RequestClass
+    {
+     
         public RegisteredAuthors()
         {
             authorList = new List<AuthorItem>();
@@ -204,7 +217,7 @@ namespace MyApp.Pages
 
 
 
-    public class RegisteredBosses
+    public class RegisteredBosses: RequestClass
     {
         public RegisteredBosses()
         {
@@ -219,7 +232,7 @@ namespace MyApp.Pages
         public IdentityUser user;
         public Boss boss;
     }
-    public class RegisteredCommentators
+    public class RegisteredCommentators: RequestClass
     {
         public RegisteredCommentators()
         {
