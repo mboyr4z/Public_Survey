@@ -17,9 +17,9 @@ namespace MyApp.Pages
         public string RoleName { get; set; }
 
         [BindProperty]
-        public SurveyUserRequestParameters _surveyUserRequestParameters {get;set;}
+        public SurveyUserRequestParameters _surveyUserRequestParameters { get; set; }
         [BindProperty]
-        public IdentityUserRequestParameters _identityUserRequestParameters{get;set;}
+        public IdentityUserRequestParameters _identityUserRequestParameters { get; set; }
 
         public SelectList roleSelectList;
         public Roles role;
@@ -56,7 +56,7 @@ namespace MyApp.Pages
             FindRoles();
         }
 
-      
+
 
         public async Task OnPostAsync()
         {
@@ -127,7 +127,11 @@ namespace MyApp.Pages
                 );
             }
 
-            
+            registeredAuthors.FilteringRegisteredAuthorsByIdentityUser(_surveyUserRequestParameters, _identityUserRequestParameters);
+            registeredAuthors._surveyUserRequestParameters = _surveyUserRequestParameters;
+            registeredAuthors._identityUserRequestParameters = _identityUserRequestParameters;
+
+
         }
 
         private async Task FindAllBossesAsync()
@@ -172,11 +176,6 @@ namespace MyApp.Pages
 
     public class RegisteredAdmins
     {
-     
-        public string Username { get; set; }
-
-
-        public string Email { get; set; }
 
         public RegisteredAdmins()
         {
@@ -187,6 +186,8 @@ namespace MyApp.Pages
 
     public class RegisteredAuthors
     {
+        public SurveyUserRequestParameters _surveyUserRequestParameters { get; set; }
+        public IdentityUserRequestParameters _identityUserRequestParameters { get; set; }
         public RegisteredAuthors()
         {
             authorList = new List<AuthorItem>();
@@ -196,7 +197,7 @@ namespace MyApp.Pages
 
     public class AuthorItem
     {
-        
+
         public IdentityUser user;
         public Author author;
     }
@@ -220,7 +221,7 @@ namespace MyApp.Pages
     }
     public class RegisteredCommentators
     {
-          public RegisteredCommentators()
+        public RegisteredCommentators()
         {
             commentatorList = new List<CommentatorItem>();
         }
