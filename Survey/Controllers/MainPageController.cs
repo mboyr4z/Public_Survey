@@ -46,18 +46,37 @@ namespace Survey.Controllers
              ClaimsPrincipal curUser = User;
             ViewBag.isMemberShipCompleted = await _manager.IsSurveyUserMembershipCompletedAsync(curUser);
 
-            p.f("üyelik tamamlandı mı : " + ViewBag.isMemberShipCompleted);
+            // p.f("üyelik tamamlandı mı : " + ViewBag.isMemberShipCompleted);
 
+            
+
+            
             return View("Index");
         }
 
 
         public async Task<IActionResult> Index()
         {
+
             ClaimsPrincipal curUser = User;
             ViewBag.isMemberShipCompleted = await _manager.IsSurveyUserMembershipCompletedAsync(curUser);
 
-            p.f("üyelik tamamlandı mı : " + ViewBag.isMemberShipCompleted);
+            var identityBosses = await _userManager.GetUsersInRoleAsync("Boss");
+            
+            foreach (var identityBoss in  identityBosses)
+            {
+                Boss boss = _manager.BossService.GetOneBoss(identityBoss.Id, false);
+
+                if(boss is not null){
+                    boss.Company = _manager.CompanyService.GetOneCompany(boss.CompanyId, false);
+                }
+
+                p.f(identityBoss.UserName + " -> " + identityBoss.Email + " -> " + boss?.Name + " -> " + boss?.Company?.Name);
+
+
+            }
+
+            // p.f("üyelik tamamlandı mı : " + ViewBag.isMemberShipCompleted);
             return await CustomizeAccordingByLogin();
         }
 

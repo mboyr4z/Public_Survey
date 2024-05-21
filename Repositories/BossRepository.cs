@@ -1,3 +1,4 @@
+using System.Dynamic;
 using Entities;
 using Entities.Models;
 using Entities.RequestParameters;
@@ -5,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using Repositories.Contracts;
 using Repositories.Extensions;
+using Survey.Benimkiler;
 
 namespace Repositories
 {
@@ -32,7 +34,7 @@ namespace Repositories
 
        
 
-        public Boss? GetOneBoss(string id, bool trackChanges)
+        public Boss GetOneBoss(string id, bool trackChanges)
         {
             return FindByCondition(b => b.Id.Equals(id), trackChanges);
         }

@@ -67,19 +67,19 @@ namespace MyApp.Pages
             {
                 case Roles.Admin:
                     FindAllAdminsAsync();
-                    // p.f("admin sayısı : " + admins.Count());
+                    p.f("admin sayısı : " + registeredAdmins.adminList.Count());
                     break;
                 case Roles.Author:
                     FindAllAuthorsAsync();
-                    // p.f("author sayısı : " + authors.Count());
+                    p.f("author sayısı : " + registeredAuthors.authorList.Count());
                     break;
                 case Roles.Boss:
                     FindAllBossesAsync();
-                    // p.f("boss sayısı : " + bosses.Count());
+                    p.f("boss sayısı : " + registeredBosses.bossList.Count());
                     break;
                 case Roles.Commentator:
                     FindAllCommentatorsAsync();
-                    // p.f("commentator sayısı : " + commentators.Count());
+                    p.f("commentator sayısı : " + registeredCommentators.commentatorList.Count());
                     break;
                 default:
                     break;
@@ -114,12 +114,16 @@ namespace MyApp.Pages
 
             foreach (IdentityUser item in IdentityAuthors)
             {
+
+                Author author = _manager.AuthorService.GetOneAuthor(item.Id, false);
+                
+                
                 registeredAuthors.authorList.Add(
                     new AuthorItem
                     {
                         user = item,
-                        author = _manager.AuthorService.GetOneAuthor(item.Id, false)
-
+                        author = author,
+                        company =  author is not null ? _manager.CompanyService.GetOneCompany(author.CompanyId, false) : null
                     }
                 );
             }
@@ -139,19 +143,33 @@ namespace MyApp.Pages
 
             foreach (IdentityUser item in IdentityBosses)
             {
-                BossItem newBossItem = new BossItem
-                {
-                        user = item,
-                        boss = _manager.BossService.GetOneBoss(item.Id, false)
-                };
+                
 
-                newBossItem.boss.Company = _manager.CompanyService.GetOneCompany(newBossItem.boss.CompanyId, false);
+              
+                Boss newBoss = _manager.BossService.GetOneBoss(item.Id, false);
 
+                if(newBoss is not null){
+                    newBoss.Company = _manager.CompanyService.GetOneCompany(newBoss.CompanyId, false);
+                }
+                
+               
+                
                 
                 registeredBosses.bossList.Add(
-                    newBossItem    
+                    new BossItem{
+                        user = item,
+                        boss = newBoss,
+                    }
                 );
+
+
+                
+
+
+                
+                
             }
+
 
             registeredBosses.FilteringRegisteredBossesByIdentityUser(_surveyUserRequestParameters,_identityUserRequestParameters);
             registeredBosses._surveyUserRequestParameters = _surveyUserRequestParameters;
@@ -213,6 +231,8 @@ namespace MyApp.Pages
 
         public IdentityUser user;
         public Author author;
+
+        public Company company;
     }
 
 

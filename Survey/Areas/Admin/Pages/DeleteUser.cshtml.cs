@@ -76,7 +76,7 @@ public class DeleteUserModel : PageModel
 
         foreach (var error in result.Errors)
         {
-            ModelState.AddModelError(string.Empty, error.Description);
+               p.f(error.Description);
         }
         return RedirectToPage("./GetUsers");
     }
@@ -99,7 +99,7 @@ public class DeleteUserModel : PageModel
 
             foreach (var error in result.Errors)
             {
-                ModelState.AddModelError(string.Empty, error.Description);
+                 p.f(error.Description);
             }
         }
 
@@ -130,7 +130,7 @@ public class DeleteUserModel : PageModel
 
             foreach (var error in result.Errors)
             {
-                ModelState.AddModelError(string.Empty, error.Description);
+                p.f(error.Description);
             }
         }
 
@@ -155,7 +155,7 @@ public class DeleteUserModel : PageModel
 
             foreach (var error in result.Errors)
             {
-                ModelState.AddModelError(string.Empty, error.Description);
+                p.f(error.Description);
             }
         }
 

@@ -11,7 +11,7 @@ namespace Repositories.Contracts
         Company? GetOneCompanyWithName(string name, bool trackChanges);
 
         
-        public Company? GetOneCompany(int id, bool trackChanges);
+        public Company GetOneCompany(int id, bool trackChanges);
         void  CreateCompany(Company company);
         void Delete(Company company);
         void UpdateOneCompany(Company entity);

@@ -21,14 +21,14 @@ namespace Repositories
        
         public IQueryable<Company> GetAllCompanies(bool trackChanges) =>  FindAll(trackChanges);
 
-        public Company? GetOneCompany(string id, bool trackChanges) => FindByCondition(p=> p.Id.Equals(id),false);
+        public Company GetOneCompany(string id, bool trackChanges) => FindByCondition(p=> p.Id.Equals(id),false);
 
-        public Company? GetOneCompany(int id, bool trackChanges)
+        public Company GetOneCompany(int id, bool trackChanges)
         {
             return FindByCondition(p => p.Id == id, false);
         }
 
-        public Company? GetOneCompanyWithName(string name, bool trackChanges)
+        public Company GetOneCompanyWithName(string name, bool trackChanges)
         {
             return FindByCondition(p => p.Name.Equals(name), false);
         }

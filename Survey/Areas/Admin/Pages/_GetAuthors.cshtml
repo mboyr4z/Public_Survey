@@ -17,7 +17,7 @@
                     <th>Email</th>
                     <th>Name</th>
                     <th>Surname</th>
-                    @* <th>Company</th> *@
+                    <th>Company</th>
                     <th>Age</th>
                     <th>City</th>
                     <th>Confirmed</th>
@@ -36,17 +36,17 @@
 
                     <tr>
                         <td>
-                                <input type="text" name="Username" value="@Model._identityUserRequestParameters.Username">
+                                <input type="text" name="Username" value="@Model._identityUserRequestParameters?.Username">
                         </td>
                         <td>
-                                <input type="text" name="Email" value="@Model._identityUserRequestParameters.Email">
+                                <input type="text" name="Email" value="@Model._identityUserRequestParameters?.Email">
                         </td>
                         
 
                             
-                        <td><input type="text" name="Name" value="@Model._surveyUserRequestParameters.Name"></td>
-                        <td><input type="text" name="Surname" value="@Model._surveyUserRequestParameters.Surname"></td>
-                        @* <td></td> *@
+                        <td><input type="text" name="Name" value="@Model._surveyUserRequestParameters?.Name"></td>
+                        <td><input type="text" name="Surname" value="@Model._surveyUserRequestParameters?.Surname"></td>
+                        <td></td> 
                         <td></td>
                         <td></td>
                         <td></td>
@@ -73,7 +73,7 @@
                     <td>@author.user.Email</td>
                     <td>@author.author?.Name</td>
                     <td>@author.author?.Surname</td>
-                    @* <td>@author.author?.c</td> *@
+                    <td>@author.company?.Name</td>
                     <td>@author.author?.Age</td>
                     <td>@author.author?.City</td>
                     <td>

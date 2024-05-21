@@ -39,17 +39,13 @@ namespace Services
         {
            return _manager.Company.GetAllCompanies(trackChanges);
         }
-        public Company? GetOneCompany(string id, bool trackChanges)
+     
+        public Company GetOneCompany(int id, bool trackChanges)
         {
             return _manager.Company.GetOneCompany(id, trackChanges);
         }
 
-        public Company? GetOneCompany(int id, bool trackChanges)
-        {
-            return _manager.Company.GetOneCompany(id, trackChanges);
-        }
-
-        public Company? GetOneCompanyWithName(string name, bool trackChanges)
+        public Company GetOneCompanyWithName(string name, bool trackChanges)
         {
             return _manager.Company.GetOneCompanyWithName(name,trackChanges);
         }
