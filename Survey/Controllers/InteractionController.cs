@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Services.Contracts;
 using Survey.Benimkiler;
 using Survey.Components;
+using Survey.Models;
 
 namespace Survey.Controllers;
 
@@ -14,12 +15,14 @@ public class InteractionController : Controller
 
     private readonly IMapper _mapper;
 
+    private readonly MainPageModel _mainPageModel;
     private readonly IServiceManager _manager;
 
-    public InteractionController(IServiceManager manager, IMapper mapper)
+    public InteractionController(IServiceManager manager, IMapper mapper, MainPageModel mainPageModel)
     {
         _manager = manager;
         _mapper = mapper;
+        _mainPageModel = mainPageModel;
     }
 
     [HttpPost]
@@ -30,6 +33,9 @@ public class InteractionController : Controller
         // p.f("isGlobal : " + postDto.IsGlobalString);
 
         Post newPost = _mapper.Map<Post>(postDto);
+        newPost.PublisherId = _mainPageModel.User.Id;
+        newPost.PublishTime = DateTime.Now;
+
         if (postDto.IsGlobalString.ToLower().Contains("global"))
         {
             newPost.IsGlobal = true;
@@ -40,7 +46,7 @@ public class InteractionController : Controller
         }
 
 
-        // _manager.PostService.CreatePost(newPost);
+        _manager.PostService.CreatePost(newPost);
 
         return View("Success");
     }
