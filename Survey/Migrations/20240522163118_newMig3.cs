@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Survey.Migrations
 {
-    public partial class Mig1 : Migration
+    public partial class newMig3 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -87,6 +87,22 @@ namespace Survey.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Chats",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    SenderId = table.Column<string>(type: "TEXT", nullable: false),
+                    ReceiverId = table.Column<string>(type: "TEXT", nullable: false),
+                    Content = table.Column<string>(type: "TEXT", nullable: false),
+                    PublishTime = table.Column<DateTime>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Chats", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Commentators",
                 columns: table => new
                 {
@@ -105,6 +121,20 @@ namespace Survey.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Comments",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    PostId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Content = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Comments", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Companies",
                 columns: table => new
                 {
@@ -118,6 +148,51 @@ namespace Survey.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Companies", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Follows",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    FollowById = table.Column<string>(type: "TEXT", nullable: false),
+                    FollowedId = table.Column<string>(type: "TEXT", nullable: false),
+                    FollowTime = table.Column<DateTime>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Follows", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Likes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    LikerId = table.Column<string>(type: "TEXT", nullable: false),
+                    PostId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Likes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Posts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    PublisherId = table.Column<string>(type: "TEXT", nullable: false),
+                    Content = table.Column<string>(type: "TEXT", nullable: false),
+                    IsGlobal = table.Column<bool>(type: "INTEGER", nullable: false),
+                    PublishTime = table.Column<DateTime>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Posts", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -229,22 +304,22 @@ namespace Survey.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "81d29ff2-72e7-4981-9cab-ad87b80f3935", null, "Commentator", "COMMENTATOR" });
+                values: new object[] { "6de5a410-4773-483f-9ed4-5c1ad726c0a9", null, "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "92fec663-77ee-450c-8035-d2e5c41ed9a2", null, "Author", "AUTHOR" });
+                values: new object[] { "d847bf56-6fb4-404a-bca2-82ad9187f661", null, "Author", "AUTHOR" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "acf88cfb-c365-4f1a-8e20-a37b3130223b", null, "Admin", "ADMIN" });
+                values: new object[] { "e71c8c4b-129d-4acd-99c8-d55b2afc226a", null, "Boss", "BOSS" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "c4ad98ab-7434-4185-9576-301f20f75051", null, "Boss", "BOSS" });
+                values: new object[] { "f6e0d2d2-1380-4e28-82e0-772b16ddbe0e", null, "Commentator", "COMMENTATOR" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -308,10 +383,25 @@ namespace Survey.Migrations
                 name: "Bosses");
 
             migrationBuilder.DropTable(
+                name: "Chats");
+
+            migrationBuilder.DropTable(
                 name: "Commentators");
 
             migrationBuilder.DropTable(
+                name: "Comments");
+
+            migrationBuilder.DropTable(
                 name: "Companies");
+
+            migrationBuilder.DropTable(
+                name: "Follows");
+
+            migrationBuilder.DropTable(
+                name: "Likes");
+
+            migrationBuilder.DropTable(
+                name: "Posts");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

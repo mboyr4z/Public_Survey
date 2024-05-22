@@ -5,8 +5,12 @@
     <div class="col-md-8 row">
         <div class="col-md-1"></div>
         <div class="col-md-10 ">
+         
 
-                @* @await Component.InvokeAsync("CreatePost") *@
+            @if((Model.Role == Roles.Author || Model.Role == Roles.Boss) && Model.IsUserConfirmed){
+                @await Component.InvokeAsync("CreatePost")
+            }
+                
 
 
             <div class="card gedf-card my-3">
@@ -50,6 +54,7 @@
 
 
         </div>
+        
         <div class="col-md-1"></div>
     </div>
     <div class="col-md-2"></div>

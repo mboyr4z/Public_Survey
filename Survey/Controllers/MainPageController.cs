@@ -44,7 +44,6 @@ namespace Survey.Controllers
             _mainPageModel.User = null;
             _mainPageModel.Role = Roles.Guess;
 
-            ViewBag.HeaderModel = _mainPageModel;
             
             if(await IsLoggedInAsync()){
 
@@ -56,6 +55,7 @@ namespace Survey.Controllers
 
             }
 
+            ViewBag.HeaderModel = _mainPageModel;
             return View(model: _mainPageModel);
         }
     }

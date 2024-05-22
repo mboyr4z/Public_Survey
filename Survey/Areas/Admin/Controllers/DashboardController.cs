@@ -1,6 +1,9 @@
+using Benimkiler.Roles;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Services;
 using Services.Contracts;
+using Survey.Models;
 
 namespace Survey.Areas.Controllers
 {
@@ -10,13 +13,25 @@ namespace Survey.Areas.Controllers
 
         private readonly IServiceManager _manager;
 
-        public DashboardController(IServiceManager manager)
+        private readonly  MainPageModel _mainPageModel;
+
+        private readonly UserManager<IdentityUser> _userManager;
+
+        public DashboardController(IServiceManager manager, MainPageModel mainPageModel, UserManager<IdentityUser> userManager)
         {
             _manager = manager;
+            _mainPageModel = mainPageModel;
+            _userManager = userManager;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> IndexAsync()
         {
+            _mainPageModel.IsUserLogged = true;
+            _mainPageModel.User = await _userManager.GetUserAsync(User);
+            _mainPageModel.Role = Roles.Admin;
+
+
+            ViewBag.HeaderModel = _mainPageModel;
             return View();
         }
     }

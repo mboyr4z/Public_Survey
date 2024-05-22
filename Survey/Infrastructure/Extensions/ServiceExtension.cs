@@ -17,13 +17,23 @@ namespace StoreApp.Infrastructure.Extensions
 
         public static void ConfigureServiceRegistration(this IServiceCollection services)
         {
-             services.AddScoped<IServiceManager, ServiceManager>();
-             services.AddScoped<IAuthService, AuthManager>();
-             services.AddScoped<IAuthorService, AuthorManager>();
-             services.AddScoped<IBossService, BossManager>();
-             services.AddScoped<ICommentatorService, CommentatorManager>();
-             services.AddScoped<ICompanyService, CompanyManager>();
-             services.AddSingleton<MainPageModel>();
+            services.AddScoped<IServiceManager, ServiceManager>();
+            services.AddScoped<IAuthService, AuthManager>();
+            services.AddScoped<IAuthorService, AuthorManager>();
+            services.AddScoped<IBossService, BossManager>();
+            services.AddScoped<ICommentatorService, CommentatorManager>();
+            services.AddScoped<ICompanyService, CompanyManager>();
+
+            services.AddScoped<IChatService, ChatManager>();
+            services.AddScoped<ICommentService, CommentManager>();
+            services.AddScoped<IFollowService, FollowManager>();
+            services.AddScoped<ILikeService, LikeManager>();
+            services.AddScoped<IPostService, PostManager>();
+
+
+
+
+            services.AddSingleton<MainPageModel>();
 
         }
 
@@ -50,12 +60,19 @@ namespace StoreApp.Infrastructure.Extensions
 
         public static void ConfigureRepositoryRegistration(this IServiceCollection services)
         {
-             services.AddScoped<IRepositoryManager, RepositoryManager>();        // IOS için  yapılıyor bu
-             services.AddScoped<IAuthorRepository, AuthorRepository>();
-             services.AddScoped<IBossRepository, BossRepository>();
-             services.AddScoped<ICommentatorRepository, CommentatorRepository>();
-             services.AddScoped<ICompanyRepository, CompanyRepository >();
-           
+            services.AddScoped<IRepositoryManager, RepositoryManager>();        // IOS için  yapılıyor bu
+            services.AddScoped<IAuthorRepository, AuthorRepository>();
+            services.AddScoped<IBossRepository, BossRepository>();
+            services.AddScoped<ICommentatorRepository, CommentatorRepository>();
+            services.AddScoped<ICompanyRepository, CompanyRepository>();
+
+            services.AddScoped<IChatRepository, ChatRepository>();
+            services.AddScoped<ICommentRepository, CommentRepository>();
+            services.AddScoped<IFollowRepository, FollowRepository>();
+            services.AddScoped<ILikeRepository, LikeRepository>();
+            services.AddScoped<IPostRepository, PostRepository>();
+
+
         }
         public static void ConfigureIdentity(this IServiceCollection services)
         {

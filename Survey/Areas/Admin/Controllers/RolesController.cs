@@ -5,27 +5,37 @@ using Microsoft.AspNetCore.Mvc;
 using Services;
 using Survey.Benimkiler;
 using Services.Contracts;
+using Survey.Models;
+using Benimkiler.Roles;
 
 namespace Survey.Areas.Controllers
 {
     [Area("Admin")]
     public class RolesController : Controller
     {
+        private readonly  MainPageModel _mainPageModel;
         private readonly IServiceManager _manager;
         private readonly IMapper _mapper;
 
           private readonly RoleManager<IdentityRole> _roleManager;
         private readonly UserManager<IdentityUser> _userManager;
-        public RolesController(IServiceManager manager, IMapper mapper, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+        public RolesController(IServiceManager manager, IMapper mapper, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, MainPageModel mainPageModel)
         {
             _manager = manager;
             _mapper = mapper;
             _userManager = userManager;
             _roleManager = roleManager;
+            _mainPageModel = mainPageModel;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> IndexAsync()
         {
+            _mainPageModel.IsUserLogged = true;
+            _mainPageModel.User = await _userManager.GetUserAsync(User);
+            _mainPageModel.Role = Roles.Admin;
+
+
+            ViewBag.HeaderModel = _mainPageModel;
 
             var roles = _manager.AuthService.Roles;
             return View(roles);

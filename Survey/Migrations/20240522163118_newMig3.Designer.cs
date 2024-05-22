@@ -11,8 +11,8 @@ using Repositories;
 namespace Survey.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20240522133545_Mig1")]
-    partial class Mig1
+    [Migration("20240522163118_newMig3")]
+    partial class newMig3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -91,6 +91,50 @@ namespace Survey.Migrations
                     b.ToTable("Bosses");
                 });
 
+            modelBuilder.Entity("Entities.Models.Chat", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("PublishTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ReceiverId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("SenderId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Chats");
+                });
+
+            modelBuilder.Entity("Entities.Models.Comment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("PostId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Comments");
+                });
+
             modelBuilder.Entity("Entities.Models.Commentator", b =>
                 {
                     b.Property<string>("Id")
@@ -149,6 +193,71 @@ namespace Survey.Migrations
                     b.ToTable("Companies");
                 });
 
+            modelBuilder.Entity("Entities.Models.Follow", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("FollowById")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("FollowTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FollowedId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Follows");
+                });
+
+            modelBuilder.Entity("Entities.Models.Like", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("LikerId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("PostId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Likes");
+                });
+
+            modelBuilder.Entity("Entities.Models.Post", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsGlobal")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("PublishTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PublisherId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Posts");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -177,25 +286,25 @@ namespace Survey.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "acf88cfb-c365-4f1a-8e20-a37b3130223b",
+                            Id = "6de5a410-4773-483f-9ed4-5c1ad726c0a9",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "92fec663-77ee-450c-8035-d2e5c41ed9a2",
+                            Id = "d847bf56-6fb4-404a-bca2-82ad9187f661",
                             Name = "Author",
                             NormalizedName = "AUTHOR"
                         },
                         new
                         {
-                            Id = "c4ad98ab-7434-4185-9576-301f20f75051",
+                            Id = "e71c8c4b-129d-4acd-99c8-d55b2afc226a",
                             Name = "Boss",
                             NormalizedName = "BOSS"
                         },
                         new
                         {
-                            Id = "81d29ff2-72e7-4981-9cab-ad87b80f3935",
+                            Id = "f6e0d2d2-1380-4e28-82e0-772b16ddbe0e",
                             Name = "Commentator",
                             NormalizedName = "COMMENTATOR"
                         });
