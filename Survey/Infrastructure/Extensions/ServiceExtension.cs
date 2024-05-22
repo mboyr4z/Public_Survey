@@ -8,6 +8,7 @@ using Repositories;
 using Repositories.Contracts;
 using Services;
 using Services.Contracts;
+using Survey.Models;
 
 namespace StoreApp.Infrastructure.Extensions
 {
@@ -22,6 +23,7 @@ namespace StoreApp.Infrastructure.Extensions
              services.AddScoped<IBossService, BossManager>();
              services.AddScoped<ICommentatorService, CommentatorManager>();
              services.AddScoped<ICompanyService, CompanyManager>();
+             services.AddSingleton<MainPageModel>();
 
         }
 

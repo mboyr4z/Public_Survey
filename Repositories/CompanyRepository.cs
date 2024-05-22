@@ -17,7 +17,7 @@ namespace Repositories
 
         public void CreateCompany(Company company) => Create(company);
 
-        public void Delete(Company company) => Delete(company);
+        public void Delete(Company company) => Remove(company);
        
         public IQueryable<Company> GetAllCompanies(bool trackChanges) =>  FindAll(trackChanges);
 

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Survey.Migrations
 {
-    public partial class addMig2 : Migration
+    public partial class Mig1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -68,6 +68,25 @@ namespace Survey.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Bosses",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "TEXT", nullable: false),
+                    Confirmed = table.Column<bool>(type: "INTEGER", nullable: true),
+                    CompanyId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Surname = table.Column<string>(type: "TEXT", nullable: true),
+                    Age = table.Column<int>(type: "INTEGER", nullable: true),
+                    City = table.Column<string>(type: "TEXT", nullable: true),
+                    LikeRate = table.Column<float>(type: "REAL", nullable: true),
+                    ImageUrl = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Bosses", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Commentators",
                 columns: table => new
                 {
@@ -93,7 +112,8 @@ namespace Survey.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     Address = table.Column<string>(type: "TEXT", nullable: true),
-                    ImageUrl = table.Column<string>(type: "TEXT", nullable: false)
+                    ImageUrl = table.Column<string>(type: "TEXT", nullable: false),
+                    IsConfirmed = table.Column<bool>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -206,50 +226,25 @@ namespace Survey.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Bosses",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "TEXT", nullable: false),
-                    Confirmed = table.Column<bool>(type: "INTEGER", nullable: true),
-                    CompanyId = table.Column<int>(type: "INTEGER", nullable: false),
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
-                    Surname = table.Column<string>(type: "TEXT", nullable: true),
-                    Age = table.Column<int>(type: "INTEGER", nullable: true),
-                    City = table.Column<string>(type: "TEXT", nullable: true),
-                    LikeRate = table.Column<float>(type: "REAL", nullable: true),
-                    ImageUrl = table.Column<string>(type: "TEXT", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Bosses", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Bosses_Companies_CompanyId",
-                        column: x => x.CompanyId,
-                        principalTable: "Companies",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { "81d29ff2-72e7-4981-9cab-ad87b80f3935", null, "Commentator", "COMMENTATOR" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "64d95590-9c8f-4da7-8c38-b193549d6f2e", null, "Author", "AUTHOR" });
+                values: new object[] { "92fec663-77ee-450c-8035-d2e5c41ed9a2", null, "Author", "AUTHOR" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "77d8d70f-df20-43a5-a2cf-ae66d8730c2a", null, "Commentator", "COMMENTATOR" });
+                values: new object[] { "acf88cfb-c365-4f1a-8e20-a37b3130223b", null, "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "817acedf-4407-4d69-8072-6c86600095c5", null, "Boss", "BOSS" });
-
-            migrationBuilder.InsertData(
-                table: "AspNetRoles",
-                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "d603e350-cfe7-4982-a54b-ac2f0e2811b8", null, "Admin", "ADMIN" });
+                values: new object[] { "c4ad98ab-7434-4185-9576-301f20f75051", null, "Boss", "BOSS" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -287,11 +282,6 @@ namespace Survey.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Bosses_CompanyId",
-                table: "Bosses",
-                column: "CompanyId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -321,13 +311,13 @@ namespace Survey.Migrations
                 name: "Commentators");
 
             migrationBuilder.DropTable(
+                name: "Companies");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "Companies");
         }
     }
 }

@@ -2,7 +2,7 @@
 
 
 
-<form method="post" asp-action="Index">
+<form method="post" asp-controller="Account" asp-action="Login">
     <div class="row my-10">
         <div class="col-md-3">
 
@@ -29,7 +29,7 @@
 
             <div class="form-group d-flex align-items-center justify-content-between">
                 <button class="btn btn-success" type="submit" value="Gönder">Login</button>
-                <p class="m-0">Not a member? <a asp-area="" asp-controller="Register" asp-action="Index">Register</a></p>
+                <p class="m-0">Not a member? <a asp-area="" asp-controller="Account" asp-action="Register">Register</a></p>
             </div>
 
 

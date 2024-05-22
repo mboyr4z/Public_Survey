@@ -11,5 +11,7 @@ namespace Entities.Dtos
        // [Required(ErrorMessage = "Address is required")]
         public string? Address {get;set;}
         public string ImageUrl {get; set;}
+
+        public bool? IsConfirmed{get;set;}
     }
 }

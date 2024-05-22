@@ -1,0 +1,16 @@
+@page
+@model ConfirmUserModel
+@{
+    ViewData["Title"] = "Confirm User";
+}
+
+<h1>Delete User</h1>
+
+<div>
+    <p>Are you sure you want to confirm user <strong>@Model.UserToConfirm.UserName</strong>?</p>
+    <form method="post">
+        
+        <button type="submit" class="btn btn-danger">Confirm</button>
+        <a asp-page="./GetUsers" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>

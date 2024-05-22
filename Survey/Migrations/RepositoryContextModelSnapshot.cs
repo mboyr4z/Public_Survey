@@ -86,8 +86,6 @@ namespace Survey.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CompanyId");
-
                     b.ToTable("Bosses");
                 });
 
@@ -137,6 +135,9 @@ namespace Survey.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<bool?>("IsConfirmed")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -174,25 +175,25 @@ namespace Survey.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "d603e350-cfe7-4982-a54b-ac2f0e2811b8",
+                            Id = "acf88cfb-c365-4f1a-8e20-a37b3130223b",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "64d95590-9c8f-4da7-8c38-b193549d6f2e",
+                            Id = "92fec663-77ee-450c-8035-d2e5c41ed9a2",
                             Name = "Author",
                             NormalizedName = "AUTHOR"
                         },
                         new
                         {
-                            Id = "817acedf-4407-4d69-8072-6c86600095c5",
+                            Id = "c4ad98ab-7434-4185-9576-301f20f75051",
                             Name = "Boss",
                             NormalizedName = "BOSS"
                         },
                         new
                         {
-                            Id = "77d8d70f-df20-43a5-a2cf-ae66d8730c2a",
+                            Id = "81d29ff2-72e7-4981-9cab-ad87b80f3935",
                             Name = "Commentator",
                             NormalizedName = "COMMENTATOR"
                         });
@@ -362,17 +363,6 @@ namespace Survey.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
-                });
-
-            modelBuilder.Entity("Entities.Models.Boss", b =>
-                {
-                    b.HasOne("Entities.Models.Company", "Company")
-                        .WithMany()
-                        .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Company");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

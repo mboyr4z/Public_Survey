@@ -32,11 +32,15 @@ public class DeleteUserModel : PageModel
     public async Task<IActionResult> OnPostAsync()
     {
         // p.f("POST GELDİ");
-        // p.f("id : " + UserId);
 
 
+        p.f("id : " + UserId);
 
         var user = await _userManager.FindByIdAsync(UserId);
+
+        p.f("username : " + user.UserName);
+        p.f("mail : " + user.Email);
+
         if (user != null)
         {
 
@@ -76,7 +80,7 @@ public class DeleteUserModel : PageModel
 
         foreach (var error in result.Errors)
         {
-               p.f(error.Description);
+            p.f(error.Description);
         }
         return RedirectToPage("./GetUsers");
     }
@@ -91,16 +95,14 @@ public class DeleteUserModel : PageModel
         {
             _manager.CommentatorService.Delete(commentator);
 
-            var result = await _userManager.DeleteAsync(user);
-            if (result.Succeeded)
-            {
-                return RedirectToPage("./GetUsers");
-            }
 
-            foreach (var error in result.Errors)
-            {
-                 p.f(error.Description);
-            }
+        }
+
+        var result = await _userManager.DeleteAsync(user);
+       
+        foreach (var error in result.Errors)
+        {
+            p.f(error.Description);
         }
 
         return RedirectToPage("./GetUsers");
@@ -110,28 +112,22 @@ public class DeleteUserModel : PageModel
     {
         string id = user.Id;
         Boss boss = _manager.BossService.GetOneBoss(id, false);
-
-        int companyId =  boss.CompanyId;
-        Company company = _manager.CompanyService.GetOneCompany(companyId, false);
-
-
+        Company company = null;
 
         if (boss is not null)
         {
-
-            _manager.BossService.Delete(boss);
-            _manager.CompanyService.Delete(company);
+            company = _manager.CompanyService.GetOneCompany(boss.CompanyId, false);
+            p.f(company.Name + " silinecek");
             
-            var result = await _userManager.DeleteAsync(user);
-            if (result.Succeeded)
-            {
-                return RedirectToPage("./GetUsers");
-            }
+            _manager.CompanyService.Delete(company);
+            _manager.BossService.Delete(boss);
+        }
 
-            foreach (var error in result.Errors)
-            {
-                p.f(error.Description);
-            }
+        var result = await _userManager.DeleteAsync(user);
+
+        foreach (var error in result.Errors)
+        {
+            p.f(error.Description);
         }
 
         return RedirectToPage("./GetUsers");
@@ -139,7 +135,7 @@ public class DeleteUserModel : PageModel
 
     private async Task<IActionResult> DeleteAuthor(IdentityUser user)
     {
-         string id = user.Id;
+        string id = user.Id;
 
         Author author = _manager.AuthorService.GetOneAuthor(id, false);
 
@@ -147,16 +143,14 @@ public class DeleteUserModel : PageModel
         {
             _manager.AuthorService.Delete(author);
 
-            var result = await _userManager.DeleteAsync(user);
-            if (result.Succeeded)
-            {
-                return RedirectToPage("./GetUsers");
-            }
+        }
 
-            foreach (var error in result.Errors)
-            {
-                p.f(error.Description);
-            }
+
+        var result = await _userManager.DeleteAsync(user);
+
+        foreach (var error in result.Errors)
+        {
+            p.f(error.Description);
         }
 
         return RedirectToPage("./GetUsers");

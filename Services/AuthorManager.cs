@@ -56,5 +56,11 @@ namespace Services
             _manager.Author.UpdateOneAuthor(updatingAuthor);
             _manager.Save();
         }
+
+        public void UpdateOneAuthor(Author author)
+        {
+            _manager.Author.UpdateOneAuthor(author);
+            _manager.Save();
+        }
     }
 }

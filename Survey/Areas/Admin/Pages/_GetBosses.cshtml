@@ -68,7 +68,7 @@
                     <td>@boss.user.Email</td>
                     <td>@boss.boss?.Name</td>
                     <td>@boss.boss?.Surname</td>
-                    <td>@boss.boss?.Company?.Name</td>
+                    <td>@boss.company?.Name</td>
                     <td>@boss.boss?.Age</td>
                     <td>@boss.boss?.City</td>
                     <td>
@@ -89,6 +89,17 @@
                     
                     <td>
                         <div class="btn-group">
+                                @if(boss.boss is not null){
+                                      <form method="post" asp-page="./ConfirmUser">
+                                    <input type="hidden" name="UserId" value="@boss.user.Id">
+                                 
+                                    <button type="submit" class="btn btn-warning"
+                                        onclick="return confirm('Are you sure you want to Confirm @boss.user.UserName?')">
+                                        Confirm
+                                    </button>
+                                </form>
+                                }
+                              
                                 <form method="post" asp-page="./DeleteUser">
                                     <input type="hidden" name="UserId" value="@boss.user.Id">
                                     <button type="submit" class="btn btn-danger"

@@ -43,7 +43,7 @@ namespace StoreApp.Infrastructure.Extensions
         public static async void ConfigureDefaultAdminUser(this IApplicationBuilder app)
         {
 
-            p.f("admin ayarlanıyorr");
+            //  p.f("admin ayarlanıyorr");
             // UserManager kulanıcı kaydı için
             UserManager<IdentityUser> userManager = app
                 .ApplicationServices
@@ -119,7 +119,7 @@ namespace StoreApp.Infrastructure.Extensions
                 }
             }
 
-             user = await userManager.FindByNameAsync("Admin3");
+            user = await userManager.FindByNameAsync("Admin3");
 
             if (user is null)
             {
@@ -148,7 +148,7 @@ namespace StoreApp.Infrastructure.Extensions
                 }
             }
 
-         
+
             user = await userManager.FindByNameAsync("Boss");
 
             if (user is null)
@@ -158,6 +158,65 @@ namespace StoreApp.Infrastructure.Extensions
                     Email = "Boss@samsun.edu.tr",
                     PhoneNumber = "1241245343",
                     UserName = "Boss",
+                };
+
+                var result = await userManager.CreateAsync(user, "Boss123.");
+
+                if (!result.Succeeded)
+                {
+                    throw new Exception("Boss user could not created.");
+                }
+
+                // tüm rolleri admine atayabilmek için
+                var roleResult = await userManager.AddToRolesAsync(user,
+                    new List<string> { "Boss" }
+                );
+
+                if (!roleResult.Succeeded)
+                {
+                    throw new Exception("System have problems with role defination for Boss.");
+                }
+            }
+
+                user = await userManager.FindByNameAsync("Boss2");
+
+            if (user is null)
+            {
+                user = new IdentityUser()
+                {
+                    Email = "Boss2@samsun.edu.tr",
+                    PhoneNumber = "1241245343",
+                    UserName = "Boss2",
+                };
+
+                var result = await userManager.CreateAsync(user, "Boss123.");
+
+                if (!result.Succeeded)
+                {
+                    throw new Exception("Boss user could not created.");
+                }
+
+                // tüm rolleri admine atayabilmek için
+                var roleResult = await userManager.AddToRolesAsync(user,
+                    new List<string> { "Boss" }
+                );
+
+                if (!roleResult.Succeeded)
+                {
+                    throw new Exception("System have problems with role defination for Boss.");
+                }
+            }
+
+
+    user = await userManager.FindByNameAsync("Boss3");
+
+            if (user is null)
+            {
+                user = new IdentityUser()
+                {
+                    Email = "Boss3@samsun.edu.tr",
+                    PhoneNumber = "1241245343",
+                    UserName = "Boss3",
                 };
 
                 var result = await userManager.CreateAsync(user, "Boss123.");
@@ -237,7 +296,7 @@ namespace StoreApp.Infrastructure.Extensions
                 }
             }
 
-               user = await userManager.FindByNameAsync("Author3");
+            user = await userManager.FindByNameAsync("Author3");
 
             if (user is null)
             {
@@ -275,6 +334,64 @@ namespace StoreApp.Infrastructure.Extensions
                     Email = "Commentator@samsun.edu.tr",
                     PhoneNumber = "25336786554",
                     UserName = "Commentator",
+                };
+
+                var result = await userManager.CreateAsync(user, "Commentator123.");
+
+                if (!result.Succeeded)
+                {
+                    throw new Exception("Commentator user could not created.");
+                }
+
+                // tüm rolleri admine atayabilmek için
+                var roleResult = await userManager.AddToRolesAsync(user,
+                    new List<string> { "Commentator" }
+                );
+
+                if (!roleResult.Succeeded)
+                {
+                    throw new Exception("System have problems with role defination for Commentator.");
+                }
+            }
+
+            user = await userManager.FindByNameAsync("Commentator2");
+
+            if (user is null)
+            {
+                user = new IdentityUser()
+                {
+                    Email = "Commentator2@samsun.edu.tr",
+                    PhoneNumber = "25336786554",
+                    UserName = "Commentator2",
+                };
+
+                var result = await userManager.CreateAsync(user, "Commentator123.");
+
+                if (!result.Succeeded)
+                {
+                    throw new Exception("Commentator user could not created.");
+                }
+
+                // tüm rolleri admine atayabilmek için
+                var roleResult = await userManager.AddToRolesAsync(user,
+                    new List<string> { "Commentator" }
+                );
+
+                if (!roleResult.Succeeded)
+                {
+                    throw new Exception("System have problems with role defination for Commentator.");
+                }
+            }
+
+            user = await userManager.FindByNameAsync("Commentator3");
+
+            if (user is null)
+            {
+                user = new IdentityUser()
+                {
+                    Email = "Commentator3@samsun.edu.tr",
+                    PhoneNumber = "25336786554",
+                    UserName = "Commentator3",
                 };
 
                 var result = await userManager.CreateAsync(user, "Commentator123.");

@@ -1,18 +1,6 @@
-@using Benimkiler.Roles
-@using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
+@using Survey.Models
+@model MainPageModel
 
-@{
-    var user = await UserManager.GetUserAsync(User);
-    bool isLoggedIn = (user != null) && SignInManager.IsSignedIn(User);
-    Roles signingRole = Roles.Guess;
-    if(isLoggedIn){
-        string firstRole = (await UserManager.GetRolesAsync(user))[0];
-        signingRole = (Roles)Enum.Parse(typeof(Roles), firstRole);
-    }
-    
-}
 
 <header
     class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
@@ -23,23 +11,57 @@
     </a>
 
     <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-        <li><a asp-area="" asp-controller="MainPage" asp-action="Index" class="nav-link px-2 link-secondary">Home</a></li>
+        <li>
+            <a asp-area="" asp-controller="MainPage" asp-action="Index" class="nav-link px-2 link-secondary">Home</a>
+        </li>
 
-        @if(signingRole == Roles.Admin){
-            <li><a asp-area="admin" asp-controller="dashboard" class="nav-link px-2 link-dark">Admin</a></li>
+
+        @if (Model?.Role == Roles.Admin)
+        {
+            <li>
+                <a asp-area="admin" asp-controller="dashboard" asp-action="Index" class="nav-link px-2 link-dark">Admin</a>
+            </li>
         }
-        
+
+        @if (Model?.IsUserLogged == true)
+        {
+            @if (@Model?.IsUserCompletedMembership == false)
+            {
+                <li>
+                    <a class="nav-link px-2 link-dark text-danger" asp-controller="MembershipComplete" asp-action="CustomizeAccordingToRole" asp-route-role="@Model.Role" asp-route-userId="@Model.User.Id">Complete Membership..</a>
+                </li>
+            }
+
+            @if ((Model?.Role == Roles.Boss || Model?.Role == Roles.Author) && Model?.IsUserCompletedMembership == true)
+            {
+                if (Model?.IsUserConfirmed == false)
+                {
+                    <p class="nav-link link-dark text-danger">
+                        your membership has not been approved yet</p>
+
+                }
+            }
+
+
+        }
+
+
+
+
     </ul>
 
-    @if(isLoggedIn){
+    @if (Model?.IsUserLogged == true)
+    {
         <div class="col-md-3 text-end">
-            <a  asp-controller="Login" asp-action="LogOut" class="btn btn-outline-primary me-2">Log out</a>
-        </div>
-    }else{
-        <div class="col-md-3 text-end">
-            <a  asp-controller="Login" asp-action="Index" class="btn btn-outline-primary me-2">Login</a>
-            <a  asp-controller="Register" asp-action="Index" class="btn btn-primary me-2">Sign-up</a>
+            <a asp-controller="Account" asp-action="LogOut" class="btn btn-outline-primary me-2">Log out</a>
         </div>
     }
-    
+    else
+    {
+        <div class="col-md-3 text-end">
+            <a asp-area="" asp-controller="Account" asp-action="Login" class="btn btn-outline-primary me-2">Login</a>
+            <a asp-area="" asp-controller="Account" asp-action="Register" class="btn btn-primary me-2">Sign-up</a>
+        </div>
+    }
+
 </header>

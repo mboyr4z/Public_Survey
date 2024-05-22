@@ -14,5 +14,7 @@ namespace Services.Contracts
         void CreateAuthor(Author author);
         void Delete(Author author);
         void UpdateOneAuthor(author_updateDto entity);
+
+        void UpdateOneAuthor(Author author);
     }
 }

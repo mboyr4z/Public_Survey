@@ -94,8 +94,21 @@
                     
                     <td>
                        <div class="btn-group">
+                                @if(author.author is not null){
+                                    <form method="post" asp-page="./ConfirmUser">
+                                    <input type="hidden" name="UserId" value="@author.user.Id">
+                                 
+                                    <button type="submit" class="btn btn-warning"
+                                        onclick="return confirm('Are you sure you want to Confirm @author.user.UserName?')">
+                                        Confirm
+                                    </button>
+                                </form>
+                                }
+                                 
+
                                 <form method="post" asp-page="./DeleteUser">
                                     <input type="hidden" name="UserId" value="@author.user.Id">
+                                 
                                     <button type="submit" class="btn btn-danger"
                                         onclick="return confirm('Are you sure you want to delete @author.user.UserName?')">
                                         Delete

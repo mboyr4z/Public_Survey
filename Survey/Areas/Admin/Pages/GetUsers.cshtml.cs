@@ -116,14 +116,14 @@ namespace MyApp.Pages
             {
 
                 Author author = _manager.AuthorService.GetOneAuthor(item.Id, false);
-                
-                
+
+
                 registeredAuthors.authorList.Add(
                     new AuthorItem
                     {
                         user = item,
                         author = author,
-                        company =  author is not null ? _manager.CompanyService.GetOneCompany(author.CompanyId, false) : null
+                        company = author is not null ? _manager.CompanyService.GetOneCompany(author.CompanyId, false) : null
                     }
                 );
             }
@@ -143,35 +143,39 @@ namespace MyApp.Pages
 
             foreach (IdentityUser item in IdentityBosses)
             {
-                
 
-              
+
+
                 Boss newBoss = _manager.BossService.GetOneBoss(item.Id, false);
+                Company newCompany = null;
 
-                if(newBoss is not null){
-                    newBoss.Company = _manager.CompanyService.GetOneCompany(newBoss.CompanyId, false);
+                if (newBoss is not null)
+                {
+                    newCompany = _manager.CompanyService.GetOneCompany(newBoss.CompanyId, false);
                 }
-                
-               
-                
-                
+
+
+
+
                 registeredBosses.bossList.Add(
-                    new BossItem{
+                    new BossItem
+                    {
                         user = item,
                         boss = newBoss,
+                        company = newCompany
                     }
                 );
 
 
-                
 
 
-                
-                
+
+
+
             }
 
 
-            registeredBosses.FilteringRegisteredBossesByIdentityUser(_surveyUserRequestParameters,_identityUserRequestParameters);
+            registeredBosses.FilteringRegisteredBossesByIdentityUser(_surveyUserRequestParameters, _identityUserRequestParameters);
             registeredBosses._surveyUserRequestParameters = _surveyUserRequestParameters;
             registeredBosses._identityUserRequestParameters = _identityUserRequestParameters;
         }
@@ -210,15 +214,15 @@ namespace MyApp.Pages
         public List<IdentityUser> adminList;
     }
 
-    public abstract class RequestClass 
+    public abstract class RequestClass
     {
-           public SurveyUserRequestParameters _surveyUserRequestParameters { get; set; }
+        public SurveyUserRequestParameters _surveyUserRequestParameters { get; set; }
         public IdentityUserRequestParameters _identityUserRequestParameters { get; set; }
     }
 
     public class RegisteredAuthors : RequestClass
     {
-     
+
         public RegisteredAuthors()
         {
             authorList = new List<AuthorItem>();
@@ -237,7 +241,7 @@ namespace MyApp.Pages
 
 
 
-    public class RegisteredBosses: RequestClass
+    public class RegisteredBosses : RequestClass
     {
         public RegisteredBosses()
         {
@@ -251,8 +255,10 @@ namespace MyApp.Pages
     {
         public IdentityUser user;
         public Boss boss;
+
+        public Company company;
     }
-    public class RegisteredCommentators: RequestClass
+    public class RegisteredCommentators : RequestClass
     {
         public RegisteredCommentators()
         {

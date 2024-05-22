@@ -1,5 +1,11 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var headerModel = ViewBag.HeaderModel;
+}
+
+<!DOCTYPE html>
 <html lang="en">
+
+
 
 <head>
     <meta charset="utf-8" />
@@ -15,7 +21,7 @@
 
 
     <header>
-        <partial name="_Header" />
+        <partial name="_Header" model="headerModel"/>
     </header>
 
     <div class="container">

@@ -1,14 +1,7 @@
 @model boss_createDto
 
 
-
-@if (ViewBag.completedMembership)
-{
-
-}
-else
-{
-    <form method="post" asp-controller="CheckingSurveyUser" asp-action="CompleteBossMembership"
+    <form method="post" asp-action="CompleteBossMembership"
         enctype="multipart/form-data">
         <div class="row my-10">
             <div class="col-md-3">
@@ -104,7 +97,6 @@ else
     </form>
 
 
-}
 
 @section Scripts {
     @{

@@ -57,5 +57,11 @@ namespace Services
             _manager.Boss.UpdateOneBoss(updatingBoss);
             _manager.Save();
         }
+
+        public void UpdateOneBoss(Boss boss)
+        {
+            _manager.Boss.UpdateOneBoss(boss);
+            _manager.Save();
+        }
     }
 }

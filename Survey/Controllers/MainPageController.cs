@@ -1,85 +1,66 @@
 using System.Security.Claims;
+using Benimkiler.Roles;
 using Entities.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Services.Contracts;
 using Survey.Benimkiler;
+using Survey.Models;
 
 namespace Survey.Controllers
 {
     public class MainPageController : Controller
     {
         private readonly UserManager<IdentityUser> _userManager;
-
         private readonly IServiceManager _manager;
-
-
-        public MainPageController(UserManager<IdentityUser> userManager, IServiceManager manager)
+        private MainPageModel _mainPageModel;
+        public MainPageController(UserManager<IdentityUser> userManager, IServiceManager manager, MainPageModel mainPageModel)
         {
             _userManager = userManager;
             _manager = manager;
+            _mainPageModel = mainPageModel;
         }
 
-        private async Task<IActionResult> CustomizeAccordingByLogin()
+        private async Task<bool> IsLoggedInAsync()
         {
-
             var user = await _userManager.GetUserAsync(User);
-
 
             if (user is not null)
             {
-
-                // p.f("Giriş Yapılmış");
-                return RedirectToAction("CustomizeAccordingToRole", "CheckingSurveyUser");
+                return true;
             }
-            else
-            {
-                
-                // p.f("giriş yapılmamış");
-                return View("Index");
-            }
+            return false;
         }
 
 
-        public async Task<IActionResult> GuestPage()
-        {
-             ClaimsPrincipal curUser = User;
-            ViewBag.isMemberShipCompleted = await _manager.IsSurveyUserMembershipCompletedAsync(curUser);
-
-            // p.f("üyelik tamamlandı mı : " + ViewBag.isMemberShipCompleted);
-
-            
-
-            
-            return View("Index");
-        }
+  
 
 
         public async Task<IActionResult> Index()
         {
+            _mainPageModel.IsUserLogged = false;
+            _mainPageModel.IsUserConfirmed = false;
+            _mainPageModel.IsUserCompletedMembership = false;
+            _mainPageModel.User = null;
+            _mainPageModel.Role = Roles.Guess;
 
-            ClaimsPrincipal curUser = User;
-            ViewBag.isMemberShipCompleted = await _manager.IsSurveyUserMembershipCompletedAsync(curUser);
-
-            var identityBosses = await _userManager.GetUsersInRoleAsync("Boss");
+            ViewBag.HeaderModel = _mainPageModel;
             
-            foreach (var identityBoss in  identityBosses)
-            {
-                Boss boss = _manager.BossService.GetOneBoss(identityBoss.Id, false);
+            if(await IsLoggedInAsync()){
 
-                if(boss is not null){
-                    boss.Company = _manager.CompanyService.GetOneCompany(boss.CompanyId, false);
-                }
-
-                p.f(identityBoss.UserName + " -> " + identityBoss.Email + " -> " + boss?.Name + " -> " + boss?.Company?.Name);
-
+                _mainPageModel.IsUserLogged = true;
+                _mainPageModel.IsUserConfirmed = await _manager.IsConfirmedMember(User);
+                _mainPageModel.IsUserCompletedMembership = await _manager.IsSurveyUserMembershipCompletedAsync(User);
+                _mainPageModel.User = await _userManager.GetUserAsync(User);
+                _mainPageModel.Role = p.RoleToEnum((await _userManager.GetRolesAsync(_mainPageModel.User)).FirstOrDefault());
 
             }
 
-            // p.f("üyelik tamamlandı mı : " + ViewBag.isMemberShipCompleted);
-            return await CustomizeAccordingByLogin();
+            return View(model: _mainPageModel);
         }
-
-
     }
+
+    
+
+    
 }

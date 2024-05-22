@@ -13,6 +13,7 @@ namespace Services.Contracts
 
         IAuthService AuthService{get;}
 
+        Task<bool> IsConfirmedMember(ClaimsPrincipal curUser);
         Task<bool> IsSurveyUserMembershipCompletedAsync(ClaimsPrincipal curUser);
     }
 }
