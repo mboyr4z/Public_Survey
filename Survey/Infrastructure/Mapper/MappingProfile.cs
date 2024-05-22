@@ -27,6 +27,8 @@ namespace StoreApp.Infrastructure.Mapper
             CreateMap<company_createDto, Company>().ReverseMap();
             CreateMap<company_updateDto, Company>().ReverseMap();
 
+            CreateMap<PostDto, Post>().ReverseMap();
+
             
         }
     }

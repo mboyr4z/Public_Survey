@@ -2,6 +2,7 @@ using System.Security.Claims;
 using Benimkiler.Roles;
 using Entities.Models;
 using Microsoft.AspNetCore.Identity;
+using Repositories.Contracts;
 using Services.Contracts;
 
 namespace Services
@@ -15,11 +16,21 @@ namespace Services
         private readonly ICommentatorService _commentatorService;
         private readonly ICompanyService _companyService;
 
+        private readonly IChatService _chatService;
+
+        private readonly ICommentService _commentService;
+
+        private readonly IFollowService _followService;
+
+        private readonly ILikeService _likeService;
+
+        private readonly IPostService _postService;
+
         private readonly UserManager<IdentityUser> _userManager;
 
 
 
-        public ServiceManager(IAuthService authService, IBossService bossService, ICommentatorService commentatorService, IAuthorService authorService, ICompanyService companyService, UserManager<IdentityUser> userManager)
+        public ServiceManager(IAuthService authService, IBossService bossService, ICommentatorService commentatorService, IAuthorService authorService, ICompanyService companyService, UserManager<IdentityUser> userManager, IChatService chatService, ICommentService commentService, IFollowService followService, ILikeService likeService, IPostService postService)
         {
             _authService = authService;
             _bossService = bossService;
@@ -27,6 +38,11 @@ namespace Services
             _authorService = authorService;
             _companyService = companyService;
             _userManager = userManager;
+            _chatService = chatService;
+            _commentService = commentService;
+            _followService = followService;
+            _likeService = likeService;
+            _postService = postService;
         }
 
         public IAuthService AuthService => _authService;
@@ -38,6 +54,16 @@ namespace Services
         public ICommentatorService CommentatorService => _commentatorService;
 
         public ICompanyService CompanyService => _companyService;
+
+        public IChatService ChatService => _chatService;
+
+        public ICommentService CommentService => _commentService;
+
+        public IFollowService FollowService => _followService;
+
+        public ILikeService LikeService => _likeService;
+
+        public IPostService PostService => _postService;
 
         public async Task<bool> IsConfirmedMember(ClaimsPrincipal curUser)
         {

@@ -32,10 +32,6 @@ namespace Survey.Controllers
             return false;
         }
 
-
-  
-
-
         public async Task<IActionResult> Index()
         {
             _mainPageModel.IsUserLogged = false;

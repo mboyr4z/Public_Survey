@@ -1,6 +1,5 @@
-﻿@{
-    var headerModel = ViewBag.HeaderModel;
-}
+﻿@inject MainPageModel mainPageModel
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,9 +18,8 @@
 
 <body>
 
-
     <header>
-        <partial name="_Header" model="headerModel"/>
+        <partial name="_Header" model="mainPageModel"/>
     </header>
 
     <div class="container">
@@ -30,10 +28,7 @@
         </main>
     </div>
 
-
     <partial name="_Footer" />
-
-
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
