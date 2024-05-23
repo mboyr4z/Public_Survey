@@ -11,8 +11,8 @@ using Repositories;
 namespace Survey.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20240522163118_newMig3")]
-    partial class newMig3
+    [Migration("20240523125646_Mig1")]
+    partial class Mig1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -286,25 +286,25 @@ namespace Survey.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "6de5a410-4773-483f-9ed4-5c1ad726c0a9",
+                            Id = "c27cd670-bc85-4e9a-a09d-4a91f2db457c",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "d847bf56-6fb4-404a-bca2-82ad9187f661",
+                            Id = "52d44600-bcba-427d-ac45-2ad81d5875fa",
                             Name = "Author",
                             NormalizedName = "AUTHOR"
                         },
                         new
                         {
-                            Id = "e71c8c4b-129d-4acd-99c8-d55b2afc226a",
+                            Id = "5314fff8-4eaa-4d48-891f-fca71e034219",
                             Name = "Boss",
                             NormalizedName = "BOSS"
                         },
                         new
                         {
-                            Id = "f6e0d2d2-1380-4e28-82e0-772b16ddbe0e",
+                            Id = "202dfdd9-9d15-4613-9abd-f396fc024b2c",
                             Name = "Commentator",
                             NormalizedName = "COMMENTATOR"
                         });

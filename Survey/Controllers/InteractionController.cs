@@ -12,7 +12,6 @@ namespace Survey.Controllers;
 
 public class InteractionController : Controller
 {
-
     private readonly IMapper _mapper;
 
     private readonly MainPageModel _mainPageModel;
@@ -48,6 +47,6 @@ public class InteractionController : Controller
 
         _manager.PostService.CreatePost(newPost);
 
-        return View("Success");
+        return RedirectToAction("Index","MainPage");
     }
 }
