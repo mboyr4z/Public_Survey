@@ -13,20 +13,40 @@
                 <div class="pro-img"><img src="@Model.ImageUrl" alt="user"></div>
                 <h3 class="m-b-0">@Model.FullName</h3>
                 <p>@Model.Information</p>
+                @if(Model.CurrentUser is not null){
+                    <div>oturum açılmış</div>
+
+                    if(Model.CurrentUser.Id != Model.AuthorId){
+                        <div>
+                            farklı kişi
+                        </div>
+                    }else{
+                        <div>
+                            aynı kişi
+                        </div>
+                    }
+                }else{
+                    <div>oturum yok</div>
+                }
+
 
                 @if (Model.CurrentUser is not null && Model.CurrentUser.Id != Model.AuthorId)
                 {
-                    if (Model.AuthorFollowing)
+                    if (!Model.AuthorFollowing)
                     {
-                        <a href="javascript:void(0)" class="m-t-10 waves-effect waves-dark btn btn-primary btn-md btn-rounded"
-                            data-abc="true">UnFollow</a>
+                        <a asp-page="/Author" asp-route-authorId="@Model.AuthorId" asp-route-follow ="true" class="m-t-10 waves-effect waves-dark btn btn-primary btn-md btn-rounded"
+                            data-abc="true">Follow</a>
                     }
                     else
                     {
-                        <a href="javascript:void(0)" class="m-t-10 waves-effect waves-dark btn btn-primary btn-md btn-rounded"
-                            data-abc="true">Follow</a>
+                        <a asp-page="/Author" asp-route-authorId="@Model.AuthorId" asp-route-unfollow ="true" class="m-t-10 waves-effect waves-dark btn btn-primary btn-md btn-rounded"
+                            data-abc="true">UnFollow</a>
                     }
 
+                }else{
+                    <div>
+                        oturum aç ya da farklı bir hesapla oturum aç  
+                    </div>
                 }
 
                 <div class="row text-center m-t-20">

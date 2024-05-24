@@ -34,9 +34,19 @@ namespace Survey.Pages
             _mainPageModel = mainPageModel;
         }
 
-        public void OnGet(string authorId)
+        private Author author;
+        public void OnGet(string authorId, string follow, string unfollow)
         {
-            Author author = _manager.AuthorService.GetOneAuthor(authorId, false);
+
+            p.f("follow : " + follow + " unfollow : " + unfollow);
+            author = _manager.AuthorService.GetOneAuthor(authorId, false);
+
+            if(!string.IsNullOrEmpty(follow)){
+                FollowThisAuthor();
+            }else if(!string.IsNullOrEmpty(unfollow)){
+                UnfollowThisAuthor();
+            }
+
 
             if (author is not null)
             {
@@ -57,9 +67,8 @@ namespace Survey.Pages
 
                 if (_mainPageModel.User is not null)
                 {
-
-                    Follow follow = followers.Where(f => f.FollowById == _mainPageModel.User.Id).FirstOrDefault();
-                    if (follow is not null)
+                    Follow IFollowToThisAuthor = followers.Where(f => f.FollowById.Equals(_mainPageModel.User.Id)).FirstOrDefault(); // authorun takipçi lsitesinde ben varmıyım
+                    if (IFollowToThisAuthor is not null)
                     {
                         AuthorFollowing = true;
                     }else{
@@ -67,6 +76,22 @@ namespace Survey.Pages
                     }
                 }
             }
+        }
+
+        private void FollowThisAuthor(){
+            p.f("takip kısmı");
+            Follow newFollow = new Follow();
+            newFollow.FollowedId = author.Id;
+            newFollow.FollowById = _mainPageModel.User.Id;
+            newFollow.FollowTime = DateTime.Now;
+
+            _manager.FollowService.CreateFollow(newFollow);
+        }
+
+        private void UnfollowThisAuthor(){
+            p.f("takip bırakma kısmı");
+            Follow deletingFollow = _manager.FollowService.GetAllFollows(false).Where(f => f.FollowedId.Equals(author.Id) && f.FollowById.Equals(_mainPageModel.User.Id)).FirstOrDefault();
+            _manager.FollowService.Delete(deletingFollow);
         }
 
         public async Task OnPostAsync()
