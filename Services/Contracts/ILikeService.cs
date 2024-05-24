@@ -11,5 +11,6 @@ namespace Repositories.Contracts
         void CreateLike(Like like);
         void Delete(Like like);
         void UpdateOneLike(Like entity);
+        IQueryable<Like> GetLikesWithPostId(int postId, bool trackChanges);
     }
 }

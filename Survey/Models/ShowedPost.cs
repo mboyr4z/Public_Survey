@@ -9,8 +9,6 @@ public class ShowedPost
     public int commentCount { get; set; }
     public int likeCount { get; set; }
     public IQueryable<string> comments { get; set; }
-
     public string publisherInformation{get;set;}
-
     public string publisherImagePath {get;set;}
 }

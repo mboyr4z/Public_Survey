@@ -38,6 +38,11 @@ namespace Services
             return _manager.Comment.GetAllComments(trackChanges);
         }
 
+        public IQueryable<Comment> GetCommentsWithPostId(int postId, bool trackChanges)
+        {
+            return GetAllComments(trackChanges).Where(p => p.PostId == postId);
+        }
+
         public Comment? GetOneComment(string id, bool trackChanges)
         {
             return _manager.Comment.GetOneComment(id, trackChanges);

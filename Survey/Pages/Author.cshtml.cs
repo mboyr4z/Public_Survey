@@ -22,12 +22,16 @@ namespace Survey.Pages
         public string CompanyName { get; set; }
         public string Information => "Author at " + CompanyName;
         public bool AuthorFollowing;
-        private readonly IServiceManager _manager;
-        private IQueryable<Follow> followers;
 
+        public List<Post> AllPosts;        
+        public List<Post> GlobalPosts;
+        public IdentityUser CurrentUser {get;set;}
+        private IQueryable<Follow> Followers;
+
+
+        private readonly IServiceManager _manager;
         private MainPageModel _mainPageModel;
 
-        public IdentityUser CurrentUser {get;set;}
 
         public AuthorPageModel(IServiceManager manager, MainPageModel mainPageModel)
         {
@@ -48,9 +52,19 @@ namespace Survey.Pages
                 Name = author.Name;
                 Surname = author.Surname;
                 ImageUrl = author.ImageUrl;
-                followers = _manager.FollowService.GetAllFollows(false).Where(f => f.FollowedId.Equals(_authorId));
-                FollowerCount = followers.Count();
-                // LikeCount = _manager.LikeService.GetAllLikes(false).Where(l => l.)
+                Followers = _manager.FollowService.GetAllFollows(false).Where(f => f.FollowedId.Equals(_authorId));
+                FollowerCount = Followers.Count();
+                AllPosts = _manager.PostService.GetAllPosts(false).Where(p => p.PublisherId.Equals(author.Id)).ToList();
+                GlobalPosts = AllPosts.Where(p => p.IsGlobal == true).ToList();
+
+                LikeCount = 0;
+                foreach (Post post in AllPosts)
+                {
+                    LikeCount +=  _manager.LikeService.GetLikesWithPostId(post.Id, false).Count();
+                }
+                
+                
+                
                 PublishCount = _manager.PostService.GetAllPosts(false).Where(p => p.PublisherId.Equals(_authorId)).Count();
                 CompanyImageUrl = _manager.CompanyService.GetOneCompany(author.CompanyId, false).ImageUrl;
                 CompanyName = _manager.CompanyService.GetOneCompany(author.CompanyId, false).Name;
@@ -59,7 +73,7 @@ namespace Survey.Pages
 
                 if (_mainPageModel.User is not null)
                 {
-                    Follow IFollowToThisAuthor = followers.Where(f => f.FollowById.Equals(_mainPageModel.User.Id)).FirstOrDefault(); // authorun takipçi lsitesinde ben varmıyım
+                    Follow IFollowToThisAuthor = Followers.Where(f => f.FollowById.Equals(_mainPageModel.User.Id)).FirstOrDefault(); // authorun takipçi lsitesinde ben varmıyım
                     if (IFollowToThisAuthor is not null)
                     {
                         AuthorFollowing = true;

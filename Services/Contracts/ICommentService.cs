@@ -11,5 +11,7 @@ namespace Repositories.Contracts
         void CreateComment(Comment comment);
         void Delete(Comment comment);
         void UpdateOneComment(Comment entity);
+
+        IQueryable<Comment> GetCommentsWithPostId(int postId, bool trackChanges);
     }
 }

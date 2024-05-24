@@ -51,8 +51,12 @@ namespace Survey.Components
                 newShowedPost.publisherId = post.PublisherId;
                 newShowedPost.content = post.Content;
                 newShowedPost.publishTime = post.PublishTime;
+                newShowedPost.likeCount = _manager.LikeService.GetLikesWithPostId(post.Id, false).Count();
+                newShowedPost.commentCount = _manager.CommentService.GetCommentsWithPostId(post.Id, false).Count();
+                
 
                 publisher = await _userManager.FindByIdAsync(newShowedPost.publisherId);
+                
                 Roles role = p.RoleToEnum((await _userManager.GetRolesAsync(publisher)).FirstOrDefault());
 
                 if (role == Roles.Author)

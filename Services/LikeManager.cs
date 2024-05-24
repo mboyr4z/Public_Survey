@@ -43,6 +43,11 @@ namespace Services
             return _manager.Like.GetOneLike(id, trackChanges);
         }
 
+        public IQueryable<Like> GetLikesWithPostId(int postId, bool trackChanges)
+        {
+            return _manager.Like.GetAllLikes(trackChanges).Where(l => l.PostId == postId);
+        }
+
         public void UpdateOneLike(Like entity)
         {
             _manager.Like.UpdateOneLike(entity);
