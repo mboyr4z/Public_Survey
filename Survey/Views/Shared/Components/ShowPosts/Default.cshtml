@@ -1,7 +1,16 @@
+@using Survey.Benimkiler
 @model List<ShowedPost>
 
 @inject MainPageModel _mainPageModel
 @inject IServiceManager _manager
+@inject IHttpContextAccessor HttpContextAccessor
+
+@{
+    var returnUrl = $"{HttpContextAccessor.HttpContext.Request.Path}{HttpContextAccessor.HttpContext.Request.QueryString}";
+    p.f(returnUrl);
+}
+
+
 
 @foreach (ShowedPost showedPost in Model)
 {
@@ -15,7 +24,7 @@
                     <div class="ml-2">
                         <div class="h5 m-0">
                             <a class="text-decoration-none text-secondary" asp-page="/RouterPage"
-                                asp-route-userId="@showedPost.publisherId">@showedPost.publisherFullName</a>
+                                asp-route-userId="@showedPost.publisherId" asp-route-process="" asp-route-returnUrl="" >@showedPost.publisherFullName</a>
                         </div>
                         <div class="h7 text-muted">@showedPost.publisherInformation</div>
                     </div>
@@ -25,14 +34,12 @@
                     {
                         if(_manager.FollowService.GetAllFollows(false).Where(p => p.FollowById.Equals(_mainPageModel.User.Id) && p.FollowedId.Equals(showedPost.publisherId)).FirstOrDefault() is null){
                             <div class="container">
-                                <a class="btn btn-success">
+                                <a asp-page="/Follow" asp-route-followedId="@showedPost.publisherId" asp-route-followerId = "@_mainPageModel.User.Id" asp-route-returnUrl = "@returnUrl" class="btn btn-success">
                                     <i class="fa-solid fa-plus"></i>
                                     Takip Et
                                 </a>
                             </div>
                         }
-
-                       
                     }
 
                 </div>

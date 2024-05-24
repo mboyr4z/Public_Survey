@@ -11,7 +11,7 @@ namespace Survey.Pages
         public string ImageUrl { get; set; }
         public int FollowerCount { get; set; }
         public int LikeCount { get; set; }
-        public void OnGet(string publisherId)
+        public void OnGet(string commentatorId)
         {
         }
 

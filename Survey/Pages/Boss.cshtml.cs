@@ -15,7 +15,7 @@ namespace Survey.Pages
         public string CompanyImageUrl { get; set; }
         public string CompanyName { get; set; }
         public string Information => "Boss at " + CompanyName;
-        public void OnGet(string publisherId)
+        public void OnGet(string bossId)
         {
         }
 

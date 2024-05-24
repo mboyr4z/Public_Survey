@@ -29,11 +29,8 @@ namespace StoreApp.Infrastructure.Extensions
             services.AddScoped<IFollowService, FollowManager>();
             services.AddScoped<ILikeService, LikeManager>();
             services.AddScoped<IPostService, PostManager>();
-
-
-
-
             services.AddSingleton<MainPageModel>();
+            services.AddHttpContextAccessor();
 
         }
 
@@ -54,9 +51,7 @@ namespace StoreApp.Infrastructure.Extensions
                 options.LowercaseUrls = true;
                 options.AppendTrailingSlash = false; // sonuna / ifadesi eklensin
             });
-
         }
-
 
         public static void ConfigureRepositoryRegistration(this IServiceCollection services)
         {

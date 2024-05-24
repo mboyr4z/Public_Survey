@@ -1,8 +1,18 @@
 @page "/Author"
+@using Survey.Benimkiler
+@inject MainPageModel _mainPageModel
+@inject IHttpContextAccessor HttpContextAccessor
 
 @{
     ViewData["Title"] = "Author Page";
+
+    var returnUrl = $"{HttpContextAccessor.HttpContext.Request.Path}{HttpContextAccessor.HttpContext.Request.QueryString}";
+    p.f(returnUrl);
 }
+
+
+
+
 
 @model AuthorPageModel
 <div class="padding">
@@ -13,25 +23,30 @@
                 <div class="pro-img"><img src="@Model.ImageUrl" alt="user"></div>
                 <h3 class="m-b-0">@Model.FullName</h3>
                 <p>@Model.Information</p>
-            
 
+                @ViewBag.returnUrl
 
                 @if (Model.CurrentUser is not null && Model.CurrentUser.Id != Model.AuthorId)
                 {
                     if (!Model.AuthorFollowing)
                     {
-                        <a asp-page="/Author" asp-route-authorId="@Model.AuthorId" asp-route-follow ="true" class="m-t-10 waves-effect waves-dark btn btn-primary btn-md btn-rounded"
-                            data-abc="true">Follow</a>
+                        <a asp-page="/Follow" asp-route-followedId="@Model.AuthorId"
+                            asp-route-followerId="@_mainPageModel.User.Id" asp-route-returnUrl="@returnUrl"
+                            class="m-t-10 waves-effect waves-dark btn btn-primary btn-md btn-rounded" data-abc="true">Follow</a>
                     }
                     else
                     {
-                        <a asp-page="/Author" asp-route-authorId="@Model.AuthorId" asp-route-unfollow ="true" class="m-t-10 waves-effect waves-dark btn btn-primary btn-md btn-rounded"
+                        <a asp-page="/UnFollow" asp-route-followedId="@Model.AuthorId"
+                            asp-route-followerId="@_mainPageModel.User.Id" asp-route-returnUrl="@returnUrl"
+                            class="m-t-10 waves-effect waves-dark btn btn-primary btn-md btn-rounded"
                             data-abc="true">UnFollow</a>
                     }
 
-                }else{
+                }
+                else
+                {
                     <div>
-                        oturum aç ya da farklı bir hesapla oturum aç  
+                        oturum aç ya da farklı bir hesapla oturum aç
                     </div>
                 }
 
