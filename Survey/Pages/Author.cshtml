@@ -13,21 +13,7 @@
                 <div class="pro-img"><img src="@Model.ImageUrl" alt="user"></div>
                 <h3 class="m-b-0">@Model.FullName</h3>
                 <p>@Model.Information</p>
-                @if(Model.CurrentUser is not null){
-                    <div>oturum açılmış</div>
-
-                    if(Model.CurrentUser.Id != Model.AuthorId){
-                        <div>
-                            farklı kişi
-                        </div>
-                    }else{
-                        <div>
-                            aynı kişi
-                        </div>
-                    }
-                }else{
-                    <div>oturum yok</div>
-                }
+            
 
 
                 @if (Model.CurrentUser is not null && Model.CurrentUser.Id != Model.AuthorId)

@@ -1,6 +1,7 @@
 @model List<ShowedPost>
 
 @inject MainPageModel _mainPageModel
+@inject IServiceManager _manager
 
 @foreach (ShowedPost showedPost in Model)
 {
@@ -20,15 +21,18 @@
                     </div>
                 </div>
                 <div>
-                    @if (_mainPageModel.User is not null && !showedPost.publisherId.Equals(_mainPageModel.User.Id))
+                    @if (_mainPageModel.User is not null && !showedPost.publisherId.Equals(_mainPageModel.User.Id))     // benim paylaşımım olmadığı zaman ve oturum açtığımda
                     {
-                        
-                        <div class="container">
-                            <a class="btn btn-success">
-                                <i class="fa-solid fa-plus"></i>
-                                Takip Et
-                            </a>
-                        </div>
+                        if(_manager.FollowService.GetAllFollows(false).Where(p => p.FollowById.Equals(_mainPageModel.User.Id) && p.FollowedId.Equals(showedPost.publisherId)).FirstOrDefault() is null){
+                            <div class="container">
+                                <a class="btn btn-success">
+                                    <i class="fa-solid fa-plus"></i>
+                                    Takip Et
+                                </a>
+                            </div>
+                        }
+
+                       
                     }
 
                 </div>
