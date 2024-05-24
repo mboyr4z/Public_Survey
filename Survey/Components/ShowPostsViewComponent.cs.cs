@@ -53,6 +53,7 @@ namespace Survey.Components
                 newShowedPost.publishTime = post.PublishTime;
                 newShowedPost.likeCount = _manager.LikeService.GetLikesWithPostId(post.Id, false).Count();
                 newShowedPost.commentCount = _manager.CommentService.GetCommentsWithPostId(post.Id, false).Count();
+                newShowedPost.postId = post.Id;
                 
 
                 publisher = await _userManager.FindByIdAsync(newShowedPost.publisherId);

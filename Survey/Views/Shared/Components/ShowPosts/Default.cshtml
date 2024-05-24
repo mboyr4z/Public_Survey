@@ -7,7 +7,6 @@
 
 @{
     var returnUrl = $"{HttpContextAccessor.HttpContext.Request.Path}{HttpContextAccessor.HttpContext.Request.QueryString}";
-    p.f(returnUrl);
 }
 
 
@@ -55,7 +54,20 @@
             </p>
         </div>
         <div class="card-footer">
-            <a class="card-link text-decoration-none text-secondary"><i class="fa-solid fa-heart"></i> Like(@showedPost.likeCount)</a>
+
+            @{
+                string likeClass = "fa-solid fa-heart";
+                bool isUserLikePost = false;
+                string likeOrDislikePage = "/Like";
+
+                if(_mainPageModel.User is not null &&  _manager.LikeService.IsUserLikeTePost(_mainPageModel.User.Id, showedPost.postId)){
+                    likeClass+= " text-primary";
+                    isUserLikePost = true;
+                    likeOrDislikePage = "/Unlike";
+                }
+            }
+
+            <a asp-page="@likeOrDislikePage" asp-route-likerId = "@_mainPageModel.User.Id" asp-route-postId = "@showedPost.postId" asp-route-returnUrl = "@returnUrl" class="card-link text-decoration-none text-secondary"><i class= "@likeClass"></i> Like(@showedPost.likeCount)</a>
             <a class="card-link text-decoration-none text-warning"><i class="fa fa-comment"></i> Comment(@showedPost.commentCount)</a>
         </div>
     </div>

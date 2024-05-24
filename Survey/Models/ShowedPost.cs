@@ -11,4 +11,6 @@ public class ShowedPost
     public IQueryable<string> comments { get; set; }
     public string publisherInformation{get;set;}
     public string publisherImagePath {get;set;}
+
+    public int postId{get;set;}
 }

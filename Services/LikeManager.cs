@@ -53,5 +53,10 @@ namespace Services
             _manager.Like.UpdateOneLike(entity);
             _manager.Save();
         }
+
+        public bool IsUserLikeTePost(string userId, int postId)
+        {
+            return GetLikesWithPostId(postId, false).Where(p => p.LikerId.Equals(userId)).FirstOrDefault() is not null ? true : false;
+        }
     }
 }
