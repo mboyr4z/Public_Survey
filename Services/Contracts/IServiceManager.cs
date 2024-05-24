@@ -25,5 +25,11 @@ namespace Services.Contracts
         IPostService PostService{get;}
         Task<bool> IsConfirmedMember(ClaimsPrincipal curUser);
         Task<bool> IsSurveyUserMembershipCompletedAsync(ClaimsPrincipal curUser);
+
+        Task<string> GetFullNameById(string userId);
+
+        Task<string> GetImageUrlById(string userId);
+
+        
     }
 }

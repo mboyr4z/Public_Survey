@@ -1,0 +1,110 @@
+@model ShowCommentsItem
+@inject MainPageModel _mainPageModel
+
+@inject IHttpContextAccessor HttpContextAccessor
+
+@{
+    var returnUrl = $"{HttpContextAccessor.HttpContext.Request.Path}{HttpContextAccessor.HttpContext.Request.QueryString}";
+}
+
+
+
+@if (_mainPageModel.User is not null)
+{
+    <div class="d-flex flex-row add-comment-section mt-4 mb-4">
+        <img class="img-fluid img-responsive rounded-circle mr-2" src="@Model.userImageUrl" width="38">
+        <input id="comment-input-@Model.postId" type="text" class="form-control mr-3" placeholder="Add comment">
+        <a onclick="submitComment('@Model.postId')" class="btn btn-primary" type="button">Publish</a>
+    </div>
+}
+
+<script>
+    function submitComment(postId) {
+        var commentInput = document.getElementById('comment-input-' + postId);
+        var commentContent = commentInput.value;
+        var userId = '@_mainPageModel.User?.Id';
+        var returnUrl = '@returnUrl';
+        console.log("comment " + commentContent);
+        // Create the URL with parameters
+        var url = `/CreateComment?content=${encodeURIComponent(commentContent)}&commenterId=${userId}&postId=${postId}&returnUrl=${encodeURIComponent(returnUrl)}`;
+
+        // Redirect to the URL
+        window.location.href = url;
+    }
+</script>
+
+@{
+    string a = " ";
+}
+
+
+<div class="container justify-content-center mt-5 border-left border-right">
+    @foreach (CommentItem item in Model.commentItems)
+    {
+        <div class="d-flex justify-content-center py-2" >
+            <div class="second py-2 px-2"> <span class="text1">@item.Content</span>
+                <div class="d-flex justify-content-between py-1 pt-2">
+                    <div><img src="@item.CommenterImageUrl" width="18" height="18" class="rounded-circle"><span class="text2">@item.FullName</span></div>
+                    <div><span class="text3"></span><span class="thumbup"><i
+                                class="fa fa-thumbs-o-up"></i></span><span class="text4">@item.PublishTime</span></div>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+
+
+<style>
+
+
+.form-control: focus{
+	color: #000;
+}
+.second{
+	width: 100%;
+	background-color: white;
+	border-radius: 4px;
+	box-shadow: 10px 10px 5px #aaaaaa;
+}
+.text1{
+	font-size: 13px;
+    font-weight: 500;
+    color: #56575b;
+}
+.text2{
+	font-size: 13px;
+    font-weight: 500;
+    margin-left: 6px;
+    color: #56575b;
+}
+.text3{
+	font-size: 13px;
+    font-weight: 500;
+    margin-right: 4px;
+    color: #828386;
+}
+.text3o{
+	color: #00a5f4;
+
+}
+.text4{
+	font-size: 13px;
+    font-weight: 500;
+    color: #828386;
+}
+.text4i{
+	color: #00a5f4;
+}
+.text4o{
+	color: white;
+}
+.thumbup{
+	font-size: 13px;
+    font-weight: 500;
+    margin-right: 5px;
+}
+.thumbupo{
+	color: #17a2b8;
+}
+</style>

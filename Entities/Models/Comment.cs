@@ -5,7 +5,7 @@ namespace Entities.Models
         public int Id {get;set;}
         public int PostId {get;set;}
         public string Content {get;set;}
-        public string CommenterId;
-        public DateTime PublishTime;
+        public string CommenterId {get;set;}
+        public DateTime PublishTime {get;set;}
     }
 }

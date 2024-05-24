@@ -4,6 +4,7 @@ using Entities.Models;
 using Microsoft.AspNetCore.Identity;
 using Repositories.Contracts;
 using Services.Contracts;
+using Survey.Benimkiler;
 
 namespace Services
 {
@@ -65,6 +66,54 @@ namespace Services
 
         public IPostService PostService => _postService;
 
+        public async Task<string> GetFullNameById(string userId)
+        {
+            IdentityUser user = await _userManager.FindByIdAsync(userId);
+            string roleString = (await _userManager.GetRolesAsync(user)).FirstOrDefault();
+            Roles role = p.RoleToEnum(roleString);
+
+            if (role == Roles.Author)
+            {
+                Author author = AuthorService.GetOneAuthor(userId, false);
+                return author.FullName;
+            }
+            else if (role == Roles.Boss)
+            {
+                Boss boss = BossService.GetOneBoss(userId, false);
+                return boss.FullName;
+            }
+            else if (role == Roles.Commentator)
+            {
+                Commentator commentator = CommentatorService.GetOneCommentator(userId, false);
+                return commentator.FullName;
+            }
+            return "";
+        }
+
+        public async Task<string> GetImageUrlById(string userId)
+        {
+            IdentityUser user = await _userManager.FindByIdAsync(userId);
+            string roleString = (await _userManager.GetRolesAsync(user)).FirstOrDefault();
+            Roles role = p.RoleToEnum(roleString);
+
+            if (role == Roles.Author)
+            {
+                Author author = AuthorService.GetOneAuthor(userId, false);
+                return author.ImageUrl;
+            }
+            else if (role == Roles.Boss)
+            {
+                Boss boss = BossService.GetOneBoss(userId, false);
+                return boss.ImageUrl;
+            }
+            else if (role == Roles.Commentator)
+            {
+                Commentator commentator = CommentatorService.GetOneCommentator(userId, false);
+                return commentator.ImageUrl;
+            }
+            return "";
+        }
+
         public async Task<bool> IsConfirmedMember(ClaimsPrincipal curUser)
         {
             IdentityUser user = await _userManager.GetUserAsync(curUser);
@@ -125,7 +174,7 @@ namespace Services
                         }
                         break;
                     case Roles.Commentator:
-                        Commentator commentator  = _commentatorService.GetOneCommentator(user.Id, false);
+                        Commentator commentator = _commentatorService.GetOneCommentator(user.Id, false);
                         if (commentator is not null)
                         {
                             return true;

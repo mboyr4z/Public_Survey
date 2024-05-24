@@ -5,5 +5,6 @@ namespace Entities.Models
         public bool? Confirmed { get; set; } = false;
         public int CompanyId{get;set;}
 
+
     }
 }

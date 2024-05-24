@@ -9,5 +9,8 @@ namespace Entities.Models
         public string? City {get; set;}
         public float? LikeRate{get; set;}
         public string ImageUrl{get; set;}
+
+        public string FullName => Name + " " + Surname;
+
     }
 }
