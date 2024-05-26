@@ -1,3 +1,4 @@
+using Benimkiler.Roles;
 using Entities.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -23,9 +24,10 @@ namespace Survey.Pages
         public string Information => "Author at " + CompanyName;
         public bool AuthorFollowing;
 
-        public List<Post> AllPosts;        
+        public List<Post> AllPosts;
         public List<Post> GlobalPosts;
-        public IdentityUser CurrentUser {get;set;}
+
+        public IdentityUser CurrentUser { get; set; }
         private IQueryable<Follow> Followers;
 
 
@@ -60,11 +62,11 @@ namespace Survey.Pages
                 LikeCount = 0;
                 foreach (Post post in AllPosts)
                 {
-                    LikeCount +=  _manager.LikeService.GetLikesWithPostId(post.Id, false).Count();
+                    LikeCount += _manager.LikeService.GetLikesWithPostId(post.Id, false).Count();
                 }
-                
-                
-                
+
+
+
                 PublishCount = _manager.PostService.GetAllPosts(false).Where(p => p.PublisherId.Equals(_authorId)).Count();
                 CompanyImageUrl = _manager.CompanyService.GetOneCompany(author.CompanyId, false).ImageUrl;
                 CompanyName = _manager.CompanyService.GetOneCompany(author.CompanyId, false).Name;
@@ -77,19 +79,50 @@ namespace Survey.Pages
                     if (IFollowToThisAuthor is not null)
                     {
                         AuthorFollowing = true;
-                    }else{
+                    }
+                    else
+                    {
                         AuthorFollowing = false;
                     }
                 }
             }
         }
 
-     
+        List<ShowedPost> showedPosts;
+        ShowedPost newShowedPost;
 
-        public async Task OnPostAsync()
+        public List<ShowedPost> PostToShowedPost(List<Post> posts)
         {
+            showedPosts = new List<ShowedPost>();
+            foreach (Post post in posts)
+            {
+                newShowedPost = new ShowedPost();
+                newShowedPost.publisherId = post.PublisherId;
+                newShowedPost.content = post.Content;
+                newShowedPost.publishTime = post.PublishTime;
+                newShowedPost.likeCount = _manager.LikeService.GetLikesWithPostId(post.Id, false).Count();
+                newShowedPost.commentCount = _manager.CommentService.GetCommentsWithPostId(post.Id, false).Count();
+                newShowedPost.postId = post.Id;
 
+
+
+
+                newShowedPost.publisherFullName = FullName;
+                newShowedPost.publisherImagePath = ImageUrl;
+
+
+
+
+                newShowedPost.publisherInformation = CompanyName;
+                showedPosts.Add(
+                    newShowedPost
+                );
+            }
+
+            return showedPosts;
         }
+
+
     }
 
 

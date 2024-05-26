@@ -65,7 +65,8 @@
                 {
                     <div class="row text-center m-t-20">
                         <div class="col-md-4"></div>
-                        <a asp-area = "" asp-controller="Chat" asp-action="Index" asp-route-contactId="@Model.AuthorId" class="col-lg-4 col-md-4 m-t-20 btn btn-primary">
+                        <a asp-area="" asp-controller="Chat" asp-action="Index" asp-route-contactId="@Model.AuthorId"
+                            class="col-lg-4 col-md-4 m-t-20 btn btn-primary">
                             <i class="fa-solid fa-comment" style="margin-right:3px;"></i><small>Message</small>
                         </a>
 
@@ -73,9 +74,30 @@
                 }
 
 
+
+
             </div>
         </div>
+
+        @if (_mainPageModel.User is not null)
+        {
+            @if (Model.AuthorFollowing || _mainPageModel.User.Id.Equals(Model.AuthorId))
+            {
+                <partial name="_ShowUserPosts" model="@Model.PostToShowedPost(@Model.AllPosts)"></partial>
+            }
+            else
+            {
+                <partial name="_ShowUserPosts" model="@Model.PostToShowedPost(@Model.GlobalPosts)"></partial>
+            }
+        }
+        else
+        {
+            <partial name="_ShowUserPosts" model="@Model.PostToShowedPost(@Model.GlobalPosts)"></partial>
+        }
     </div>
+
+
+
 </div>
 
 

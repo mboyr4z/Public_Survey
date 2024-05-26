@@ -1,0 +1,119 @@
+@using Services.Contracts
+@using Survey.Benimkiler
+@model List<ShowedPost>
+
+@inject MainPageModel _mainPageModel
+@inject IServiceManager _manager
+@inject IHttpContextAccessor HttpContextAccessor
+
+@{
+    var returnUrl = $"{HttpContextAccessor.HttpContext.Request.Path}{HttpContextAccessor.HttpContext.Request.QueryString}";
+}
+
+@foreach (ShowedPost showedPost in Model)
+{
+    <div class="card gedf-card my-3">
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="mr-2">
+                        <img class="rounded-circle" width="45" height="45" src="@showedPost.publisherImagePath">
+                    </div>
+                    <div class="ml-2">
+                        <div class="h5 m-0">
+                            <a class="text-decoration-none text-secondary" asp-page="/RouterPage"
+                                asp-route-userId="@showedPost.publisherId" asp-route-process=""
+                                asp-route-returnUrl="">@showedPost.publisherFullName</a>
+                        </div>
+                        <div class="h7 text-muted">@showedPost.publisherInformation</div>
+                    </div>
+                </div>
+                <div>
+                    @if (_mainPageModel.User is not null && !showedPost.publisherId.Equals(_mainPageModel.User.Id))
+                    {
+                        if (_manager.FollowService.GetAllFollows(false).Where(p => p.FollowById.Equals(_mainPageModel.User.Id) &&
+                        p.FollowedId.Equals(showedPost.publisherId)).FirstOrDefault() is null)
+                        {
+                            <div class="container">
+                                <a asp-page="/Follow" asp-route-followedId="@showedPost.publisherId"
+                                    asp-route-followerId="@_mainPageModel.User.Id" asp-route-returnUrl="@returnUrl"
+                                    class="btn btn-success">
+                                    <i class="fa-solid fa-plus"></i>
+                                    Takip Et
+                                </a>
+                            </div>
+                        }
+                    }
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="card-body">
+            <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>@showedPost.publishTime</div>
+
+            <p class="card-text">
+                @showedPost.content
+            </p>
+        </div>
+        <div class="card-footer">
+
+            @{
+                string likeClass = "fa-solid fa-heart";
+                bool isUserLikePost = false;
+                string likeOrDislikePage = "/Like";
+
+                if (_mainPageModel.User is not null && _manager.LikeService.IsUserLikeTePost(_mainPageModel.User.Id,
+                showedPost.postId))
+                {
+                    likeClass += " text-primary";
+                    isUserLikePost = true;
+                    likeOrDislikePage = "/Unlike";
+                }
+            }
+            @if (_mainPageModel.User is not null)
+            {
+                <a asp-page="@likeOrDislikePage" asp-route-likerId="@_mainPageModel.User.Id"
+                    asp-route-postId="@showedPost.postId" asp-route-returnUrl="@returnUrl"
+                    class="card-link text-decoration-none text-secondary"><i class="@likeClass"></i>
+                    Like(@showedPost.likeCount)</a>
+            }
+            else
+            {
+                <a class="card-link text-decoration-none text-secondary"><i class="@likeClass"></i>
+                    Like(@showedPost.likeCount)</a>
+            }
+        
+            <a class="card-link text-decoration-none text-warning" id="comment_@showedPost.postId" onclick="showCommentInput(this.id)"><i class="fa fa-comment"></i>
+                Comment(@showedPost.commentCount)</a>
+        </div>
+
+        <div class="coment-bottom bg-white p-2 px-4" style="display:none;" id="commentArea_@showedPost.postId" >
+            @await Component.InvokeAsync("ShowComments",new { postId = showedPost.postId })
+        </div>
+
+        
+    
+    
+    </div>
+    
+}
+
+  <script>
+
+      function showCommentInput(id) {
+            console.log(id);
+            var postId = id.split('_')[1];  // Extract postId from the element's ID
+            var commentArea = document.getElementById('commentArea_' + postId);
+
+            if (commentArea.style.display === 'none') {
+                commentArea.style.display = 'block';
+            } else {
+                commentArea.style.display = 'none';
+            }
+
+
+        }
+       
+    </script>
