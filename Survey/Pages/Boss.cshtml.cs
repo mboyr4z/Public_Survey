@@ -11,7 +11,7 @@ namespace Survey.Pages
 {
     public class BossPageModel : PageModel
     {
-        public string AuthorId { get; set; }
+        public string BossId { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public string FullName => Name + " " + Surname;
@@ -21,8 +21,8 @@ namespace Survey.Pages
         public int PublishCount { get; set; }
         public string CompanyImageUrl { get; set; }
         public string CompanyName { get; set; }
-        public string Information => "Author at " + CompanyName;
-        public bool AuthorFollowing;
+        public string Information => "Boss at " + CompanyName;
+        public bool BossFollowing;
 
         public List<Post> AllPosts;
         public List<Post> GlobalPosts;
@@ -41,22 +41,22 @@ namespace Survey.Pages
             _mainPageModel = mainPageModel;
         }
 
-        private Author author;
-        public void OnGet(string _authorId)
+        private Boss boss;
+        public void OnGet(string _bossId)
         {
-            author = _manager.AuthorService.GetOneAuthor(_authorId, false);
+            boss = _manager.BossService.GetOneBoss(_bossId, false);
 
-            if (author is not null)
+            if (boss is not null)
             {
                 // p.f(author.Name + " " + author.Surname);
 
-                AuthorId = author.Id;
-                Name = author.Name;
-                Surname = author.Surname;
-                ImageUrl = author.ImageUrl;
-                Followers = _manager.FollowService.GetAllFollows(false).Where(f => f.FollowedId.Equals(_authorId));
+                BossId = boss.Id;
+                Name = boss.Name;
+                Surname = boss.Surname;
+                ImageUrl = boss.ImageUrl;
+                Followers = _manager.FollowService.GetAllFollows(false).Where(f => f.FollowedId.Equals(_bossId));
                 FollowerCount = Followers.Count();
-                AllPosts = _manager.PostService.GetAllPosts(false).Where(p => p.PublisherId.Equals(author.Id)).ToList();
+                AllPosts = _manager.PostService.GetAllPosts(false).Where(p => p.PublisherId.Equals(boss.Id)).ToList();
                 GlobalPosts = AllPosts.Where(p => p.IsGlobal == true).ToList();
 
                 LikeCount = 0;
@@ -67,9 +67,9 @@ namespace Survey.Pages
 
 
 
-                PublishCount = _manager.PostService.GetAllPosts(false).Where(p => p.PublisherId.Equals(_authorId)).Count();
-                CompanyImageUrl = _manager.CompanyService.GetOneCompany(author.CompanyId, false).ImageUrl;
-                CompanyName = _manager.CompanyService.GetOneCompany(author.CompanyId, false).Name;
+                PublishCount = _manager.PostService.GetAllPosts(false).Where(p => p.PublisherId.Equals(_bossId)).Count();
+                CompanyImageUrl = _manager.CompanyService.GetOneCompany(boss.CompanyId, false).ImageUrl;
+                CompanyName = _manager.CompanyService.GetOneCompany(boss.CompanyId, false).Name;
 
                 CurrentUser = _mainPageModel.User;
 
@@ -78,11 +78,11 @@ namespace Survey.Pages
                     Follow IFollowToThisAuthor = Followers.Where(f => f.FollowById.Equals(_mainPageModel.User.Id)).FirstOrDefault(); // authorun takipçi lsitesinde ben varmıyım
                     if (IFollowToThisAuthor is not null)
                     {
-                        AuthorFollowing = true;
+                        BossFollowing = true;
                     }
                     else
                     {
-                        AuthorFollowing = false;
+                        BossFollowing = false;
                     }
                 }
             }

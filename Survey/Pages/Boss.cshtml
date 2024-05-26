@@ -21,17 +21,17 @@
                 <p>@Model.Information</p>
 
 
-                @if (Model.CurrentUser is not null && Model.CurrentUser.Id != Model.AuthorId)
+                @if (Model.CurrentUser is not null && Model.CurrentUser.Id != Model.BossId)
                 {
-                    if (!Model.AuthorFollowing)
+                    if (!Model.BossFollowing)
                     {
-                        <a asp-page="/Follow" asp-route-followedId="@Model.AuthorId"
+                        <a asp-page="/Follow" asp-route-followedId="@Model.BossId"
                             asp-route-followerId="@_mainPageModel.User.Id" asp-route-returnUrl="@returnUrl"
                             class="m-t-10 waves-effect waves-dark btn btn-primary btn-md btn-rounded" data-abc="true">Follow</a>
                     }
                     else
                     {
-                        <a asp-page="/UnFollow" asp-route-followedId="@Model.AuthorId"
+                        <a asp-page="/UnFollow" asp-route-followedId="@Model.BossId"
                             asp-route-followerId="@_mainPageModel.User.Id" asp-route-returnUrl="@returnUrl"
                             class="m-t-10 waves-effect waves-dark btn btn-primary btn-md btn-rounded"
                             data-abc="true">UnFollow</a>
@@ -57,11 +57,11 @@
                     </div>
                 </div>
 
-                @if (Model.CurrentUser is not null && Model.CurrentUser.Id != Model.AuthorId)
+                @if (Model.CurrentUser is not null && Model.CurrentUser.Id != Model.BossId)
                 {
                     <div class="row text-center m-t-20">
                         <div class="col-md-4"></div>
-                        <a asp-area="" asp-controller="Chat" asp-action="Index" asp-route-contactId="@Model.AuthorId"
+                        <a asp-area="" asp-controller="Chat" asp-action="Index" asp-route-contactId="@Model.BossId"
                             class="col-lg-4 col-md-4 m-t-20 btn btn-primary">
                             <i class="fa-solid fa-comment" style="margin-right:3px;"></i><small>Message</small>
                         </a>
@@ -77,7 +77,7 @@
 
         @if (_mainPageModel.User is not null)
         {
-            @if (Model.AuthorFollowing || _mainPageModel.User.Id.Equals(Model.AuthorId))
+            @if (Model.BossFollowing || _mainPageModel.User.Id.Equals(Model.BossId))
             {
                 <partial name="_ShowUserPosts" model="@Model.PostToShowedPost(@Model.AllPosts)"></partial>
             }
