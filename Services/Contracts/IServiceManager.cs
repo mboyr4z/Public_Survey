@@ -26,6 +26,8 @@ namespace Services.Contracts
         Task<bool> IsConfirmedMember(ClaimsPrincipal curUser);
         Task<bool> IsSurveyUserMembershipCompletedAsync(ClaimsPrincipal curUser);
 
+        Task<bool> IsSurveyUserMembershipCompletedAsync(IdentityUser user);
+
         Task<string> GetFullNameById(string userId);
 
         Task<string> GetImageUrlById(string userId);

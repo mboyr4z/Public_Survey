@@ -1,5 +1,6 @@
 @model ShowCommentsItem
 @inject MainPageModel _mainPageModel
+@inject IServiceManager _manager
 
 @inject IHttpContextAccessor HttpContextAccessor
 
@@ -9,7 +10,7 @@
 
 
 
-@if (_mainPageModel.User is not null)
+@if (_mainPageModel.User is not null && await _manager.IsSurveyUserMembershipCompletedAsync(_mainPageModel.User))
 {
     <div class="d-flex flex-row add-comment-section mt-4 mb-4">
         <img class="img-fluid img-responsive rounded-circle mr-2" src="@Model.userImageUrl" width="38">

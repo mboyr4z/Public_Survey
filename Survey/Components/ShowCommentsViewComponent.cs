@@ -30,7 +30,7 @@ namespace Survey.Components
             showCommentsItems = new ShowCommentsItem();
 
 
-            showCommentsItems.userImageUrl = _mainPageModel.User is not null?  await _manager.GetImageUrlById(_mainPageModel.User.Id) : ""; 
+            showCommentsItems.userImageUrl = (_mainPageModel.User is not null  && await _manager.IsSurveyUserMembershipCompletedAsync(_mainPageModel.User)) ?  await _manager.GetImageUrlById(_mainPageModel.User.Id) : ""; 
             showCommentsItems.postId = postId;
 
             foreach (Comment comment in comments)

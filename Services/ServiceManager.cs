@@ -189,5 +189,45 @@ namespace Services
             return false;
         }
 
+        public async Task<bool> IsSurveyUserMembershipCompletedAsync(IdentityUser user)
+        {
+            
+            if (user is not null)
+            {
+                string firstRole = (await _userManager.GetRolesAsync(user))[0];
+
+                Roles signingRole = (Roles)Enum.Parse(typeof(Roles), firstRole);
+
+                switch (signingRole)
+                {
+                    case Roles.Author:
+                        Author author = _authorService.GetOneAuthor(user.Id, false);
+                        if (author is not null)
+                        {
+                            return true;
+                        }
+                        break;
+                    case Roles.Boss:
+                        Boss boss = _bossService.GetOneBoss(user.Id, false);
+                        if (boss is not null)
+                        {
+                            return true;
+                        }
+                        break;
+                    case Roles.Commentator:
+                        Commentator commentator = _commentatorService.GetOneCommentator(user.Id, false);
+                        if (commentator is not null)
+                        {
+                            return true;
+                        }
+                        break;
+
+                    default:
+                        return true;
+                        break;
+                }
+            }
+            return false;
+        }
     }
 }
