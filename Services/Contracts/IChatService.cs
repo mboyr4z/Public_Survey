@@ -11,5 +11,7 @@ namespace Repositories.Contracts
         void CreateChat(Chat chat);
         void Delete(Chat chat);
         void UpdateOneChat(Chat entity);
+
+        IQueryable<string> GetAllCotnactsUsernameById(string myId);
     }
 }

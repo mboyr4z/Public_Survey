@@ -50,10 +50,13 @@
 
     </ul>
 
+ 
+
     @if (Model?.IsUserLogged == true)
     {
         <div class="col-md-3 text-end">
-            <a asp-controller="Account" asp-action="LogOut" class="btn btn-outline-primary me-2">Log out</a>
+            <a asp-area="" asp-controller="Chat" asp-action="Index" class="btn btn-outline-primary me-2"><i class="fa-brands fa-rocketchat"></i></a>
+            <a asp-area="" asp-controller="Account" asp-action="LogOut" class="btn btn-outline-primary me-2">Log out</a>
         </div>
     }
     else

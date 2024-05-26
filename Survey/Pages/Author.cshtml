@@ -24,7 +24,6 @@
                 <h3 class="m-b-0">@Model.FullName</h3>
                 <p>@Model.Information</p>
 
-                @ViewBag.returnUrl
 
                 @if (Model.CurrentUser is not null && Model.CurrentUser.Id != Model.AuthorId)
                 {
@@ -61,6 +60,19 @@
                         <h3 class="m-b-0 font-light">@Model.LikeCount</h3><small>Like</small>
                     </div>
                 </div>
+
+                @if (Model.CurrentUser is not null && Model.CurrentUser.Id != Model.AuthorId)
+                {
+                    <div class="row text-center m-t-20">
+                        <div class="col-md-4"></div>
+                        <a asp-area = "" asp-controller="Chat" asp-action="Index" asp-route-contactId="@Model.AuthorId" class="col-lg-4 col-md-4 m-t-20 btn btn-primary">
+                            <i class="fa-solid fa-comment" style="margin-right:3px;"></i><small>Message</small>
+                        </a>
+
+                    </div>
+                }
+
+
             </div>
         </div>
     </div>

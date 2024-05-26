@@ -1,0 +1,123 @@
+@using Survey.Benimkiler
+@model MessageAreaModel
+@inject IHttpContextAccessor HttpContextAccessor
+
+@{
+    ViewData["Title"] = "Message Page";
+    var returnUrl = $"{HttpContextAccessor.HttpContext.Request.Path}{HttpContextAccessor.HttpContext.Request.QueryString}";
+}
+
+
+<div class="col-12 col-lg-7 col-xl-9">
+    <div class="py-2 px-4 border-bottom d-none d-lg-block">
+        <div class="d-flex align-items-center py-1">
+            <div class="position-relative">
+                <img src="@Model.contactImageUrl" class="rounded-circle mr-1" width="40" height="40">
+            </div>
+            <div class="flex-grow-1 pl-3">
+                <strong>@Model.contactName</strong>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="position-relative">
+        <div class="chat-messages p-4">
+            @foreach (MessageModel message in @Model.messages)
+            {
+                @if (message.isMyMessage == true)
+                {
+                    <div class="chat-message-right pb-4">
+                        
+                        <div class="flex-shrink-1 bg-primary rounded py-2 px-3 mr-3 ">
+                                @message.content
+                        </div>
+                        
+                        <div>
+                            <div class="text-muted small text-nowrap mt-2">@message.time</div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="chat-message-left pb-4">
+                        
+                        <div class="flex-shrink-1 bg-secondary rounded py-2 px-3 ml-3">
+                            @message.content
+                        </div>
+
+                        <div>
+                            <div class="text-muted small text-nowrap mt-2">@message.time</div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+
+    <div class="flex-grow-0 py-3 px-4 border-top">
+        <div class="input-group">
+            <input type="text" class="form-control" id="chatInput" placeholder="Type your message">
+            <a onclick="SendMessage()" class="btn btn-primary">Send</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    function SendMessage() {
+        var chatInput = document.getElementById('chatInput');
+        var chatInputContent = chatInput.value;
+        var returnUrl = '@returnUrl'; 
+
+        var url = `/SendMessage?senderId=@Model.myId&receiverId=@Model.contactId&content=${encodeURIComponent(chatInputContent)}&returnUrl=${encodeURIComponent(returnUrl)}`;
+        window.location.href = url;
+    }
+</script>
+
+<style>
+    body{margin-top:20px;}
+
+.chat-online {
+    color: #34ce57
+}
+
+.chat-offline {
+    color: #e4606d
+}
+
+.chat-messages {
+    display: flex;
+    flex-direction: column;
+    max-height: 800px;
+    overflow-y: scroll
+}
+
+.chat-message-left,
+.chat-message-right {
+    display: flex;
+    flex-shrink: 0
+}
+
+.chat-message-left {
+    margin-right: auto
+}
+
+.chat-message-right {
+    flex-direction: row-reverse;
+    margin-left: auto
+}
+.py-3 {
+    padding-top: 1rem!important;
+    padding-bottom: 1rem!important;
+}
+.px-4 {
+    padding-right: 1.5rem!important;
+    padding-left: 1.5rem!important;
+}
+.flex-grow-0 {
+    flex-grow: 0!important;
+}
+.border-top {
+    border-top: 1px solid #dee2e6!important;
+}
+</style>

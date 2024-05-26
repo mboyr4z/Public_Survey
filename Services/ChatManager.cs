@@ -38,6 +38,13 @@ namespace Services
             return _manager.Chat.GetAllChats(trackChanges);
         }
 
+        public IQueryable<string> GetAllCotnactsUsernameById(string myId)
+        {
+            return _manager.Chat.GetAllChats(false).Where(c => c.SenderId.Equals(myId) || c.ReceiverId.Equals(myId))
+                .Select(m => m.SenderId.Equals(myId) ? m.ReceiverId : m.SenderId)
+                .Distinct();
+        }
+
         public Chat? GetOneChat(string id, bool trackChanges)
         {
             return _manager.Chat.GetOneChat(id, trackChanges);
