@@ -19,7 +19,7 @@ namespace Survey.Pages
 
         public async Task<IActionResult> OnGetAsync(string userId)
         {
-
+            p.f("userid : " + userId);
             IdentityUser user = await _userManager.FindByIdAsync(userId);
 
             if (user is not null)
@@ -30,17 +30,17 @@ namespace Survey.Pages
 
                 if (role == Roles.Author)
                 {
-                    // p.f("a");
+                    p.f("a");
                     return RedirectToPage("/Author", new { _authorId = userId });
                 }
                 else if (role == Roles.Commentator)
                 {
-                    // p.f("c");
+                    p.f("c");
                     return RedirectToPage("/Commentator", new { _commentatorId = userId });
                 }
                 else if (role == Roles.Boss)
                 {
-                    // p.f("b");
+                    p.f("b");
                     return RedirectToPage("/Boss", new { _bossId = userId });
                 }
 
@@ -49,7 +49,7 @@ namespace Survey.Pages
             {
                 p.f("kullanıcı yok");
             }
-
+            p.f("boşta gidiyor");
             return RedirectToPage("/Boss");
         }
 

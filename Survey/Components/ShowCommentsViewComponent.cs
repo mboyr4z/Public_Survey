@@ -44,6 +44,7 @@ namespace Survey.Components
                 commentItem.PublishTime = comment.PublishTime;
                 commentItem.Content = comment.Content;
                 commentItem.CommenterImageUrl = await _manager.GetImageUrlById(commenterId);
+                commentItem.CommentatorId = comment.CommenterId;
 
                 showCommentsItems.commentItems.Add(
                         commentItem
@@ -68,6 +69,8 @@ namespace Survey.Components
     }
     public class CommentItem
     {
+        public string CommentatorId{get;set;}
+
         public string FullName { get; set; }
         public DateTime PublishTime { get; set; }
         public string Content;
