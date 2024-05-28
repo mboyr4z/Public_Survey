@@ -1,3 +1,8 @@
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using StoreApp.Infrastructure.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,6 +26,9 @@ builder.Services.ConfigureRouting();
 builder.Services.ConfigureApplicationCookie();
 
 
+
+
+
 var app = builder.Build();
 
 app.UseStaticFiles();       // wwwroot klasöürün kullanılabilir hale getir
@@ -29,7 +37,8 @@ app.UseSession();
 app.UseHttpsRedirection();      // yönlendirme https üzernden olcak, redirect için gerekli
 app.UseRouting(); // yönlendirme için gerekli
 
-app.UseAuthentication();   // önce oturum, sonra yetkilendirme 
+app.UseAuthentication();
+// önce oturum, sonra yetkilendirme 
 app.UseAuthorization();  // oturum açma ve yetkilendirme, bunlarda routing ile endpoint arasında olmalı yoksa çalışmaz
 
 app.UseEndpoints(endpoints =>
