@@ -4,7 +4,9 @@ This project aims to bring the thoughts of media writers and bosses to the reade
 
 On the sign-up screen, you can register as a writer, boss or commenter and then wait for approval by the admin.
 
-Authorizations are as follows.
+<br>
+
+<h2>Authorizations are as follows :</h2> 
 Post Commenting Commenter, Author, Patron
 
 Post Like : Commentator, Author, Boss
