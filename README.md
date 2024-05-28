@@ -11,6 +11,7 @@ Post Commenting : <i> Commenter, Author, Patron</i><br>
 Post Like : <i>Commentator, Author, Boss</i><br>
 Follow : <i>Commentator, Author, Patron</i><br>
 Posting : <i>Author and Patron whose membership is approved by admin</i><br>
+Messaging : <i>Author, Commenter and Boss</i>
 
 <h2>images from the project</h2>
 
