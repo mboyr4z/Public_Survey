@@ -7,7 +7,7 @@ On the sign-up screen, you can register as a writer, boss or commenter and then 
 <br>
 
 <h2>Authorizations are as follows :</h2> 
-Post Commenting : <i> Commenter, Author, Patron</i>
-Post Like : <i>Commentator, Author, Boss</i>
-Follow : <i>Commentator, Author, Patron</i>
-Posting : <i>Author and Patron whose membership is approved by admin</i>
+Post Commenting : <i> Commenter, Author, Patron</i><br>
+Post Like : <i>Commentator, Author, Boss</i><br>
+Follow : <i>Commentator, Author, Patron</i><br>
+Posting : <i>Author and Patron whose membership is approved by admin</i><br>
