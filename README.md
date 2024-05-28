@@ -1,17 +1,12 @@
-bu proje medya yazarları ve patronlarının düşüncelerini okuyucularla buluşturması ve okuyucuların paylaşımlara düşüncelerini eklemesi amacını taşımaktadır.
+This project aims to bring the thoughts of media writers and bosses to the readers and for the readers to add their thoughts to the posts.
 
-Kaydolma ekranında, Yazar, Patron ve yorumcu sıfatıyla kaydolunmakta ve daha sorna admin tarafından onay beklenmektedir.
+On the sign-up screen, you can register as a writer, boss or commenter and then wait for approval by the admin.
 
-Yetkiler ise şu şekildedir.
-Gönderi Yorum yapma  Yorumcu, Yazar, Patron
+Authorizations are as follows.
+Post Commenting Commenter, Author, Patron
 
-Gönderi Beğenme : Yorumcu, Yazar, Patron
+Post Like : Commentator, Author, Boss
 
-Takip Etme : Yorumcu, Yazar, Patron
+Do Not Follow : Commentator, Author, Patron
 
-Gönderi Yapma : Üyeliği admin tarafından onaylanmış Yazar ve Patron
-
-Kullanıcı İşlemleri (Silme, Onaylama) : Admin
-
-
-
+Posting : Author and Patron whose membership is approved by admin
