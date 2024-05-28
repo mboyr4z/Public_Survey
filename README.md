@@ -11,6 +11,6 @@ Post Commenting Commenter, Author, Patron
 
 Post Like : Commentator, Author, Boss
 
-Do Not Follow : Commentator, Author, Patron
+Follow : Commentator, Author, Patron
 
 Posting : Author and Patron whose membership is approved by admin
