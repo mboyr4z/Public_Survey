@@ -1,0 +1,96 @@
+<div class="text-end">
+    <form class="form-inline">
+        <input onkeyup="searchPerson()" class="form-control mr-sm-2" id="searchInput" type="search" placeholder="Search"
+            aria-label="Search">
+    </form>
+    <div id="results">
+        merhaba
+    </div>
+
+</div>
+
+
+<script>
+    function searchPerson() {
+        var query = document.getElementById("searchInput").value;
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "/api/search?query=" + query, true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+
+
+
+                var results = JSON.parse(xhr.responseText);
+                var resultsContainer = document.getElementById("results");
+                resultsContainer.innerHTML = "";
+
+                console.log(results);
+
+                results.forEach(function (person) {
+
+
+
+
+                    
+
+                    var card = document.createElement("div");
+                    card.className = "card-header";
+
+                    var secondCard = document.createElement("div");
+                    secondCard.className = "d-flex justify-content-between align-items-center";
+
+                    var thirdCard = document.createElement("div");
+                    thirdCard.className = "d-flex justify-content-between align-items-center";
+
+                    var imageDiv = document.createElement("div");
+                    imageDiv.className = "mr-2";
+
+                    var textDiv = document.createElement("div");
+                    textDiv.className = "ml-2";
+
+                    var image = document.createElement("img");
+
+                    image.className = "rounded-circle"
+                    image.width = 45;
+                    image.height = 45;
+
+                    var linkDiv = document.createElement("div");
+                    linkDiv.className = "h5 m-0";
+
+                    var informationDiv = document.createElement("div");
+                    informationDiv.className = "h7 text-muted";
+
+                    var linkA = document.createElement("a");
+                    linkA.className = "text-decoration-none text-secondary";
+
+
+                    linkDiv.appendChild(linkA);
+                    textDiv.appendChild(linkDiv);
+                    textDiv.appendChild(informationDiv);
+
+                    imageDiv.appendChild(image);
+                    thirdCard.appendChild(imageDiv);
+                    thirdCard.appendChild(textDiv);
+
+                    secondCard.appendChild(thirdCard);
+                    card.appendChild(secondCard);
+
+
+
+                    informationDiv.textContent = person.information;
+                    linkA.textContent = person.fullName;
+                    linkA.href = "/router?" + person.userId;
+                    image.src = person.imagePath;
+
+
+
+
+                    resultsContainer.appendChild(card);
+
+
+                });
+            }
+        };
+        xhr.send();
+    }
+</script>

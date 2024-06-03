@@ -10,10 +10,15 @@
             <use xlink:href="#bootstrap"></use>
         </svg>
     </a>
+
+
+
     <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+
         <li>
             <a asp-area="" asp-controller="MainPage" asp-action="Index" class="nav-link px-2 link-secondary">Home</a>
         </li>
+
 
 
         @if (Model?.Role == Roles.Admin)
@@ -28,7 +33,9 @@
             @if (@Model?.IsUserCompletedMembership == false)
             {
                 <li>
-                    <a class="nav-link px-2 link-dark text-danger" asp-controller="MembershipComplete" asp-action="CustomizeAccordingToRole" asp-route-role="@Model.Role" asp-route-userId="@Model.User.Id">Complete Membership..</a>
+                    <a class="nav-link px-2 link-dark text-danger" asp-controller="MembershipComplete"
+                        asp-action="CustomizeAccordingToRole" asp-route-role="@Model.Role"
+                        asp-route-userId="@Model.User.Id">Complete Membership..</a>
                 </li>
             }
 
@@ -50,12 +57,13 @@
 
     </ul>
 
- 
 
+    
     @if (Model?.IsUserLogged == true)
     {
         <div class="col-md-3 text-end">
-            <a asp-area="" asp-controller="Chat" asp-action="Index" class="btn btn-outline-primary me-2"><i class="fa-brands fa-rocketchat"></i></a>
+            <a asp-area="" asp-controller="Chat" asp-action="Index" class="btn btn-outline-primary me-2"><i
+                    class="fa-brands fa-rocketchat"></i></a>
             <a asp-area="" asp-controller="Account" asp-action="LogOut" class="btn btn-outline-primary me-2">Log out</a>
         </div>
     }

@@ -1,5 +1,6 @@
 using System.Dynamic;
 using System.Security.Claims;
+using Entities.Models;
 using Microsoft.AspNetCore.Identity;
 using Repositories.Contracts;
 
@@ -32,6 +33,6 @@ namespace Services.Contracts
 
         Task<string> GetImageUrlById(string userId);
 
-        
+        List<UserCard> SearchUserWithKeyword(string keyword);
     }
 }

@@ -4,29 +4,31 @@
     <h1>Public Survey</h1>
 
     <p>
-        
+
     </p>
 </div>
 
 
 <div class="row">
-    <div class="col-md-2"></div>
+    <div class="col-md-2">
+
+        @await Component.InvokeAsync("SearchUser")
+
+    </div>
     <div class="col-md-8 row">
         <div class="col-md-1"></div>
         <div class="col-md-10 ">
-         
 
-            @if((Model.Role == Roles.Author || Model.Role == Roles.Boss) && Model.IsUserConfirmed){
+
+            @if ((Model.Role == Roles.Author || Model.Role == Roles.Boss) && Model.IsUserConfirmed)
+            {
                 @await Component.InvokeAsync("CreatePost")
             }
-                
+
             @await Component.InvokeAsync("ShowPosts")
 
-            
-
-
         </div>
-        
+
         <div class="col-md-1"></div>
     </div>
     <div class="col-md-2"></div>

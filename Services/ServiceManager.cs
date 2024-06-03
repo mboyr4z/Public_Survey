@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Security.Claims;
 using Benimkiler.Roles;
 using Entities.Models;
@@ -191,7 +192,7 @@ namespace Services
 
         public async Task<bool> IsSurveyUserMembershipCompletedAsync(IdentityUser user)
         {
-            
+
             if (user is not null)
             {
                 string firstRole = (await _userManager.GetRolesAsync(user))[0];
@@ -228,6 +229,63 @@ namespace Services
                 }
             }
             return false;
+        }
+
+        public List<UserCard> SearchUserWithKeyword(string keyword)
+        {
+            List<UserCard> cards = new List<UserCard>();
+            if (string.IsNullOrEmpty(keyword))
+            {
+                return null;
+            }
+            else
+            {
+                IQueryable<Author> authors = _authorService.GetAllAuthors(false).Where(a => a.Name.ToLower().Contains(keyword.ToLower()) || a.Surname.ToLower().Contains(keyword.ToLower()));
+                IQueryable<Boss> bosses = _bossService.GetAllBosses(false).Where(a => a.Name.ToLower().Contains(keyword.ToLower()) || a.Surname.ToLower().Contains(keyword.ToLower()));
+                IQueryable<Commentator> commentators = _commentatorService.GetAllCommentators(false).Where(a => a.Name.ToLower().Contains(keyword.ToLower()) || a.Surname.ToLower().Contains(keyword.ToLower()));
+
+                foreach (Author author in authors)
+                {
+                    cards.Add(
+                        new UserCard
+                        {
+                            FullName = author.FullName,
+                            ImagePath = author.ImageUrl,
+                            Information = "author at " + _companyService.GetOneCompany(author.CompanyId, false).Name,
+                            UserId = author.Id
+
+
+                        }
+                    );
+                }
+
+                foreach (Boss boss in bosses)
+                {
+                    cards.Add(
+                        new UserCard
+                        {
+                            FullName = boss.FullName,
+                            ImagePath = boss.ImageUrl,
+                            Information = "author at " + _companyService.GetOneCompany(boss.CompanyId, false).Name,
+                            UserId = boss.Id
+                        }
+                    );
+                }
+
+                foreach (Commentator commentator in commentators)
+                {
+                    cards.Add(
+                        new UserCard
+                        {
+                            FullName = commentator.FullName,
+                            ImagePath = commentator.ImageUrl,
+                            Information = "commentator at our company",
+                            UserId = commentator.Id
+                        }
+                    );
+                }
+                return cards;
+            }
         }
     }
 }
