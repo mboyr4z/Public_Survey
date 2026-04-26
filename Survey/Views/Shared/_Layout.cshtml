@@ -1,29 +1,25 @@
-﻿@inject MainPageModel mainPageModel
-
+@inject MainPageModel mainPageModel
 
 <!DOCTYPE html>
 <html lang="en">
-
-
-
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Survey</title>
+    <title>@ViewData["Title"] - PublicSurvey</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Survey.styles.css" asp-append-version="true" />
-        <link rel="stylesheet" href="~/lib/font-awesome/css/all.css" />
 </head>
-
 <body>
-
     <header>
-        <partial name="_Header" model="mainPageModel"/>
+        <partial name="_Header" model="mainPageModel" />
     </header>
 
-    <div class="container">
-        <main role="main" class="pb-3">
+    <div class="ps-main">
+        <main role="main">
             @RenderBody()
         </main>
     </div>
@@ -35,5 +31,4 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
-
 </html>

@@ -1,41 +1,18 @@
 @model PostDto
 
 <form asp-controller="Interaction" asp-action="CreatePost">
-    <div class="card gedf-card">
-        <div class="card-header">
-            <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active show" id="posts-tab" data-toggle="tab" href="#posts" role="tab"
-                        aria-controls="posts" aria-selected="true">Make
-                        a publication</a>
-                </li>
-              
-            </ul>
+    <div class="create-post-card">
+        <div class="mb-3">
+            <textarea class="form-control" asp-for="Content" placeholder="What's on your mind? Share an idea, question, or survey..." rows="3"></textarea>
         </div>
-        <div class="card-body">
-            <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade active show" id="posts" role="tabpanel" aria-labelledby="posts-tab">
-                    <div class="form-group">
-                        <label class="sr-only" for="message">post</label>
-                        <textarea class="form-control" asp-for="Content" placeholder="What are you thinking?"></textarea>
-                    </div>
-
-                </div>
-               
-            </div>
-            <div class="btn-toolbar justify-content-between">
-                <div class="btn-group">
-                    <button type="submit" class="btn btn-primary my-2">share</button>
-                </div>
-
-                <div class="form-group my-2">
-                    <select class="form-control" asp-for="IsGlobalString">
-                        <option value="global" selected>Global</option>
-                        <option value="local">Local</option>
-                    </select>
-                </div>
-
-            </div>
+        <div class="d-flex align-items-center justify-content-between">
+            <select class="form-control" asp-for="IsGlobalString" style="width:auto; min-width:130px;">
+                <option value="global" selected><i class="fa-solid fa-globe"></i> Global</option>
+                <option value="local">Local</option>
+            </select>
+            <button type="submit" class="btn btn-primary">
+                <i class="fa-solid fa-paper-plane"></i> Publish
+            </button>
         </div>
     </div>
 </form>

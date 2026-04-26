@@ -1,46 +1,44 @@
 @model account_LoginDto
+@{
+    Layout = "_EmptyLayout";
+    ViewData["Title"] = "Login";
+}
 
-
-
-<form method="post" asp-controller="Account" asp-action="Login">
-    <div class="row my-10">
-        <div class="col-md-3">
-
-
+<div class="auth-wrapper">
+    <div class="auth-card">
+        <div class="auth-logo">
+            <div class="brand-icon">
+                <i class="fa-solid fa-chart-simple"></i>
+            </div>
+            <span>PublicSurvey</span>
         </div>
-        <div class="col-md-6">
 
-            
-            <div class="">
-                <div class="text-danger" asp-validation-summary="All">
-                    
-                </div>
+        <h2 class="auth-title">Welcome back</h2>
+        <p class="auth-subtitle">Sign in to your account to continue</p>
+
+        <form method="post" asp-controller="Account" asp-action="Login">
+            <div class="text-danger" asp-validation-summary="All"></div>
+
+            <div class="mb-3">
+                <label asp-for="UserName">Username</label>
+                <input class="form-control" type="text" asp-for="UserName" placeholder="Enter your username">
             </div>
 
-            <div class="form-group">
-                <label asp-for="UserName"></label>
-                <input class="form-control" type="text" asp-for="UserName">
+            <div class="mb-4">
+                <label asp-for="Password">Password</label>
+                <input class="form-control" type="password" asp-for="Password" placeholder="Enter your password">
             </div>
 
-            <div class="form-group my-3">
-                <label asp-for="Password"></label>
-                <input class="form-control" type="text" asp-for="Password">
-            </div>
+            <button class="btn btn-primary w-100" type="submit" style="justify-content: center; padding: 12px;">
+                Sign in
+            </button>
+        </form>
 
-            <div class="form-group d-flex align-items-center justify-content-between">
-                <button class="btn btn-success" type="submit" value="Gönder">Login</button>
-                <p class="m-0">Not a member? <a asp-area="" asp-controller="Account" asp-action="Register">Register</a></p>
-            </div>
-
-
-        </div>
-        <div class="col-md-3"></div>
+        <p class="auth-footer-text">
+            Don't have an account? <a asp-area="" asp-controller="Account" asp-action="Register">Create one</a>
+        </p>
     </div>
-
-
-
-
-</form>
+</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

@@ -1,60 +1,55 @@
 @model account_RegisterDto
+@{
+    Layout = "_EmptyLayout";
+    ViewData["Title"] = "Register";
+}
 
-<form method="post" asp-controller="Account" asp-action="Register">
-    <div class="row my-10">
-        <div class="col-md-3">
-
-
+<div class="auth-wrapper">
+    <div class="auth-card">
+        <div class="auth-logo">
+            <div class="brand-icon">
+                <i class="fa-solid fa-chart-simple"></i>
+            </div>
+            <span>PublicSurvey</span>
         </div>
-        <div class="col-md-6">
 
-            <div class="">
-                <div class="text-danger" asp-validation-summary="All">
+        <h2 class="auth-title">Create an account</h2>
+        <p class="auth-subtitle">Join PublicSurvey and start sharing</p>
 
-                </div>
+        <form method="post" asp-controller="Account" asp-action="Register">
+            <div class="text-danger" asp-validation-summary="All"></div>
+
+            <div class="mb-3">
+                <label asp-for="UserName">Username</label>
+                <input class="form-control" type="text" asp-for="UserName" placeholder="Choose a username">
             </div>
 
-            <div class="form-group">
-                <label asp-for="UserName"></label>
-                <input class="form-control" type="text" asp-for="UserName">
+            <div class="mb-3">
+                <label asp-for="Email">Email</label>
+                <input class="form-control" type="text" asp-for="Email" placeholder="your@email.com">
             </div>
 
-            <div class="form-group my-3">
-                <label asp-for="Email"></label>
-                <input class="form-control" type="text" asp-for="Email">
+            <div class="mb-3">
+                <label asp-for="Password">Password</label>
+                <input class="form-control" type="password" asp-for="Password" placeholder="Create a password">
             </div>
 
-            <div class="form-group my-3">
-                <label asp-for="Password"></label>
-                <input class="form-control" type="text" asp-for="Password">
+            <div class="mb-4">
+                <label>Role</label>
+                <select class="form-control" asp-items="@ViewBag.allRoles" asp-for="RoleId"></select>
             </div>
 
-            <div class="form-group my-3">
-                <label>Role </label>
-                <select class="form-control" asp-items="@ViewBag.allRoles" asp-for="RoleId">
-                </select>
-            </div>
+            <button class="btn btn-primary w-100" type="submit" style="justify-content: center; padding: 12px;">
+                Create account
+            </button>
+        </form>
 
-            <div class="form-group d-flex align-items-center justify-content-between">
-                <button class="btn btn-success" type="submit">Register</button>
-                <p class="m-0">Are You Already a Member <a asp-area="" asp-controller="Account"
-                        asp-action="Login">Login</a>
-                </p>
-
-            </div>
-
-
-        </div>
-        <div class="col-md-3"></div>
+        <p class="auth-footer-text">
+            Already have an account? <a asp-area="" asp-controller="Account" asp-action="Login">Sign in</a>
+        </p>
     </div>
-
-
-
-
-</form>
+</div>
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

@@ -1,35 +1,24 @@
 @model MainPageModel
 
-<div>
-    <h1>Public Survey</h1>
-
-    <p>
-
-    </p>
-</div>
-
-
-<div class="row">
-    <div class="col-md-2">
-
+<div class="row g-4">
+    <div class="col-lg-3 col-md-4 d-none d-md-block">
         @await Component.InvokeAsync("SearchUser")
-
     </div>
-    <div class="col-md-8 row">
-        <div class="col-md-1"></div>
-        <div class="col-md-10 ">
 
+    <div class="col-lg-6 col-md-8">
+        @if ((Model.Role == Roles.Author || Model.Role == Roles.Boss) && Model.IsUserConfirmed)
+        {
+            @await Component.InvokeAsync("CreatePost")
+        }
+        @await Component.InvokeAsync("ShowPosts")
+    </div>
 
-            @if ((Model.Role == Roles.Author || Model.Role == Roles.Boss) && Model.IsUserConfirmed)
-            {
-                @await Component.InvokeAsync("CreatePost")
-            }
-
-            @await Component.InvokeAsync("ShowPosts")
-
+    <div class="col-lg-3 d-none d-lg-block">
+        <div class="search-card">
+            <p style="font-size:0.8rem; font-weight:600; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:12px;">About</p>
+            <p style="font-size:0.85rem; color:var(--text-muted); line-height:1.6; margin:0;">
+                PublicSurvey is a platform for authors and companies to share insights, surveys, and ideas with their community.
+            </p>
         </div>
-
-        <div class="col-md-1"></div>
     </div>
-    <div class="col-md-2"></div>
 </div>

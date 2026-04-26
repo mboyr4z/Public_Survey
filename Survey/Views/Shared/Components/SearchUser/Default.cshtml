@@ -1,93 +1,50 @@
-<div class="text-end">
-    <form class="form-inline">
-        <input onkeyup="searchPerson()" class="form-control mr-sm-2" id="searchInput" type="search" placeholder="Search"
-            aria-label="Search">
-    </form>
-    <div id="results">
-        merhaba
-    </div>
-
+<div class="search-card">
+    <p style="font-size:0.8rem; font-weight:600; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:10px;">
+        <i class="fa-solid fa-magnifying-glass"></i> Search Users
+    </p>
+    <input onkeyup="searchPerson()" class="form-control" id="searchInput" type="search" placeholder="Search by name...">
+    <div id="results" style="margin-top: 8px;"></div>
 </div>
-
 
 <script>
     function searchPerson() {
         var query = document.getElementById("searchInput").value;
+        if (query.length === 0) {
+            document.getElementById("results").innerHTML = "";
+            return;
+        }
         var xhr = new XMLHttpRequest();
         xhr.open("GET", "/api/search?query=" + query, true);
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
-
-
-
                 var results = JSON.parse(xhr.responseText);
-                var resultsContainer = document.getElementById("results");
-                resultsContainer.innerHTML = "";
-
-                console.log(results);
+                var container = document.getElementById("results");
+                container.innerHTML = "";
 
                 results.forEach(function (person) {
+                    var item = document.createElement("a");
+                    item.className = "search-result-item";
+                    item.href = "/router?" + person.userId;
 
-
-
-
-                    
-
-                    var card = document.createElement("div");
-                    card.className = "card-header";
-
-                    var secondCard = document.createElement("div");
-                    secondCard.className = "d-flex justify-content-between align-items-center";
-
-                    var thirdCard = document.createElement("div");
-                    thirdCard.className = "d-flex justify-content-between align-items-center";
-
-                    var imageDiv = document.createElement("div");
-                    imageDiv.className = "mr-2";
+                    var img = document.createElement("img");
+                    img.src = person.imagePath;
+                    img.alt = person.fullName;
 
                     var textDiv = document.createElement("div");
-                    textDiv.className = "ml-2";
 
-                    var image = document.createElement("img");
+                    var nameDiv = document.createElement("div");
+                    nameDiv.className = "search-result-name";
+                    nameDiv.textContent = person.fullName;
 
-                    image.className = "rounded-circle"
-                    image.width = 45;
-                    image.height = 45;
+                    var infoDiv = document.createElement("div");
+                    infoDiv.className = "search-result-info";
+                    infoDiv.textContent = person.information;
 
-                    var linkDiv = document.createElement("div");
-                    linkDiv.className = "h5 m-0";
-
-                    var informationDiv = document.createElement("div");
-                    informationDiv.className = "h7 text-muted";
-
-                    var linkA = document.createElement("a");
-                    linkA.className = "text-decoration-none text-secondary";
-
-
-                    linkDiv.appendChild(linkA);
-                    textDiv.appendChild(linkDiv);
-                    textDiv.appendChild(informationDiv);
-
-                    imageDiv.appendChild(image);
-                    thirdCard.appendChild(imageDiv);
-                    thirdCard.appendChild(textDiv);
-
-                    secondCard.appendChild(thirdCard);
-                    card.appendChild(secondCard);
-
-
-
-                    informationDiv.textContent = person.information;
-                    linkA.textContent = person.fullName;
-                    linkA.href = "/router?" + person.userId;
-                    image.src = person.imagePath;
-
-
-
-
-                    resultsContainer.appendChild(card);
-
-
+                    textDiv.appendChild(nameDiv);
+                    textDiv.appendChild(infoDiv);
+                    item.appendChild(img);
+                    item.appendChild(textDiv);
+                    container.appendChild(item);
                 });
             }
         };
