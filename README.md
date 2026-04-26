@@ -98,7 +98,10 @@ Tarayıcında `https://localhost:5001` adresini aç.
 
 ## 📸 Ekran Görüntüleri
 
-> _(Buraya ekran görüntüleri eklenecek)_
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/0fe453a8-2435-4871-8e92-96aa3e23b476" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/96856e9d-413d-4fd9-9eea-b50c613fdeff" />
+
+
 
 ---
 
