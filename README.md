@@ -11,80 +11,80 @@
 
 # 📊 PublicSurvey
 
-**A social survey platform where authors, companies, and commentators connect — share posts, follow users, like, comment, and chat.**
+**Yazarların, şirketlerin ve yorumcuların bir araya geldiği sosyal anket platformu — gönderi paylaş, kullanıcıları takip et, beğen, yorum yap ve mesajlaş.**
 
 </div>
 
 ---
 
-## 🚀 Features
+## 🚀 Özellikler
 
-| Feature | Description |
+| Özellik | Açıklama |
 |---|---|
-| 👤 **Role-Based Access** | Author, Boss, Commentator and Admin roles with separate flows |
-| 📝 **Post System** | Create global or local posts, like and comment |
-| 💬 **Direct Messaging** | Real-time chat between users |
-| 🔍 **User Search** | AJAX-powered live search by name or surname |
-| 🏢 **Company Management** | Bosses can create companies; authors can join them |
-| ✅ **Membership Approval** | Admin confirms user memberships before activation |
-| 🛡️ **Admin Panel** | Full user and role management dashboard |
-| 🔐 **JWT Auth** | Secure API endpoints with JWT Bearer tokens |
+| 👤 **Rol Tabanlı Erişim** | Author, Boss, Commentator ve Admin rolleriyle ayrı kullanıcı akışları |
+| 📝 **Gönderi Sistemi** | Global veya yerel gönderi oluşturma, beğenme ve yorum yapma |
+| 💬 **Doğrudan Mesajlaşma** | Kullanıcılar arası anlık chat sistemi |
+| 🔍 **Kullanıcı Arama** | AJAX tabanlı canlı isim/soyisim araması |
+| 🏢 **Şirket Yönetimi** | Boss kullanıcılar şirket kurabilir, yazarlar şirkete katılabilir |
+| ✅ **Üyelik Onayı** | Admin, kullanıcı üyeliklerini aktif etmeden önce onaylar |
+| 🛡️ **Admin Paneli** | Kullanıcı ve rol yönetimi için tam yetkili yönetim ekranı |
+| 🔐 **JWT Kimlik Doğrulama** | REST API uç noktaları için JWT Bearer token güvenliği |
 
 ---
 
-## 🛠️ Tech Stack
+## 🛠️ Kullanılan Teknolojiler
 
 ### Backend
-- **ASP.NET Core MVC** (.NET 8) — server-side rendering with Razor views
-- **Entity Framework Core 8** — Code-First database management
-- **ASP.NET Core Identity** — authentication & role-based authorization (RBAC)
-- **JWT Bearer Token** — secure REST API authentication
-- **AutoMapper** — clean Entity ↔ DTO mapping
+- **ASP.NET Core MVC** (.NET 8) — Razor Views ile sunucu taraflı rendering
+- **Entity Framework Core 8** — Code-First yaklaşımıyla veritabanı yönetimi
+- **ASP.NET Core Identity** — Kimlik doğrulama ve rol tabanlı yetkilendirme (RBAC)
+- **JWT Bearer Token** — API güvenliği
+- **AutoMapper** — Entity ↔ DTO dönüşümleri
 
 ### Frontend
-- **Bootstrap 5** + **Font Awesome 6** — responsive & modern UI
-- **jQuery** + **AJAX** — live user search without page reload
+- **Bootstrap 5** + **Font Awesome 6** — Duyarlı ve modern arayüz
+- **jQuery** + **AJAX** — Sayfa yenilemeden canlı kullanıcı arama
 
-### Architecture
-- **N-Tier Layered Architecture** (Presentation → Services → Repositories → Entities)
-- **Repository Pattern** — abstracted data access layer
-- **Unit of Work Pattern** — consistent transaction management
-- **View Components** — modular, reusable UI blocks
+### Mimari
+- **N-Tier Katmanlı Mimari** (Presentation → Services → Repositories → Entities)
+- **Repository Pattern** — Veri erişim katmanı soyutlaması
+- **Unit of Work Pattern** — Tutarlı transaction yönetimi
+- **View Components** — Modüler ve yeniden kullanılabilir UI bileşenleri
 
 ---
 
-## 🏗️ Project Structure
+## 🏗️ Proje Yapısı
 
 ```
 PublicSurvey/
-├── Survey/           # Main app — controllers, views, program.cs
-├── Services/         # Business logic layer
-├── Repositories/     # Data access layer (EF Core)
-├── Entities/         # Domain models & DTOs
-├── Presentation/     # API controllers
-└── Benimkiler/       # Shared utilities & enums
+├── Survey/           # Ana uygulama — controller'lar, view'lar, program.cs
+├── Services/         # İş mantığı katmanı
+├── Repositories/     # Veri erişim katmanı (EF Core)
+├── Entities/         # Domain modelleri ve DTO'lar
+├── Presentation/     # API controller'ları
+└── Benimkiler/       # Paylaşılan yardımcı araçlar ve enum'lar
 ```
 
 ---
 
-## 👥 User Roles
+## 👥 Kullanıcı Rolleri
 
 ```
-SurveyUser (base)
-├── Author       → Creates and publishes posts
-├── Boss         → Manages a company, publishes posts
-├── Commentator  → Reads and comments on posts
-└── Admin        → Full platform management
+SurveyUser (temel sınıf)
+├── Author       → Gönderi oluşturur ve yayınlar
+├── Boss         → Şirket yönetir, gönderi paylaşır
+├── Commentator  → Gönderileri okur ve yorum yapar
+└── Admin        → Platformun tüm yönetiminden sorumludur
 ```
 
 ---
 
-## ⚙️ Getting Started
+## ⚙️ Kurulum ve Çalıştırma
 
-### Prerequisites
+### Gereksinimler
 - [.NET 8 SDK](https://dotnet.microsoft.com/download)
 
-### Run
+### Çalıştırma
 
 ```bash
 git clone https://github.com/mboyr4z/Public_Survey.git
@@ -92,18 +92,18 @@ cd Public_Survey/Survey
 dotnet run
 ```
 
-Open your browser at `https://localhost:5001`
+Tarayıcında `https://localhost:5001` adresini aç.
 
 ---
 
-## 📸 Screenshots
+## 📸 Ekran Görüntüleri
 
-> _(Add screenshots here)_
+> _(Buraya ekran görüntüleri eklenecek)_
 
 ---
 
 <div align="center">
 
-Made with ❤️ using ASP.NET Core
+ASP.NET Core ile ❤️ geliştirildi
 
 </div>
